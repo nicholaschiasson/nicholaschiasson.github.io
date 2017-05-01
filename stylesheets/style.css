@@ -8,7 +8,7 @@ body {
   background-color: #151515;
 }
 
-div.main-content {
+div#main-content {
   background-color: #222222;
   height: 100%;
   margin-left: 20%;
