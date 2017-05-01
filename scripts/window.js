@@ -1,11 +1,14 @@
-window.onload = function() {
+function onWindowResize() {
   var mainContentDiv = document.getElementById("main-content");
 
   var mainContentDivWidth = Math.max(Math.min(window.innerWidth, window.innerHeight),
     0.7 * window.innerWidth) / window.innerWidth * 100.0;
   mainContentDiv.style.width = mainContentDivWidth  + "%";
   mainContentDiv.style.marginLeft = (100.0 - mainContentDivWidth) / 2.0 + "%";
+}
 
+function onWindowLoad() {
+  onWindowResize();
   var page = getURLParameter("page");
   var blog = getURLParameter("entry");
 
@@ -24,16 +27,19 @@ window.onload = function() {
     if (client.readyState === 4) {
       if (client.status === 200) {
         var renderText = renderFile.split(".").pop() === "md" ? md.render(client.responseText) : client.responseText;
-        mainContentDiv.innerHTML += renderText;
+        document.getElementById("main-content").innerHTML += renderText;
       } else {
-        mainContentDiv.innerHTML += "<h1>Page not found.</h1>";
+        document.getElementById("main-content").innerHTML += "<h1>Page not found.</h1>";
       }
     }
   };
   client.send();
-};
+}
 
 /// Taken from http://stackoverflow.com/a/11582513
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
+
+window.addEventListener("resize", onWindowResize, true);
+window.addEventListener("load", onWindowLoad, true);
