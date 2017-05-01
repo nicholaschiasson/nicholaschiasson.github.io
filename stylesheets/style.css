@@ -1,5 +1,4 @@
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -10,11 +9,33 @@ body {
 
 div#main-content {
   background-color: #222222;
-  height: 100%;
   margin-left: 20%;
   margin-right: 20%;
   padding: 1%;
   position: absolute;
   top: 0;
-  width: 60%;
+}
+
+ul#nav-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+ul#nav-menu li {
+  display: inline-block;
+  float: left;
+}
+
+ul#nav-menu li a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+ul#nav-menu li a:hover {
+  background-color: #111111;
 }
