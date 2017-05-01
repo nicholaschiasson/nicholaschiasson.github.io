@@ -7,6 +7,16 @@ body {
   background-color: #151515;
 }
 
+a.social-link {
+  float: right;
+  padding: 5px;
+  text-decoration: none;
+}
+
+a object {
+  pointer-events: none;
+}
+
 div#main-content {
   background-color: #222222;
   padding: 1%;
