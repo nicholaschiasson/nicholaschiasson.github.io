@@ -1,7 +1,10 @@
 window.onload = function() {
   var mainContentDiv = document.getElementById("main-content");
 
-  mainContentDiv.style.width = Math.max(Math.min(window.innerWidth, window.innerHeight), 0.6 * window.innerWidth) + "px";
+  var mainContentDivWidth = Math.max(Math.min(window.innerWidth, window.innerHeight),
+    0.7 * window.innerWidth) / window.innerWidth * 100.0;
+  mainContentDiv.style.width = mainContentDivWidth  + "%";
+  mainContentDiv.style.marginLeft = (100.0 - mainContentDivWidth) / 2.0 + "%";
 
   var page = getURLParameter("page");
   var blog = getURLParameter("entry");
