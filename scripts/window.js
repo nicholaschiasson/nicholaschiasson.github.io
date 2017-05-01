@@ -29,7 +29,7 @@ function onWindowLoad() {
         var renderText = renderFile.split(".").pop() === "md" ? md.render(client.responseText) : client.responseText;
         document.getElementById("main-content").innerHTML += renderText;
       } else {
-        document.getElementById("main-content").innerHTML += "<h1>Page not found.</h1>";
+        window.location.href = "404.html";
       }
     }
   };
@@ -40,6 +40,3 @@ function onWindowLoad() {
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
-
-window.addEventListener("resize", onWindowResize, true);
-window.addEventListener("load", onWindowLoad, true);
