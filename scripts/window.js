@@ -20,63 +20,28 @@ function onWindowLoad(page) {
   if (!page)
     page = "home.html";
 
-  var headerFile = "views/html/header.html";
-  var navigationFile = "views/html/navigation.html";
-  var footerFile = "views/html/footer.html";
-  var contentFile = "views/html/" + page;
+  var filenames = [];
+  filenames.push("views/html/header.html");
+  filenames.push("views/html/navigation.html");
+  filenames.push("views/html/" + page);
   if (page === "blog.html" && blog)
-    contentFile = "views/markdown/" + blog;
+    filenames[2] = "views/markdown/" + blog;
+  filenames.push("views/html/footer.html");
 
-  // GET and render header
-  var headerRequest = new XMLHttpRequest();
-  headerRequest.open("GET", headerFile);
-  headerRequest.onreadystatechange = function() {
-    handleXMLHTTPRequestReadyStateChange(headerRequest, function(err, responseText) {
-        renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), headerFile);
-        window.dispatchEvent(eventRenderHeader);
-    });
-  };
+  var promises = [];
+  for (var i = 0; i < filenames.length; i++) {
+    promises.push(get(filenames[i]));
+  }
 
-  // GET and render navigation menu
-  window.addEventListener("renderheader", function() {
-    var navigationRequest = new XMLHttpRequest();
-    navigationRequest.open("GET", navigationFile);
-    navigationRequest.onreadystatechange = function() {
-      handleXMLHTTPRequestReadyStateChange(navigationRequest, function(err, responseText) {
-          renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), navigationFile);
-          window.dispatchEvent(eventRenderNavigation);
-      });
-    };
-    navigationRequest.send();
+  Promise.all(promises).then(function(response) {
+    var element = document.getElementById("main-content");
+    for (var i = 0; i < response.length; i++) {
+      var renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
+      element.innerHTML += renderText;
+    }
+  }, function(error) {
+    window.location.href = "404.html";
   });
-
-  // GET and render main content
-  window.addEventListener("rendernavigation", function() {
-    var contentRequest = new XMLHttpRequest();
-    contentRequest.open("GET", contentFile);
-    contentRequest.onreadystatechange = function() {
-      handleXMLHTTPRequestReadyStateChange(contentRequest, function(err, responseText) {
-          renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), contentFile);
-          window.dispatchEvent(eventRenderMainContent);
-      });
-    };
-    contentRequest.send();
-  });
-
-  // GET and render footer
-  window.addEventListener("rendermaincontent", function() {
-      var footerRequest = new XMLHttpRequest();
-      footerRequest.open("GET", footerFile);
-      footerRequest.onreadystatechange = function() {
-        handleXMLHTTPRequestReadyStateChange(footerRequest, function(err, responseText) {
-            renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), footerFile);
-            window.dispatchEvent(eventRenderFooter);
-        });
-      };
-      footerRequest.send();
-    });
-
-  headerRequest.send();
 }
 
 function handleXMLHTTPRequestReadyStateChange(req, callback) {
@@ -91,6 +56,38 @@ function renderFileContentsToDocumentElement(err, responseText, element, filenam
     var renderText = filename.split(".").pop() === "md" ? md.render(responseText) : responseText;
     element.innerHTML += renderText;
   }
+}
+
+// Taken from https://developers.google.com/web/fundamentals/getting-started/primers/promises
+function get(url) {
+  // Return a new promise.
+  return new Promise(function(resolve, reject) {
+    // Do the usual XHR stuff
+    var req = new XMLHttpRequest();
+    req.open('GET', url);
+
+    req.onload = function() {
+      // This is called even on 404 etc
+      // so check the status
+      if (req.status == 200) {
+        // Resolve the promise with the response text
+        resolve(req.response);
+      }
+      else {
+        // Otherwise reject with the status text
+        // which will hopefully be a meaningful error
+        reject(Error(req.statusText));
+      }
+    };
+
+    // Handle network errors
+    req.onerror = function() {
+      reject(Error("Network Error"));
+    };
+
+    // Make the request
+    req.send();
+  });
 }
 
 /// Taken from http://stackoverflow.com/a/11582513
