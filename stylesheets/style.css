@@ -25,6 +25,7 @@ div#main-content {
 }
 
 ul#nav-menu {
+  border: 1px solid #222222;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -33,8 +34,14 @@ ul#nav-menu {
 }
 
 ul#nav-menu li {
+  border-right: 1px solid #222222;
   display: inline-block;
   float: left;
+  width: 20%;
+}
+
+ul#nav-menu li:last-child {
+    border-right: none;
 }
 
 ul#nav-menu li a {
