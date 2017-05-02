@@ -47,7 +47,8 @@ ul#nav-menu li:last-child {
 ul#nav-menu li a {
   display: block;
   text-align: center;
-  padding: 16px;
+  padding-bottom: 16px;
+  padding-top: 16px;
   text-decoration: none;
 }
 
