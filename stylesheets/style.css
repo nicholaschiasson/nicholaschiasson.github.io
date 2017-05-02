@@ -7,9 +7,17 @@ body {
   background-color: #151515;
 }
 
-a.social-link {
-  float: right;
-  padding: 5px;
+div#header .title-text {
+  display: inline-block;
+}
+
+div#header div.social-buttons {
+  display: inline-block;
+  float: right
+}
+
+a.social-button {
+  padding: 4px;
   text-decoration: none;
 }
 
@@ -17,11 +25,8 @@ a object {
   pointer-events: none;
 }
 
-div#main-content {
-  background-color: #222222;
-  padding: 1%;
-  position: absolute;
-  top: 0;
+div#navigation {
+
 }
 
 ul#nav-menu {
@@ -41,7 +46,7 @@ ul#nav-menu li {
 }
 
 ul#nav-menu li:last-child {
-    border-right: none;
+  border-right: none;
 }
 
 ul#nav-menu li a {
@@ -54,4 +59,24 @@ ul#nav-menu li a {
 
 ul#nav-menu li a:hover {
   background-color: #111111;
+}
+
+div#main-content {
+  background-color: #222222;
+  padding: 1%;
+  position: absolute;
+  top: 0;
+}
+
+div#footer {
+  color: gray;
+  text-align: center;
+}
+
+div#footer .legal {
+  float: left;
+}
+
+div#footer div.social-buttons {
+  clear: left;
 }

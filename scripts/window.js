@@ -1,3 +1,9 @@
+var eventRenderHeader = new Event('renderheader');
+var eventRenderNavigation = new Event('rendernavigation');
+var eventRenderMainContent = new Event('rendermaincontent');
+var eventRenderFooter = new Event('renderfooter');
+var md = window.markdownit();
+
 function onWindowResize() {
   var mainContentDiv = document.getElementById("main-content");
 
@@ -14,25 +20,77 @@ function onWindowLoad(page) {
   if (!page)
     page = "home.html";
 
-  var renderFile = "views/html/" + page;
+  var headerFile = "views/html/header.html";
+  var navigationFile = "views/html/navigation.html";
+  var footerFile = "views/html/footer.html";
+  var contentFile = "views/html/" + page;
   if (page === "blog.html" && blog)
-    renderFile = "views/markdown/" + blog;
+    contentFile = "views/markdown/" + blog;
 
-  var md = window.markdownit();
-
-  var client = new XMLHttpRequest();
-  client.open("GET", renderFile);
-  client.onreadystatechange = function() {
-    if (client.readyState === 4) {
-      if (client.status === 200) {
-        var renderText = renderFile.split(".").pop() === "md" ? md.render(client.responseText) : client.responseText;
-        document.getElementById("main-content").innerHTML += renderText;
-      } else {
-        window.location.href = "404.html";
-      }
-    }
+  // GET and render header
+  var headerRequest = new XMLHttpRequest();
+  headerRequest.open("GET", headerFile);
+  headerRequest.onreadystatechange = function() {
+    handleXMLHTTPRequestReadyStateChange(headerRequest, function(err, responseText) {
+        renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), headerFile);
+        window.dispatchEvent(eventRenderHeader);
+    });
   };
-  client.send();
+
+  // GET and render navigation menu
+  window.addEventListener("renderheader", function() {
+    var navigationRequest = new XMLHttpRequest();
+    navigationRequest.open("GET", navigationFile);
+    navigationRequest.onreadystatechange = function() {
+      handleXMLHTTPRequestReadyStateChange(navigationRequest, function(err, responseText) {
+          renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), navigationFile);
+          window.dispatchEvent(eventRenderNavigation);
+      });
+    };
+    navigationRequest.send();
+  });
+
+  // GET and render main content
+  window.addEventListener("rendernavigation", function() {
+    var contentRequest = new XMLHttpRequest();
+    contentRequest.open("GET", contentFile);
+    contentRequest.onreadystatechange = function() {
+      handleXMLHTTPRequestReadyStateChange(contentRequest, function(err, responseText) {
+          renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), contentFile);
+          window.dispatchEvent(eventRenderMainContent);
+      });
+    };
+    contentRequest.send();
+  });
+
+  // GET and render footer
+  window.addEventListener("rendermaincontent", function() {
+      var footerRequest = new XMLHttpRequest();
+      footerRequest.open("GET", footerFile);
+      footerRequest.onreadystatechange = function() {
+        handleXMLHTTPRequestReadyStateChange(footerRequest, function(err, responseText) {
+            renderFileContentsToDocumentElement(err, responseText, document.getElementById("main-content"), footerFile);
+            window.dispatchEvent(eventRenderFooter);
+        });
+      };
+      footerRequest.send();
+    });
+
+  headerRequest.send();
+}
+
+function handleXMLHTTPRequestReadyStateChange(req, callback) {
+  if (req.readyState === 4)
+    callback(req.status !== 200, req.responseText);
+}
+
+function renderFileContentsToDocumentElement(err, responseText, element, filename) {
+  if (err) {
+    window.location.href = "404.html";
+  } else {
+    var renderText = filename.split(".").pop() === "md" ? md.render(responseText) : responseText;
+    element.innerHTML += renderText;
+  }
 }
 
 /// Taken from http://stackoverflow.com/a/11582513
