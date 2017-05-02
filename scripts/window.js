@@ -1,7 +1,3 @@
-var eventRenderHeader = new Event('renderheader');
-var eventRenderNavigation = new Event('rendernavigation');
-var eventRenderMainContent = new Event('rendermaincontent');
-var eventRenderFooter = new Event('renderfooter');
 var md = window.markdownit();
 
 function onWindowResize() {
