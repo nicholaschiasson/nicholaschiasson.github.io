@@ -7,9 +7,8 @@ function onWindowResize() {
   mainContentDiv.style.marginLeft = (100.0 - mainContentDivWidth) / 2.0 + "%";
 }
 
-function onWindowLoad() {
+function onWindowLoad(page) {
   onWindowResize();
-  var page = getURLParameter("page");
   var blog = getURLParameter("entry");
 
   if (!page)
@@ -39,4 +38,14 @@ function onWindowLoad() {
 /// Taken from http://stackoverflow.com/a/11582513
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+function initialize(err) {
+  window.addEventListener("resize", onWindowResize, true);
+  window.addEventListener("deviceorientation", onWindowResize, true);
+  if (err) {
+    window.addEventListener("load", function() { onWindowLoad("error.html"); }, true);
+  } else {
+    window.addEventListener("load", function() { onWindowLoad(getURLParameter("page")); }, true);
+  }
 }
