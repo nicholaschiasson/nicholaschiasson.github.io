@@ -1,12 +1,12 @@
 var md = window.markdownit();
 
 function onWindowResize() {
-  var mainContentDiv = document.getElementById("main-content");
+  var wrapperDiv = document.getElementById("wrapper");
 
-  var mainContentDivWidth = Math.max(Math.min(window.innerWidth, window.innerHeight),
+  var wrapperDivWidth = Math.max(Math.min(window.innerWidth, window.innerHeight),
     0.7 * window.innerWidth) / window.innerWidth * 100.0;
-  mainContentDiv.style.width = mainContentDivWidth  + "%";
-  mainContentDiv.style.marginLeft = (100.0 - mainContentDivWidth) / 2.0 + "%";
+  wrapperDiv.style.width = wrapperDivWidth  + "%";
+  wrapperDiv.style.marginLeft = (100.0 - wrapperDivWidth) / 2.0 + "%";
 }
 
 function onWindowLoad(page) {
@@ -30,7 +30,7 @@ function onWindowLoad(page) {
   }
 
   Promise.all(promises).then(function(response) {
-    var element = document.getElementById("main-content");
+    var element = document.getElementById("wrapper");
     for (var i = 0; i < response.length; i++) {
       var renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
       element.innerHTML += renderText;

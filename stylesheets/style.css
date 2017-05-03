@@ -8,7 +8,7 @@ body {
   background-color: #151515;
 }
 
-div#main-content {
+div#wrapper {
   background-color: #222222;
   padding: 1%;
   position: relative;
