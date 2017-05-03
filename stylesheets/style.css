@@ -96,3 +96,13 @@ div#footer .legal {
 div#footer div.social-buttons {
   clear: left;
 }
+
+/* Special rule for svg images embedded in object tags */
+#header .svg-img {
+  fill: #FFFFFF;
+}
+
+/* Special rule for svg images embedded in object tags */
+#footer .svg-img {
+  fill: gray;
+}

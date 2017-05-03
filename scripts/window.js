@@ -1,9 +1,12 @@
+// jshint esversion: 6
+
+var eventInitialized = new Event("initialized");
 var md = window.markdownit();
 
 function onWindowResize() {
-  var wrapperDiv = document.getElementById("wrapper");
+  let wrapperDiv = document.getElementById("wrapper");
 
-  var wrapperDivWidth = Math.max(Math.min(window.innerWidth, window.innerHeight),
+  let wrapperDivWidth = Math.max(Math.min(window.innerWidth, window.innerHeight),
     0.7 * window.innerWidth) / window.innerWidth * 100.0;
   wrapperDiv.style.width = wrapperDivWidth  + "%";
   wrapperDiv.style.marginLeft = (100.0 - wrapperDivWidth) / 2.0 + "%";
@@ -11,12 +14,12 @@ function onWindowResize() {
 
 function onWindowLoad(page) {
   onWindowResize();
-  var blog = getURLParameter("entry");
+  let blog = getURLParameter("entry");
 
   if (!page)
     page = "home.html";
 
-  var filenames = [];
+  let filenames = [];
   filenames.push("views/html/header.html");
   filenames.push("views/html/navigation.html");
   filenames.push(page);
@@ -24,17 +27,19 @@ function onWindowLoad(page) {
     filenames[2] = "views/markdown/" + blog;
   filenames.push("views/html/footer.html");
 
-  var promises = [];
-  for (var i = 0; i < filenames.length; i++) {
+  let promises = [];
+  for (let i = 0; i < filenames.length; i++) {
     promises.push(get(filenames[i]));
   }
 
   Promise.all(promises).then(function(response) {
-    var element = document.getElementById("wrapper");
-    for (var i = 0; i < response.length; i++) {
-      var renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
+    let element = document.getElementById("wrapper");
+    for (let i = 0; i < response.length; i++) {
+      let renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
       element.innerHTML += renderText;
     }
+    applySVGStyles();
+    window.dispatchEvent(eventInitialized);
   }, function(error) {
     window.location.href = "404.html";
   });
@@ -49,7 +54,7 @@ function renderFileContentsToDocumentElement(err, responseText, element, filenam
   if (err) {
     window.location.href = "404.html";
   } else {
-    var renderText = filename.split(".").pop() === "md" ? md.render(responseText) : responseText;
+    let renderText = filename.split(".").pop() === "md" ? md.render(responseText) : responseText;
     element.innerHTML += renderText;
   }
 }
@@ -59,7 +64,7 @@ function get(url) {
   // Return a new promise.
   return new Promise(function(resolve, reject) {
     // Do the usual XHR stuff
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     req.open('GET', url);
 
     req.onload = function() {
@@ -89,6 +94,55 @@ function get(url) {
 /// Taken from http://stackoverflow.com/a/11582513
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+/// Taken and modified from http://stackoverflow.com/a/22638396
+function css(el) {
+    let sheets = document.styleSheets, ret = [];
+    el.matches = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector || el.oMatchesSelector;
+    for (let i in sheets) {
+        let rules = sheets[i].rules || sheets[i].cssRules;
+        for (let r in rules) {
+            if (el.matches(rules[r].selectorText)) {
+                ret.push(rules[r].cssText);
+            }
+        }
+    }
+    return ret;
+}
+
+function applySVGStyles() {
+  let svgImages = document.getElementsByClassName("svg-img");
+  let svgPromises = [];
+  if (svgImages) {
+    for (let i = 0; i < svgImages.length; i++) {
+      svgPromises.push(promiseLoaded(svgImages[i]));
+    }
+    Promise.all(svgPromises).then(function() {
+      for (let i = 0; i < svgImages.length; i++) {
+        let cssRules = css(svgImages[i]);
+        let svgDoc = svgImages[i].contentDocument;
+        if (svgDoc) {
+          let svgDefs = svgDoc.getElementsByTagName("defs");
+          if (svgDefs && svgDefs.length > 0) {
+            let styleElement = svgDoc.createElementNS("http://www.w3.org/2000/svg", "style");
+            for (let j = 0; j < cssRules.length; j++) {
+              if (cssRules[j].includes("." + svgImages[i].className)) {
+                styleElement.textContent = cssRules[j].replace(/.*{/, "svg {");
+              }
+            }
+            svgDefs[0].appendChild(styleElement);
+          }
+        }
+      }
+    });
+  }
+}
+
+function promiseLoaded(element) {
+  return new Promise(function(resolve, reject) {
+    element.onload = resolve;
+  });
 }
 
 function initialize(pageContent) {
