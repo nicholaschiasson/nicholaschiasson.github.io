@@ -19,7 +19,7 @@ function onWindowLoad(page) {
   var filenames = [];
   filenames.push("views/html/header.html");
   filenames.push("views/html/navigation.html");
-  filenames.push("views/html/" + page);
+  filenames.push(page);
   if (page === "blog.html" && blog)
     filenames[2] = "views/markdown/" + blog;
   filenames.push("views/html/footer.html");
@@ -91,12 +91,8 @@ function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
-function initialize(err) {
+function initialize(pageContent) {
   window.addEventListener("resize", onWindowResize, true);
   window.addEventListener("deviceorientation", onWindowResize, true);
-  if (err) {
-    window.addEventListener("load", function() { onWindowLoad("error.html"); }, true);
-  } else {
-    window.addEventListener("load", function() { onWindowLoad(getURLParameter("page")); }, true);
-  }
+  window.addEventListener("load", function() { onWindowLoad(pageContent); }, true);
 }
