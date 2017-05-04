@@ -1,0 +1,66 @@
+div#content ul {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 1%;
+}
+
+div#content li {
+  background: #282828;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  margin: 1%;
+  padding: 1%;
+}
+
+div#content li:hover {
+  background: #333333;
+}
+
+div#content .left {
+  display: inline-block;
+}
+
+div#content .right {
+  display: inline-block;
+  float: right;
+}
+
+div#content h4 {
+  color: lightgray;
+}
+
+div#content h5 {
+  font-weight: bolder;
+}
+
+div#content a {
+  padding-left: 8px;
+  text-decoration: none;
+}
+
+div#content img {
+  padding-right: 8px;
+}
+
+div#content .middle .left {
+  max-width: 80%;
+  padding-right: 1%;
+}
+
+div#content .middle img {
+  max-width: 20%;
+  max-height: 128px;
+  padding-bottom: 16px;
+}
+
+div#content .bottom {
+  border-top: 1px solid #444444;
+  clear: both;
+  padding-top: 1%;
+}
+
+/* Special rule for svg images embedded in object tags */
+div#content .svg-img {
+  fill: #0ce3ac;
+}

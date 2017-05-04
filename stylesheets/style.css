@@ -38,17 +38,22 @@ a object {
   pointer-events: none;
 }
 
+/* Special rule for svg images embedded in object tags */
+div#header .svg-img {
+  fill: #FFFFFF;
+}
+
 div#navigation {
 
 }
 
 ul#nav-menu {
+  background-color: #333333;
   border: 1px solid #222222;
   list-style-type: none;
   margin: 0;
-  padding: 0;
   overflow: hidden;
-  background-color: #333333;
+  padding: 0;
 }
 
 ul#nav-menu li {
@@ -64,9 +69,9 @@ ul#nav-menu li:last-child {
 
 ul#nav-menu li a {
   display: block;
-  text-align: center;
   padding-bottom: 16px;
   padding-top: 16px;
+  text-align: center;
   text-decoration: none;
 }
 
@@ -98,11 +103,6 @@ div#footer div.social-buttons {
 }
 
 /* Special rule for svg images embedded in object tags */
-#header .svg-img {
-  fill: #FFFFFF;
-}
-
-/* Special rule for svg images embedded in object tags */
-#footer .svg-img {
+div#footer .svg-img {
   fill: gray;
 }
