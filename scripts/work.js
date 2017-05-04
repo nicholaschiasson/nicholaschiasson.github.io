@@ -1,33 +1,53 @@
+// jshint esversion: 6
+
 function renderWorkData() {
-  var contentDiv = document.getElementById("content");
+  function createWorkDataListItem(data) {
+    let listItem = document.createElement("li");
+    let link = document.createElement("a");
+    link.setAttribute("target", "_blank");
+    link.setAttribute("href", data.url);
+    link.innerHTML = data.title;
+    listItem.appendChild(link);
+    return listItem;
+  }
+
+  function createWorkDataList(dataArray) {
+    let list = document.createElement("ul");
+    for (let i = 0; i < dataArray.length; i++) {
+      list.appendChild(createWorkDataListItem(dataArray[i]));
+    }
+    return list;
+  }
+
+  let contentDiv = document.getElementById("content");
 
   if (contentDiv) {
-    var personalProjectsHeading = document.createElement("h4");
+    let personalProjectsHeading = document.createElement("h4");
     personalProjectsHeading.innerHTML = "Personal Projects";
     contentDiv.appendChild(personalProjectsHeading);
     if (WorkData && WorkData.personalProjects) {
-
+      contentDiv.appendChild(createWorkDataList(WorkData.personalProjects));
     }
 
-    var educationalProjectsHeading = document.createElement("h4");
+    let educationalProjectsHeading = document.createElement("h4");
     educationalProjectsHeading.innerHTML = "Educational Projects";
     contentDiv.appendChild(educationalProjectsHeading);
     if (WorkData && WorkData.educationalProjects) {
-
+      contentDiv.appendChild(createWorkDataList(WorkData.educationalProjects));
     }
 
-    var jamsHeading = document.createElement("h4");
+    let jamsHeading = document.createElement("h4");
     jamsHeading.innerHTML = "Jams";
     contentDiv.appendChild(jamsHeading);
     if (WorkData && WorkData.jams) {
-
+      contentDiv.appendChild(createWorkDataList(WorkData.jams));
     }
 
-    var gistsHeading = document.createElement("h4");
+    let gistsHeading = document.createElement("h4");
     gistsHeading.innerHTML = "Gists";
     contentDiv.appendChild(gistsHeading);
     if (WorkData && WorkData.gists) {
-
+      contentDiv.appendChild(createWorkDataList(WorkData.gists));
     }
   }
 }
