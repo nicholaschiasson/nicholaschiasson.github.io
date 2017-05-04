@@ -159,6 +159,7 @@ function renderWorkData() {
       contentDiv.appendChild(createWorkDataList(WorkData.gists));
     }
   }
+  applySVGStyles();
 }
 
 window.addEventListener("initialized", renderWorkData, true);
