@@ -96,7 +96,7 @@ WorkData = {
   "jams": [
     {
       "title": "Kill The Snowman",
-      "description": "Ludum Dare 31 entry - The title is a lie! Snowman is the best theme!\nThis game was produced in less than 48 hours.",
+      "description": "Ludum Dare 31 entry - The title is a lie! Snowman is the best theme! This game was produced in less than 48 hours.",
       "thumbnail_url": "https://github.com/nicholaschiasson/KillTheSnowman/raw/master/KillTheSnowman/Content/LudumDare31Icon.png",
       "home_url": "https://nicholaschiasson.github.io/KillTheSnowman",
       "download_url": "https://github.com/nicholaschiasson/KillTheSnowman/releases/latest",
