@@ -85,7 +85,7 @@ WorkData = {
     {
       "title": "W3DL",
       "description": "Web 3D Library. An experimental graphics and math library built on WebGL.",
-      "thumbnail_url": "",
+      "thumbnail_url": "https://pidgi.net/wiki/images/thumb/9/92/Weedle_-_Pokemon_Dream_World.svg/164px-Weedle_-_Pokemon_Dream_World.svg.png",
       "home_url": "",
       "download_url": "",
       "repo_url": "https://github.com/nicholaschiasson/W3DL",
