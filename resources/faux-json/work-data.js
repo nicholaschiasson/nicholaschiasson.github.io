@@ -97,7 +97,7 @@ WorkData = {
     {
       "title": "Kill The Snowman",
       "description": "Ludum Dare 31 entry - The title is a lie! Snowman is the best theme!",
-      "thumbnail_url": "http://images.clipartpanda.com/holiday-snowman-clip-art-snowman.png",
+      "thumbnail_url": "https://github.com/nicholaschiasson/KillTheSnowman/raw/master/KillTheSnowman/Content/LudumDare31Icon.png",
       "home_url": "https://nicholaschiasson.github.io/KillTheSnowman",
       "download_url": "https://github.com/nicholaschiasson/KillTheSnowman/releases/latest",
       "repo_url": "https://github.com/nicholaschiasson/KillTheSnowman",
