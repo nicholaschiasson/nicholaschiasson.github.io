@@ -1,7 +1,7 @@
 // jshint esversion: 6
 
 var eventInitialized = new Event("initialized");
-var md = window.markdownit();
+var md = window.markdownit("commonmark");
 
 function onWindowResize() {
   let wrapperDiv = document.getElementById("wrapper");
@@ -23,7 +23,7 @@ function onWindowLoad(page) {
   filenames.push("views/html/header.html");
   filenames.push("views/html/navigation.html");
   filenames.push(page);
-  if (page === "blog.html" && blog)
+  if (page.split("/").pop() === "blog.html" && blog)
     filenames[2] = "views/markdown/" + blog;
   filenames.push("views/html/footer.html");
 

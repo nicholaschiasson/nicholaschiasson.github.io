@@ -1,3 +1,5 @@
+<div id="content">
+
 # First entry!
 
 Hi! My name is Nick and this is the first entry into my personal website's blog.
@@ -12,3 +14,5 @@ I could call my own on the internet -- a place into which I could post whatever
 I felt like. So here is to a future of untold adventures.
 
 Cheers!
+
+</div>
