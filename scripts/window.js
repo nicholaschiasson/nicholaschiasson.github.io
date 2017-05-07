@@ -2,6 +2,17 @@
 
 var eventInitialized = new Event("initialized");
 var md = window.markdownit("commonmark");
+var owner = "nicholaschiasson";
+var repo = owner + "/nicholaschiasson.github.io";
+var UserMeta;
+var RepoMeta;
+
+get("https://api.github.com/users/" + owner).then(function(response) {
+  UserMeta = response;
+});
+get("https://api.github.com/repos/" + repo).then(function(response) {
+  RepoMeta = response;
+});
 
 function onWindowResize() {
   let wrapperDiv = document.getElementById("wrapper");

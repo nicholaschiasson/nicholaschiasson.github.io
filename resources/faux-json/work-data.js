@@ -1,6 +1,26 @@
 WorkData = {
   "educationalProjects": [
     {
+      "title": "snatch3d-vr",
+      "description": "Computer Science Undergraduate Honours Project - A virtual reality puzzle platformer game!",
+      "thumbnail_url": "",
+      "home_url": "https://nicholaschiasson.github.io/snatch3d-vr",
+      "download_url": "",
+      "repo_url": "https://github.com/nicholaschiasson/snatch3d-vr",
+      "doc_url": "",
+      "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
+    },
+    {
+      "title": "affliction",
+      "description": "COMP4501 Final Project - An immune system real time strategy game made with Unity.",
+      "thumbnail_url": "",
+      "home_url": "https://nicholaschiasson.github.io/affliction",
+      "download_url": "https://github.com/nicholaschiasson/affliction/releases/latest",
+      "repo_url": "https://github.com/nicholaschiasson/affliction",
+      "doc_url": "",
+      "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
+    },
+    {
       "title": "checkers",
       "description": "COMP4501 Assignment 1 - A simple local multiplayer game of checkers made with Unity.",
       "thumbnail_url": "",
@@ -21,12 +41,12 @@ WorkData = {
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
     },
     {
-      "title": "laser-pong",
-      "description": "COMP1405 Assignment 7 - An arcade survival style game of Pong!",
+      "title": "Snatch",
+      "description": "COMP2501 Final Project - A puzzle solving escape game!",
       "thumbnail_url": "",
-      "home_url": "https://nicholaschiasson.github.io/laser-pong",
-      "download_url": "https://github.com/nicholaschiasson/laser-pong/releases/latest",
-      "repo_url": "https://github.com/nicholaschiasson/laser-pong",
+      "home_url": "https://nicholaschiasson.github.io/Snatch",
+      "download_url": "https://github.com/nicholaschiasson/Snatch/releases/latest",
+      "repo_url": "https://github.com/nicholaschiasson/Snatch",
       "doc_url": "",
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
     },
@@ -41,22 +61,12 @@ WorkData = {
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
     },
     {
-      "title": "Snatch",
-      "description": "COMP2501 Final Project - A puzzle solving escape game!",
+      "title": "laser-pong",
+      "description": "COMP1405 Assignment 7 - An arcade survival style game of Pong!",
       "thumbnail_url": "",
-      "home_url": "https://nicholaschiasson.github.io/Snatch",
-      "download_url": "https://github.com/nicholaschiasson/Snatch/releases/latest",
-      "repo_url": "https://github.com/nicholaschiasson/Snatch",
-      "doc_url": "",
-      "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
-    },
-    {
-      "title": "snatch3d-vr",
-      "description": "Computer Science Undergraduate Honours Project - A virtual reality puzzle platformer game!",
-      "thumbnail_url": "",
-      "home_url": "https://nicholaschiasson.github.io/snatch3d-vr",
-      "download_url": "",
-      "repo_url": "https://github.com/nicholaschiasson/snatch3d-vr",
+      "home_url": "https://nicholaschiasson.github.io/laser-pong",
+      "download_url": "https://github.com/nicholaschiasson/laser-pong/releases/latest",
+      "repo_url": "https://github.com/nicholaschiasson/laser-pong",
       "doc_url": "",
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
     }
@@ -73,16 +83,6 @@ WorkData = {
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
     },
     {
-      "title": "love-maker",
-      "description": "A simple distribution building script for your LÖVE games!",
-      "thumbnail_url": "https://avatars.githubusercontent.com/u/10260207?size=200",
-      "home_url": "https://nicholaschiasson.github.io/love-maker",
-      "download_url": "",
-      "repo_url": "https://github.com/nicholaschiasson/love-maker",
-      "doc_url": "",
-      "license_badge": "https://img.shields.io/badge/license-GPL--3.0-blue.svg"
-    },
-    {
       "title": "W3DL",
       "description": "Web 3D Library. An experimental graphics and math library built on WebGL.",
       "thumbnail_url": "https://pidgi.net/wiki/images/thumb/9/92/Weedle_-_Pokemon_Dream_World.svg/164px-Weedle_-_Pokemon_Dream_World.svg.png",
@@ -91,6 +91,16 @@ WorkData = {
       "repo_url": "https://github.com/nicholaschiasson/W3DL",
       "doc_url": "https://nicholaschiasson.github.io/W3DL",
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
+    },
+    {
+      "title": "love-maker",
+      "description": "A simple distribution building script for your LÖVE games!",
+      "thumbnail_url": "https://avatars.githubusercontent.com/u/10260207?size=200",
+      "home_url": "https://nicholaschiasson.github.io/love-maker",
+      "download_url": "",
+      "repo_url": "https://github.com/nicholaschiasson/love-maker",
+      "doc_url": "",
+      "license_badge": "https://img.shields.io/badge/license-GPL--3.0-blue.svg"
     }
   ],
   "jams": [
@@ -137,4 +147,4 @@ WorkData = {
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
     }
   ]
-}
+};
