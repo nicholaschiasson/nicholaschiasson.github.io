@@ -3,7 +3,7 @@ WorkData = {
     {
       "title": "snatch3d-vr",
       "description": "Computer Science Undergraduate Honours Project - A virtual reality puzzle platformer game!",
-      "thumbnail_url": "https://raw.githubusercontent.com/nicholaschiasson/snatch3d-vr/master/Assets/Images/snatch3d-vr-icon-green-bg.png",
+      "thumbnail_url": "https://raw.githubusercontent.com/nicholaschiasson/snatch3d-vr/master/Assets/Images/snatch3d-vr-icon-transparent-bg.png",
       "home_url": "https://nicholaschiasson.github.io/snatch3d-vr",
       "download_url": "",
       "repo_url": "https://github.com/nicholaschiasson/snatch3d-vr",
