@@ -1,4 +1,4 @@
-WorkData = {
+ProjectData = {
   "educationalProjects": [
     {
       "title": "snatch3d-vr",

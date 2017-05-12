@@ -1,12 +1,12 @@
 // jshint esversion: 6
 
-function renderWorkData() {
-  function createWorkDataListItem(data) {
+function renderProjectData() {
+  function createProjectDataListItem(data) {
     let listItem = document.createElement("li");
     let topDiv = document.createElement("div");
     topDiv.setAttribute("class", "top");
     if (data.title) {
-      listItem.setAttribute("id", "work-" + data.title);
+      listItem.setAttribute("id", "project-" + data.title);
       let heading = document.createElement("h5");
       heading.setAttribute("class", "left");
       heading.innerHTML = data.title;
@@ -58,7 +58,7 @@ function renderWorkData() {
     permalink.setAttribute("class", "left");
     permalink.setAttribute("data-toggle", "tooltip");
     permalink.setAttribute("title", "permanent link");
-    permalink.setAttribute("href", "#work-" + data.title);
+    permalink.setAttribute("href", "#project-" + data.title);
     permalink.innerHTML = svg_link;
     topRightDiv.appendChild(permalink);
     topDiv.appendChild(topRightDiv);
@@ -90,10 +90,10 @@ function renderWorkData() {
     return listItem;
   }
 
-  function createWorkDataList(dataArray) {
+  function createProjectDataList(dataArray) {
     let list = document.createElement("ul");
     for (let i = 0; i < dataArray.length; i++) {
-      list.appendChild(createWorkDataListItem(dataArray[i]));
+      list.appendChild(createProjectDataListItem(dataArray[i]));
     }
     return list;
   }
@@ -102,33 +102,33 @@ function renderWorkData() {
 
   if (contentDiv) {
     let personalProjectsHeading = document.createElement("h4");
-    personalProjectsHeading.innerHTML = "Personal Projects";
+    personalProjectsHeading.innerHTML = "Personal";
     contentDiv.appendChild(personalProjectsHeading);
-    if (WorkData && WorkData.personalProjects) {
-      contentDiv.appendChild(createWorkDataList(WorkData.personalProjects));
+    if (ProjectData && ProjectData.personalProjects) {
+      contentDiv.appendChild(createProjectDataList(ProjectData.personalProjects));
     }
 
     let educationalProjectsHeading = document.createElement("h4");
-    educationalProjectsHeading.innerHTML = "Educational Projects";
+    educationalProjectsHeading.innerHTML = "Educational";
     contentDiv.appendChild(educationalProjectsHeading);
-    if (WorkData && WorkData.educationalProjects) {
-      contentDiv.appendChild(createWorkDataList(WorkData.educationalProjects));
+    if (ProjectData && ProjectData.educationalProjects) {
+      contentDiv.appendChild(createProjectDataList(ProjectData.educationalProjects));
     }
 
     let jamsHeading = document.createElement("h4");
     jamsHeading.innerHTML = "Jams";
     contentDiv.appendChild(jamsHeading);
-    if (WorkData && WorkData.jams) {
-      contentDiv.appendChild(createWorkDataList(WorkData.jams));
+    if (ProjectData && ProjectData.jams) {
+      contentDiv.appendChild(createProjectDataList(ProjectData.jams));
     }
 
     let gistsHeading = document.createElement("h4");
     gistsHeading.innerHTML = "Gists";
     contentDiv.appendChild(gistsHeading);
-    if (WorkData && WorkData.gists) {
-      contentDiv.appendChild(createWorkDataList(WorkData.gists));
+    if (ProjectData && ProjectData.gists) {
+      contentDiv.appendChild(createProjectDataList(ProjectData.gists));
     }
   }
 }
 
-window.addEventListener("initialized", renderWorkData, true);
+window.addEventListener("initialized", renderProjectData, true);
