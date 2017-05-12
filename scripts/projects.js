@@ -104,15 +104,15 @@ function renderProjectData() {
     let personalProjectsHeading = document.createElement("h4");
     personalProjectsHeading.innerHTML = "Personal";
     contentDiv.appendChild(personalProjectsHeading);
-    if (ProjectData && ProjectData.personalProjects) {
-      contentDiv.appendChild(createProjectDataList(ProjectData.personalProjects));
+    if (ProjectData && ProjectData.personal) {
+      contentDiv.appendChild(createProjectDataList(ProjectData.personal));
     }
 
     let educationalProjectsHeading = document.createElement("h4");
     educationalProjectsHeading.innerHTML = "Educational";
     contentDiv.appendChild(educationalProjectsHeading);
-    if (ProjectData && ProjectData.educationalProjects) {
-      contentDiv.appendChild(createProjectDataList(ProjectData.educationalProjects));
+    if (ProjectData && ProjectData.educational) {
+      contentDiv.appendChild(createProjectDataList(ProjectData.educational));
     }
 
     let jamsHeading = document.createElement("h4");

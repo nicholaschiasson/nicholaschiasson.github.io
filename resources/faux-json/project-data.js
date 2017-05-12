@@ -1,5 +1,5 @@
 ProjectData = {
-  "educationalProjects": [
+  "educational": [
     {
       "title": "snatch3d-vr",
       "description": "Computer Science Undergraduate Honours Project - A virtual reality puzzle platformer game!",
@@ -71,11 +71,11 @@ ProjectData = {
       "license_badge": "https://img.shields.io/badge/license-MIT-blue.svg"
     }
   ],
-  "personalProjects": [
+  "personal": [
     {
       "title": "car",
       "description": "Compile and run! A command-line utility for quickly executing files containing code in a compiled language such as C, C++, Java, etc. Seamlessly executes files as if they were scripts, leaving no trace of binaries behind.",
-      "thumbnail_url": "http://www.misskatecuttables.com/uploads/shopping_cart/7778/large_car.png",
+      "thumbnail_url": "https://www.misskatecuttables.com/uploads/shopping_cart/7778/large_car.png",
       "home_url": "",
       "download_url": "https://github.com/nicholaschiasson/car/releases/latest",
       "repo_url": "https://github.com/nicholaschiasson/car",
