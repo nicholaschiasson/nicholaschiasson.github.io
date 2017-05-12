@@ -21,13 +21,7 @@ function renderWorkData() {
       link.setAttribute("data-toggle", "tooltip");
       link.setAttribute("title", "project home page");
       link.setAttribute("href", data.home_url);
-      let objImg = document.createElement("object");
-      objImg.setAttribute("class", "svg-img");
-      objImg.setAttribute("data", "images/svg/octicons/home.svg");
-      objImg.setAttribute("type", "image/svg+xml");
-      objImg.setAttribute("width", "16px");
-      objImg.setAttribute("height", "16px");
-      link.appendChild(objImg);
+      link.innerHTML = svg_home;
       topRightDiv.appendChild(link);
     }
     if (data.download_url) {
@@ -37,13 +31,7 @@ function renderWorkData() {
       link.setAttribute("data-toggle", "tooltip");
       link.setAttribute("title", "project downloads");
       link.setAttribute("href", data.download_url);
-      let objImg = document.createElement("object");
-      objImg.setAttribute("class", "svg-img");
-      objImg.setAttribute("data", "images/svg/octicons/cloud-download.svg");
-      objImg.setAttribute("type", "image/svg+xml");
-      objImg.setAttribute("width", "16px");
-      objImg.setAttribute("height", "16px");
-      link.appendChild(objImg);
+      link.innerHTML = svg_download;
       topRightDiv.appendChild(link);
     }
     if (data.repo_url) {
@@ -53,13 +41,7 @@ function renderWorkData() {
       link.setAttribute("data-toggle", "tooltip");
       link.setAttribute("title", "project repository");
       link.setAttribute("href", data.repo_url);
-      let objImg = document.createElement("object");
-      objImg.setAttribute("class", "svg-img");
-      objImg.setAttribute("data", "images/svg/octicons/mark-github.svg");
-      objImg.setAttribute("type", "image/svg+xml");
-      objImg.setAttribute("width", "16px");
-      objImg.setAttribute("height", "16px");
-      link.appendChild(objImg);
+      link.innerHTML = svg_github;
       topRightDiv.appendChild(link);
     }
     if (data.doc_url) {
@@ -69,13 +51,7 @@ function renderWorkData() {
       link.setAttribute("data-toggle", "tooltip");
       link.setAttribute("title", "project documentation");
       link.setAttribute("href", data.doc_url);
-      let objImg = document.createElement("object");
-      objImg.setAttribute("class", "svg-img");
-      objImg.setAttribute("data", "images/svg/octicons/book.svg");
-      objImg.setAttribute("type", "image/svg+xml");
-      objImg.setAttribute("width", "16px");
-      objImg.setAttribute("height", "16px");
-      link.appendChild(objImg);
+      link.innerHTML = svg_book;
       topRightDiv.appendChild(link);
     }
     let permalink = document.createElement("a");
@@ -83,13 +59,7 @@ function renderWorkData() {
     permalink.setAttribute("data-toggle", "tooltip");
     permalink.setAttribute("title", "permanent link");
     permalink.setAttribute("href", "#work-" + data.title);
-    let objImg = document.createElement("object");
-    objImg.setAttribute("class", "svg-img");
-    objImg.setAttribute("data", "images/svg/octicons/link.svg");
-    objImg.setAttribute("type", "image/svg+xml");
-    objImg.setAttribute("width", "16px");
-    objImg.setAttribute("height", "16px");
-    permalink.appendChild(objImg);
+    permalink.innerHTML = svg_link;
     topRightDiv.appendChild(permalink);
     topDiv.appendChild(topRightDiv);
     listItem.appendChild(topDiv);
@@ -159,7 +129,6 @@ function renderWorkData() {
       contentDiv.appendChild(createWorkDataList(WorkData.gists));
     }
   }
-  applySVGStyles();
 }
 
 window.addEventListener("initialized", renderWorkData, true);

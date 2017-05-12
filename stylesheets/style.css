@@ -41,6 +41,8 @@ a object {
 /* Special rule for svg images embedded in object tags */
 div#header .svg-img {
   fill: #FFFFFF;
+  width: 18px;
+  height: 18px;
 }
 
 div#navigation {
@@ -105,4 +107,6 @@ div#footer div.social-buttons {
 /* Special rule for svg images embedded in object tags */
 div#footer .svg-img {
   fill: gray;
+  width: 18px;
+  height: 18px;
 }

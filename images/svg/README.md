@@ -1,4 +1,3 @@
 # SVG image uploads
-Include an empty ```<defs></defs>``` tag in SVG images so that styles can be
-added to them by the document element which loads them. This is done on window
-load and applies to all elements with the class "svg-img".
+SVG images placed in here are not actually loaded. Instead their inner XML is
+placed directly onto HTML pages or into the svg-template.js script.

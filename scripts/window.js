@@ -49,25 +49,10 @@ function onWindowLoad(page) {
       let renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
       element.innerHTML += renderText;
     }
-    applySVGStyles();
     window.dispatchEvent(eventInitialized);
   }, function(error) {
     window.location.href = "404.html";
   });
-}
-
-function handleXMLHTTPRequestReadyStateChange(req, callback) {
-  if (req.readyState === 4)
-    callback(req.status !== 200, req.responseText);
-}
-
-function renderFileContentsToDocumentElement(err, responseText, element, filename) {
-  if (err) {
-    window.location.href = "404.html";
-  } else {
-    let renderText = filename.split(".").pop() === "md" ? md.render(responseText) : responseText;
-    element.innerHTML += renderText;
-  }
 }
 
 // Taken from https://developers.google.com/web/fundamentals/getting-started/primers/promises
@@ -120,34 +105,6 @@ function css(el) {
         }
     }
     return ret;
-}
-
-function applySVGStyles() {
-  let svgImages = document.getElementsByClassName("svg-img");
-  let svgPromises = [];
-  if (svgImages) {
-    for (let i = 0; i < svgImages.length; i++) {
-      svgPromises.push(promiseLoaded(svgImages[i]));
-    }
-    Promise.all(svgPromises).then(function() {
-      for (let i = 0; i < svgImages.length; i++) {
-        let cssRules = css(svgImages[i]);
-        let svgDoc = svgImages[i].contentDocument;
-        if (svgDoc) {
-          let svgDefs = svgDoc.getElementsByTagName("defs");
-          if (svgDefs && svgDefs.length > 0) {
-            let styleElement = svgDoc.createElementNS("http://www.w3.org/2000/svg", "style");
-            for (let j = 0; j < cssRules.length; j++) {
-              if (cssRules[j].includes("." + svgImages[i].className)) {
-                styleElement.textContent = cssRules[j].replace(/.*{/, "svg {");
-              }
-            }
-            svgDefs[0].appendChild(styleElement);
-          }
-        }
-      }
-    });
-  }
 }
 
 function promiseLoaded(element) {

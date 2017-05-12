@@ -63,4 +63,6 @@ div#content .bottom {
 /* Special rule for svg images embedded in object tags */
 div#content .svg-img {
   fill: #0ce3ac;
+  width: 20px;
+  height: 20px;
 }
