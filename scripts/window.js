@@ -4,15 +4,7 @@ var eventInitialized = new Event("initialized");
 var md = window.markdownit("commonmark");
 var owner = "nicholaschiasson";
 var repo = owner + "/nicholaschiasson.github.io";
-var UserMeta;
-var RepoMeta;
-
-get("https://api.github.com/users/" + owner).then(function(response) {
-  UserMeta = response;
-});
-get("https://api.github.com/repos/" + repo).then(function(response) {
-  RepoMeta = response;
-});
+var RepoMeta = get("https://api.github.com/repos/" + repo);
 
 function onWindowResize() {
   let wrapperDiv = document.getElementById("wrapper");
@@ -49,6 +41,12 @@ function onWindowLoad(page) {
       let renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
       element.innerHTML += renderText;
     }
+    RepoMeta.then(function(response) {
+      let repoMeta = JSON.parse(response);
+      let copyrightYear = document.getElementById("year-of-last-update");
+      if (copyrightYear && repoMeta && repoMeta.pushed_at)
+        copyrightYear.innerHTML = new Date(repoMeta.pushed_at).getFullYear();
+    });
     window.dispatchEvent(eventInitialized);
   }, function(error) {
     window.location.href = "404.html";
