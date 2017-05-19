@@ -1,2 +1,2 @@
 # nicholaschiasson.github.io
-My incredibly stylish and even more sarcastic online portfolio.
+My incredibly stylish and even more sarcastic website for miscellaneous things including personal blog and portfolio.
