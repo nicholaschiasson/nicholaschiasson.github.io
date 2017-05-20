@@ -3,8 +3,9 @@
 var eventInitialized = new Event("initialized");
 var md = window.markdownit("commonmark");
 var owner = "nicholaschiasson";
+var api = "https://api.github.com/repos/";
 var repo = owner + "/nicholaschiasson.github.io";
-var RepoMeta = get("https://api.github.com/repos/" + repo);
+var RepoMeta = get(api + repo);
 
 function onWindowResize() {
   let wrapperDiv = document.getElementById("wrapper");
@@ -17,7 +18,6 @@ function onWindowResize() {
 
 function onWindowLoad(page) {
   onWindowResize();
-  let blog = getURLParameter("entry");
 
   if (!page)
     page = "home.html";
@@ -26,8 +26,6 @@ function onWindowLoad(page) {
   filenames.push("views/html/header.html");
   filenames.push("views/html/navigation.html");
   filenames.push(page);
-  if (page.split("/").pop() === "blog.html" && blog)
-    filenames[2] = "views/markdown/" + blog;
   filenames.push("views/html/footer.html");
 
   let promises = [];
