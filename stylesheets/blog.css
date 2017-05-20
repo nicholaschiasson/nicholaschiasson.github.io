@@ -1,3 +1,33 @@
+div#content ul {
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 1%;
+}
+
+div#content h4 {
+  color: lightgray;
+}
+
+div#content li {
+  border-bottom: 1px solid #333333;
+  padding: 1%;
+}
+
+div#content li:hover {
+  background: #333333;
+}
+
+div#content li:last-child {
+  border-bottom: none;
+}
+
+div#content .entry-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 div#content .creation-date {
   color: gray;
+  float: right;
 }

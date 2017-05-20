@@ -5,18 +5,19 @@ var BlogMeta = get(api + repo + "/contents/" + blogsPath);
 
 function renderBlogList() {
   function createProjectDataListItem(title, creationDate) {
-    let paragraph = document.createElement("p");
+    let item = document.createElement("li");
     let link = document.createElement("a");
+    link.setAttribute("class", "entry-title");
     link.setAttribute("href", window.location + "?entry=" + encodeURI(title));
     link.innerHTML = title.replace(/\.(?=[^.]*$).*/, "");
-    paragraph.appendChild(link);
+    item.appendChild(link);
     let span = document.createElement("span");
     span.setAttribute("class", "creation-date");
     span.setAttribute("data-toggle", "tooltip");
     span.setAttribute("title", creationDate.toTimeString());
-    span.innerHTML = " - " + creationDate.toDateString();
-    paragraph.appendChild(span);
-    return paragraph;
+    span.innerHTML = creationDate.toDateString();
+    item.appendChild(span);
+    return item;
   }
 
   function createBlogList(entries) {
@@ -45,6 +46,9 @@ function renderBlogList() {
         window.location.href = "404.html";
       });
     } else {
+      let entriesHeading = document.createElement("h4");
+      entriesHeading.innerHTML = "Entries";
+      contentDiv.appendChild(entriesHeading);
       BlogMeta.then(function(response) {
         let blogMeta = JSON.parse(response);
         let CommitsMeta = [];
