@@ -1,6 +1,6 @@
 // jshint esversion: 6
 
-var blogsPath = "views/markdown";
+var blogsPath = "resources/blogs";
 var BlogMeta = get(api + repo + "/contents/" + blogsPath);
 
 function renderBlogList() {
