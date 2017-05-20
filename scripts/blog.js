@@ -11,6 +11,7 @@ function renderBlogList() {
     link.setAttribute("href", window.location + "?entry=" + encodeURI(title));
     link.innerHTML = title.replace(/\.(?=[^.]*$).*/, "");
     item.appendChild(link);
+    item.appendChild(document.createElement("br"));
     let span = document.createElement("span");
     span.setAttribute("class", "creation-date");
     span.setAttribute("data-toggle", "tooltip");
