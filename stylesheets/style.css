@@ -85,6 +85,10 @@ div#content {
   padding-bottom: 8em;
 }
 
+div#content p {
+  text-align: justify;
+}
+
 div#footer {
   bottom: 0;
   color: gray;
