@@ -1,0 +1,22 @@
+div#content div.social-buttons {
+  text-align: center;
+}
+
+div#content a.social-button {
+  margin: 1%;
+}
+
+div#content .svg-img {
+  background: gray;
+  border-radius: 20%;
+  fill: #0ce3ac;
+  width: 10em;
+  height: 10em;
+  padding: 2em;
+  transition: background 0.5s, fill 0.5s;
+}
+
+div#content .svg-img:hover {
+  background: #46B196;
+  fill: white;
+}
