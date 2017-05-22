@@ -2,7 +2,6 @@
 
 svg_book = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>book</title>
     <desc>Created with Sketch.</desc>
     <g stroke="none" stroke-width="1" fill-rule="evenodd">
         <g>
@@ -13,7 +12,6 @@ svg_book = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16" 
 
 svg_download = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>cloud-download</title>
     <desc>Created with Sketch.</desc>
     <g stroke="none" stroke-width="1" fill-rule="evenodd">
         <g>
@@ -24,7 +22,6 @@ svg_download = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 
 
 svg_github = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>mark-github</title>
     <desc>Created with Sketch.</desc>
     <g stroke="none" stroke-width="1" fill-rule="evenodd">
         <g>
@@ -35,7 +32,6 @@ svg_github = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16
 
 svg_home = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>home</title>
     <desc>Created with Sketch.</desc>
     <g stroke="none" stroke-width="1" fill-rule="evenodd">
         <g>
@@ -46,7 +42,6 @@ svg_home = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16" 
 
 svg_link = `<svg class="svg-img" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>link</title>
     <desc>Created with Sketch.</desc>
     <g stroke="none" stroke-width="1" fill-rule="evenodd">
         <g>
@@ -63,7 +58,6 @@ svg_linkedin = `<svg class="svg-img" xmlns="http://www.w3.org/2000/svg" xmlns:xl
 
 svg_mail = `<svg class="svg-img" width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <title>mail</title>
     <desc>Created with Sketch.</desc>
     <g stroke="none" stroke-width="1" fill-rule="evenodd">
         <g>

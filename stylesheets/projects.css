@@ -62,6 +62,12 @@ div#content .bottom {
 
 div#content .svg-img {
   fill: #0ce3ac;
-  width: 20px;
-  height: 20px;
+  width: 1.5em;
+  height: 1.5em;
+  transition: width 0.5s, height 0.5s;
+}
+
+div#content .svg-img:hover {
+  width: 1.75em;
+  height: 1.75em;
 }
