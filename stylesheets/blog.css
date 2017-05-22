@@ -10,7 +10,7 @@ div#content h4 {
 }
 
 div#content li {
-  border-bottom: 1px solid #333333;
+  border-bottom: 0.1em solid #333333;
   padding: 1%;
 }
 

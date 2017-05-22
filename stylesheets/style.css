@@ -17,7 +17,7 @@ div#wrapper {
 }
 
 a.social-button {
-  padding: 4px;
+  padding: 0.25em;
   text-decoration: none;
 }
 
@@ -46,8 +46,8 @@ div#header a:hover {
 
 div#header .svg-img {
   fill: #FFFFFF;
-  width: 18px;
-  height: 18px;
+  width: 1.25em;
+  height: 1.25em;
   transition: fill 0.5s;
 }
 
@@ -61,7 +61,7 @@ div#navigation {
 
 ul#nav-menu {
   background-color: #333333;
-  border: 1px solid #222222;
+  border: 0.1em solid #222222;
   list-style-type: none;
   margin: 0;
   overflow: hidden;
@@ -69,7 +69,7 @@ ul#nav-menu {
 }
 
 ul#nav-menu li {
-  border-right: 1px solid #222222;
+  border-right: 0.1em solid #222222;
   display: inline-block;
   float: left;
   width: 20%;
@@ -81,8 +81,8 @@ ul#nav-menu li:last-child {
 
 ul#nav-menu li a {
   display: block;
-  padding-bottom: 16px;
-  padding-top: 16px;
+  padding-bottom: 1em;
+  padding-top: 1em;
   text-align: center;
   text-decoration: none;
 }
@@ -120,8 +120,8 @@ div#footer div.social-buttons {
 
 div#footer .svg-img {
   fill: gray;
-  width: 18px;
-  height: 18px;
+  width: 1.25em;
+  height: 1.25em;
   transition: fill 0.5s;
 }
 
