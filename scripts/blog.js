@@ -41,8 +41,17 @@ function renderBlogList() {
     if (window.location.pathname.split("/").pop() === "blog.html" && blog) {
       let filename = blogsPath + "/" + blog;
       get(filename).then(function(response) {
+        contentDiv.innerHTML = "";
+        let returnButton = document.createElement("a");
+        returnButton.setAttribute("class", "back-button");
+        returnButton.setAttribute("href", "blog.html");
+        let returnButtonInner = document.createElement("h5");
+        returnButtonInner.innerHTML = "back to list";
+        returnButton.appendChild(returnButtonInner);
+        contentDiv.appendChild(returnButton);
         let renderText = filename.split(".").pop() === "md" ? md.render(response) : response;
-        contentDiv.innerHTML = renderText;
+        contentDiv.innerHTML += renderText;
+        contentDiv.appendChild(returnButton);
       }, function(error) {
         window.location.href = "404.html";
       });
