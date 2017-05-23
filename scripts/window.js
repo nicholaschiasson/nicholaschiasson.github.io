@@ -46,6 +46,9 @@ function onWindowLoad(page) {
         copyrightYear.innerHTML = new Date(repoMeta.pushed_at).getFullYear();
     });
     let activeNavigationButton = document.getElementById("nav-button-" + window.location.pathname.split("/").pop().split(".")[0]);
+    if (!activeNavigationButton) {
+      activeNavigationButton = document.getElementById("nav-button-index");
+    }
     if (activeNavigationButton) {
       activeNavigationButton.setAttribute("class", "active");
     }
