@@ -60,7 +60,7 @@ div#navigation {
 }
 
 ul#nav-menu {
-  background-color: #333333;
+  background: #333333;
   border: 0.1em solid #222222;
   list-style-type: none;
   margin: 0;
@@ -88,7 +88,11 @@ ul#nav-menu li a {
 }
 
 ul#nav-menu li a:hover {
-  background-color: #111111;
+  background: #444444;
+}
+
+ul#nav-menu li a.active {
+  background: #444444;
 }
 
 div#content {
@@ -115,6 +119,8 @@ div#footer .legal {
   float: left;
 }
 
+/* No more social buttons in the footer */
+/*
 div#footer div.social-buttons {
   clear: left;
 }
@@ -129,3 +135,4 @@ div#footer .svg-img {
 div#footer .svg-img:hover {
   fill: #46B196;
 }
+*/

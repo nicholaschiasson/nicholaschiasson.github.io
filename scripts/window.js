@@ -45,6 +45,10 @@ function onWindowLoad(page) {
       if (copyrightYear && repoMeta && repoMeta.pushed_at)
         copyrightYear.innerHTML = new Date(repoMeta.pushed_at).getFullYear();
     });
+    let activeNavigationButton = document.getElementById("nav-button-" + window.location.pathname.split("/").pop().split(".")[0]);
+    if (activeNavigationButton) {
+      activeNavigationButton.setAttribute("class", "active");
+    }
     window.dispatchEvent(eventInitialized);
   }, function(error) {
     window.location.href = "404.html";
