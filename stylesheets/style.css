@@ -92,15 +92,19 @@ ul#nav-menu li a:hover {
 }
 
 ul#nav-menu li a.active {
-  background: #444444;
+  background: #46B196;
+  color: white;
 }
 
 div#content {
   padding-bottom: 8em;
 }
 
+div#content .social-buttons {
+  padding-top: 1em;
+}
+
 div#content p {
-  padding-bottom: 1em;
   text-align: justify;
 }
 
