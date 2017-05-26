@@ -68,11 +68,8 @@ function initializeHome() {
   contextMenu = document.getElementById("context-menu");
   shell = document.getElementById("console");
   if (shell) {
-    ShellCommands.echo.callback(["Welcome to Nicholas Omer Chiasson's home page!",
-                                "This is the interactive Nick-Shell.",
-                                "I didn't have any idea what to actually put on this home page and I'm not exactly the most artistic developer, so here's a little something to fill the page that I thought would be fun to implement.",
-                                "I made this because I'm a fan of using the terminal. In particular I am an avid user of the Bash shell, but if you're not familiar with using any terminal then I suggest visiting any of the other pages on this site. After all, that's where all of the real content lies.",
-                                "Otherwise, feel free to have some fun with this little toy I made using javascript and a textarea tag.",
+    ShellCommands.echo.callback(["Welcome to Nick's Interactive Shell, or 'NISH' for short.",
+                                "This is a little toy I am making using javascript and a textarea tag.",
                                 "Type 'help' at any time to view a synopsis for all valid commands.",
                                 ""]);
     prompt();

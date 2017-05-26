@@ -23,10 +23,10 @@ function onWindowLoad(page) {
     page = "home.html";
 
   let filenames = [];
-  filenames.push("views/html/header.html");
-  filenames.push("views/html/navigation.html");
+  filenames.push("views/root/header.html");
+  filenames.push("views/root/navigation.html");
   filenames.push(page);
-  filenames.push("views/html/footer.html");
+  filenames.push("views/root/footer.html");
 
   let promises = [];
   for (let i = 0; i < filenames.length; i++) {
@@ -45,15 +45,14 @@ function onWindowLoad(page) {
       if (copyrightYear && repoMeta && repoMeta.pushed_at)
         copyrightYear.innerHTML = new Date(repoMeta.pushed_at).getFullYear();
     });
+    let pageName = window.location.pathname.split("/").pop().split(".")[0] || "index";
     let activeNavigationButton = document.getElementById("nav-button-" + window.location.pathname.split("/").pop().split(".")[0]);
-    if (!activeNavigationButton) {
-      activeNavigationButton = document.getElementById("nav-button-index");
-    }
     if (activeNavigationButton) {
       activeNavigationButton.setAttribute("class", "active");
     }
     window.dispatchEvent(eventInitialized);
   }, function(error) {
+    console.log(error);
     window.location.href = "404.html";
   });
 }
