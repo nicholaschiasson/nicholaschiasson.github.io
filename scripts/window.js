@@ -37,7 +37,24 @@ function onWindowLoad(page) {
     let element = document.getElementById("wrapper");
     for (let i = 0; i < response.length; i++) {
       let renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
-      element.innerHTML += renderText;
+      let template = document.createElement("template");
+      template.innerHTML = renderText;
+      for (let i = 0; i < template.content.childNodes.length; i++) {
+        let node = template.content.childNodes[i];
+        switch (node.nodeName.toLowerCase()) {
+          case "title":
+          case "style":
+          case "meta":
+          case "link":
+          case "script":
+          case "base":
+            document.head.appendChild(node);
+            break;
+          default:
+            element.appendChild(node);
+            break;
+        }
+      }
     }
     RepoMeta.then(function(response) {
       let repoMeta = JSON.parse(response);

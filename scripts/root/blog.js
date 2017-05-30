@@ -4,7 +4,7 @@ var blogsPath = "views/root/blogs";
 var BlogMeta = get(api + repo + "/contents/" + blogsPath);
 
 function renderBlogList() {
-  function createProjectDataListItem(title, creationDate) {
+  function createBlogEntryListItem(title, creationDate) {
     let item = document.createElement("li");
     let link = document.createElement("a");
     link.setAttribute("class", "entry-title");
@@ -28,7 +28,7 @@ function renderBlogList() {
     for (let i = 0; i < entries.length; i++) {
       let date = new Date(entries[i].split(" ")[0]);
       let title = entries[i].replace(/^[^ ]+ /, "");
-      list.appendChild(createProjectDataListItem(title, date));
+      list.appendChild(createBlogEntryListItem(title, date));
     }
     return list;
   }
@@ -50,8 +50,25 @@ function renderBlogList() {
         returnButton.appendChild(returnButtonInner);
         contentDiv.appendChild(returnButton);
         let renderText = filename.split(".").pop() === "md" ? md.render(response) : response;
-        contentDiv.innerHTML += renderText;
-        contentDiv.appendChild(returnButton);
+        let template = document.createElement("template");
+        template.innerHTML = renderText;
+        for (let i = 0; i < template.content.childNodes.length; i++) {
+          let node = template.content.childNodes[i];
+          switch (node.nodeName.toLowerCase()) {
+            case "title":
+            case "style":
+            case "meta":
+            case "link":
+            case "script":
+            case "base":
+              document.head.appendChild(node);
+              break;
+            default:
+              contentDiv.appendChild(node);
+              break;
+          }
+        }
+        contentDiv.appendChild(returnButton.cloneNode(true));
       }, function(error) {
         window.location.href = "404.html";
       });
