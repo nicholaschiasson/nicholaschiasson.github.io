@@ -111,27 +111,6 @@ function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
-/// Taken and modified from http://stackoverflow.com/a/22638396
-function css(el) {
-    let sheets = document.styleSheets, ret = [];
-    el.matches = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector || el.oMatchesSelector;
-    for (let i in sheets) {
-        let rules = sheets[i].rules || sheets[i].cssRules;
-        for (let r in rules) {
-            if (el.matches(rules[r].selectorText)) {
-                ret.push(rules[r].cssText);
-            }
-        }
-    }
-    return ret;
-}
-
-function promiseLoaded(element) {
-  return new Promise(function(resolve, reject) {
-    element.onload = resolve;
-  });
-}
-
 function initialize(pageContent) {
   window.addEventListener("resize", onWindowResize, true);
   window.addEventListener("deviceorientation", onWindowResize, true);
