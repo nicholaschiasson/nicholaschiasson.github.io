@@ -1,7 +1,6 @@
 // jshint esversion: 6
 
 var blogsPath = "views/root/blogs";
-var BlogMeta = get(api + repo + "/contents/" + blogsPath);
 
 function renderBlogList() {
   function createBlogEntryListItem(title, creationDate) {
@@ -76,11 +75,13 @@ function renderBlogList() {
       let entriesHeading = document.createElement("h4");
       entriesHeading.innerHTML = "Entries";
       contentDiv.appendChild(entriesHeading);
-      BlogMeta.then(function(response) {
+      get(api + repo + "/contents/" + blogsPath + "?" +
+        encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
         let blogMeta = JSON.parse(response);
         let CommitsMeta = [];
         for (let i = 0; i < blogMeta.length; i++) {
-          CommitsMeta.push(get(api + repo + "/commits?path=" + blogMeta[i].path));
+          CommitsMeta.push(get(api + repo + "/commits" + "?" +
+            encodeQueryData({access_token: AccessToken.access_token, path: blogMeta[i].path})));
         }
         Promise.all(CommitsMeta).then(function(response) {
           let blogEntries = [];

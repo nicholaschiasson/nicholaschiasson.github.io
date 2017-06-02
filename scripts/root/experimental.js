@@ -1,7 +1,6 @@
 // jshint esversion: 6
 
 var experimentalProjectsPath = "views/root/experimental";
-var ExperimentalProjectsMeta = get(api + repo + "/contents/" + experimentalProjectsPath);
 
 function renderBlogList() {
   function createProjectListItem(projectName) {
@@ -62,7 +61,8 @@ function renderBlogList() {
         window.location.href = "404.html";
       });
     } else {
-      ExperimentalProjectsMeta.then(function(response) {
+      get(api + repo + "/contents/" + experimentalProjectsPath + "?" +
+        encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
         let experimentalProjectsMeta = JSON.parse(response);
         contentDiv.appendChild(createProjectList(experimentalProjectsMeta));
       });

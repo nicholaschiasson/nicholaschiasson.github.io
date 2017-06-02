@@ -5,7 +5,7 @@ var md = window.markdownit("commonmark");
 var owner = "nicholaschiasson";
 var api = "https://api.github.com/repos/";
 var repo = owner + "/nicholaschiasson.github.io";
-var RepoMeta = get(api + repo);
+var RepoMeta = get(api + repo + "?" + encodeQueryData({access_token: AccessToken.access_token}));
 
 function onWindowResize() {
   let wrapperDiv = document.getElementById("wrapper");
@@ -76,6 +76,7 @@ function onWindowLoad(page) {
 
 // Taken from https://developers.google.com/web/fundamentals/getting-started/primers/promises
 function get(url) {
+  console.log(url);
   // Return a new promise.
   return new Promise(function(resolve, reject) {
     // Do the usual XHR stuff
@@ -109,6 +110,18 @@ function get(url) {
 /// Taken from http://stackoverflow.com/a/11582513
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+function encodeLocationWithQuery(location, query) {
+  return location + "?" + query;
+}
+
+/// Taken from https://stackoverflow.com/a/111545
+function encodeQueryData(data) {
+   let ret = [];
+   for (let d in data)
+     ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+   return ret.join('&');
 }
 
 function initialize(pageContent) {
