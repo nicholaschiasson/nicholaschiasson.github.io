@@ -102,7 +102,6 @@ function guarantee(value) {
 
 // Taken from https://developers.google.com/web/fundamentals/getting-started/primers/promises
 function get(url) {
-  console.log(url);
   // Return a new promise.
   return new Promise(function(resolve, reject) {
     // Do the usual XHR stuff
