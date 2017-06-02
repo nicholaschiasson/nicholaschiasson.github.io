@@ -21,6 +21,42 @@ function renderBlogList() {
     return list;
   }
 
+  function processExperimentalProjectsMeta(experimentalProjectsMeta) {
+    let meta = JSON.parse(experimentalProjectsMeta);
+    contentDiv.appendChild(createProjectList(meta));
+  }
+
+  function renderExperimentalProject(filename, response) {
+    contentDiv.innerHTML = "";
+    let returnButton = document.createElement("a");
+    returnButton.setAttribute("class", "back-button");
+    returnButton.setAttribute("href", "experimental.html");
+    let returnButtonInner = document.createElement("h5");
+    returnButtonInner.innerHTML = "back to list";
+    returnButton.appendChild(returnButtonInner);
+    contentDiv.appendChild(returnButton);
+    let renderText = filename.split(".").pop() === "md" ? md.render(response) : response;
+    let template = document.createElement("template");
+    template.innerHTML = renderText;
+    for (let i = 0; i < template.content.childNodes.length; i++) {
+      let node = template.content.childNodes[i];
+      switch (node.nodeName.toLowerCase()) {
+        case "title":
+        case "style":
+        case "meta":
+        case "link":
+        case "script":
+        case "base":
+          document.head.appendChild(node);
+          break;
+        default:
+          contentDiv.appendChild(node);
+          break;
+      }
+    }
+    contentDiv.appendChild(returnButton.cloneNode(true));
+  }
+
   let contentDiv = document.getElementById("content");
 
   if (contentDiv) {
@@ -28,44 +64,27 @@ function renderBlogList() {
 
     if (window.location.pathname.split("/").pop() === "experimental.html" && project) {
       let filename = experimentalProjectsPath + "/" + project;
-      get(filename).then(function(response) {
-        contentDiv.innerHTML = "";
-        let returnButton = document.createElement("a");
-        returnButton.setAttribute("class", "back-button");
-        returnButton.setAttribute("href", "experimental.html");
-        let returnButtonInner = document.createElement("h5");
-        returnButtonInner.innerHTML = "back to list";
-        returnButton.appendChild(returnButtonInner);
-        contentDiv.appendChild(returnButton);
-        let renderText = filename.split(".").pop() === "md" ? md.render(response) : response;
-        let template = document.createElement("template");
-        template.innerHTML = renderText;
-        for (let i = 0; i < template.content.childNodes.length; i++) {
-          let node = template.content.childNodes[i];
-          switch (node.nodeName.toLowerCase()) {
-            case "title":
-            case "style":
-            case "meta":
-            case "link":
-            case "script":
-            case "base":
-              document.head.appendChild(node);
-              break;
-            default:
-              contentDiv.appendChild(node);
-              break;
-          }
-        }
-        contentDiv.appendChild(returnButton.cloneNode(true));
-      }, function(error) {
-        window.location.href = "404.html";
-      });
+      if (sessionStorage[filename]) {
+        renderExperimentalProject(filename, sessionStorage[filename]);
+      } else {
+        get(filename).then(function(response) {
+          sessionStorage[filename] = response;
+          renderExperimentalProject(filename, sessionStorage[filename]);
+        }, function(error) {
+          window.location.href = "404.html";
+        });
+      }
     } else {
-      get(api + repo + "/contents/" + experimentalProjectsPath + "?" +
-        encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
-        let experimentalProjectsMeta = JSON.parse(response);
-        contentDiv.appendChild(createProjectList(experimentalProjectsMeta));
-      });
+      if (sessionStorage.ExperimentalProjectsMeta) {
+        processExperimentalProjectsMeta(sessionStorage.ExperimentalProjectsMeta);
+      }
+      else {
+        get(api + repo + "/contents/" + experimentalProjectsPath + "?" +
+          encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
+          sessionStorage.ExperimentalProjectsMeta = response;
+          processExperimentalProjectsMeta(sessionStorage.ExperimentalProjectsMeta);
+        });
+      }
     }
   }
 }

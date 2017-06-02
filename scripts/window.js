@@ -5,7 +5,13 @@ var md = window.markdownit("commonmark");
 var owner = "nicholaschiasson";
 var api = "https://api.github.com/repos/";
 var repo = owner + "/nicholaschiasson.github.io";
-var RepoMeta = get(api + repo + "?" + encodeQueryData({access_token: AccessToken.access_token}));
+
+function processRepoMeta(repoMeta) {
+  let meta = JSON.parse(repoMeta);
+  let copyrightYear = document.getElementById("year-of-last-update");
+  if (copyrightYear && meta && meta.pushed_at)
+    copyrightYear.innerHTML = new Date(meta.pushed_at).getFullYear();
+}
 
 function onWindowResize() {
   let wrapperDiv = document.getElementById("wrapper");
@@ -30,12 +36,17 @@ function onWindowLoad(page) {
 
   let promises = [];
   for (let i = 0; i < filenames.length; i++) {
-    promises.push(get(filenames[i]));
+    if (sessionStorage[filenames[i]]) {
+      promises.push(guarantee(sessionStorage[filenames[i]]));
+    } else {
+      promises.push(get(filenames[i]));
+    }
   }
 
   Promise.all(promises).then(function(response) {
     let element = document.getElementById("wrapper");
     for (let i = 0; i < response.length; i++) {
+      sessionStorage[filenames[i]] = sessionStorage[filenames[i]] || response[i];
       let renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
       let template = document.createElement("template");
       template.innerHTML = renderText;
@@ -56,21 +67,36 @@ function onWindowLoad(page) {
         }
       }
     }
-    RepoMeta.then(function(response) {
-      let repoMeta = JSON.parse(response);
-      let copyrightYear = document.getElementById("year-of-last-update");
-      if (copyrightYear && repoMeta && repoMeta.pushed_at)
-        copyrightYear.innerHTML = new Date(repoMeta.pushed_at).getFullYear();
-    });
+
+    // Request repository metadata from Github API if not cached for the session
+    // Use metadata to applying last push date as copyright year for all pages
+    if (sessionStorage.RepoMeta) {
+      processRepoMeta(sessionStorage.RepoMeta);
+    } else {
+      get(api + repo + "?" + encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
+        sessionStorage.RepoMeta = response;
+        processRepoMeta(sessionStorage.RepoMeta);
+      });
+    }
+
+    // Setting active page to determine which tab to highlight on page
     let pageName = window.location.pathname.split("/").pop().split(".")[0] || "index";
     let activeNavigationButton = document.getElementById("nav-button-" + window.location.pathname.split("/").pop().split(".")[0]);
     if (activeNavigationButton) {
       activeNavigationButton.setAttribute("class", "active");
     }
+
+    // Window initialization complete
     window.dispatchEvent(eventInitialized);
   }, function(error) {
     console.log(error);
     window.location.href = "404.html";
+  });
+}
+
+function guarantee(value) {
+  return new Promise(function(resolve) {
+    resolve(value);
   });
 }
 
