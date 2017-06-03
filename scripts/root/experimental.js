@@ -61,8 +61,8 @@ function renderBlogList() {
         processExperimentalProjectsMeta(sessionStorage.ExperimentalProjectsMeta);
       }
       else {
-        get(api + repo + "/contents/" + experimentalProjectsPath + "?" +
-          encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
+        get(encodeURIWithQuery(api + repo + "/contents/" + experimentalProjectsPath,
+          encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
           sessionStorage.ExperimentalProjectsMeta = response;
           processExperimentalProjectsMeta(sessionStorage.ExperimentalProjectsMeta);
         });

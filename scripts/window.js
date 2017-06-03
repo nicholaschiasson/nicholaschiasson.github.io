@@ -77,7 +77,7 @@ function onWindowLoad(page) {
     if (sessionStorage.RepoMeta) {
       processRepoMeta(sessionStorage.RepoMeta);
     } else {
-      get(api + repo + "?" + encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
+      get(encodeURIWithQuery(api + repo, encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
         sessionStorage.RepoMeta = response;
         processRepoMeta(sessionStorage.RepoMeta);
       });
@@ -141,8 +141,9 @@ function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
-function encodeLocationWithQuery(location, query) {
-  return location + "?" + query;
+/// Expects both the uri component and query string component to already be encoded
+function encodeURIWithQuery(uri, query) {
+  return uri + "?" + query;
 }
 
 /// Taken from https://stackoverflow.com/a/111545

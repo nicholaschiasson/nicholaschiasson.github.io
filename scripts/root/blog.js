@@ -42,8 +42,8 @@ function renderBlogList() {
       if (sessionStorage[commitsPrefix + meta[i].path]) {
         CommitsMeta.push(sessionStorage[commitsPrefix + meta[i].path]);
       } else {
-        CommitsMeta.push(get(api + repo + "/commits" + "?" +
-          encodeQueryData({access_token: AccessToken.access_token, path: meta[i].path})));
+        CommitsMeta.push(get(encodeURIWithQuery(api + repo + "/commits",
+          encodeQueryData({access_token: AccessToken.access_token, path: meta[i].path}))));
       }
     }
     Promise.all(CommitsMeta).then(function(response) {
@@ -51,6 +51,7 @@ function renderBlogList() {
       for (let i = 0; i < response.length; i++) {
         sessionStorage[commitsPrefix + meta[i].path] = sessionStorage[commitsPrefix + meta[i].path] || response[i];
         let commitMeta = JSON.parse(response[i]);
+        console.log(commitMeta);
         blogEntries.push(commitMeta.pop().commit.committer.date + " " + meta[i].name);
       }
       contentDiv.appendChild(createBlogList(blogEntries));
@@ -92,8 +93,8 @@ function renderBlogList() {
       if (sessionStorage.BlogMeta) {
         processBlogMeta(sessionStorage.BlogMeta);
       } else {
-        get(api + repo + "/contents/" + blogsPath + "?" +
-          encodeQueryData({access_token: AccessToken.access_token})).then(function(response) {
+        get(encodeURIWithQuery(api + repo + "/contents/" + blogsPath,
+          encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
           sessionStorage.BlogMeta = response;
           processBlogMeta(sessionStorage.BlogMeta);
         });
