@@ -35,25 +35,7 @@ function renderBlogList() {
     returnButtonInner.innerHTML = "back to list";
     returnButton.appendChild(returnButtonInner);
     contentDiv.appendChild(returnButton);
-    let renderText = filename.split(".").pop() === "md" ? md.render(response) : response;
-    let template = document.createElement("template");
-    template.innerHTML = renderText;
-    for (let i = 0; i < template.content.childNodes.length; i++) {
-      let node = template.content.childNodes[i];
-      switch (node.nodeName.toLowerCase()) {
-        case "title":
-        case "style":
-        case "meta":
-        case "link":
-        case "script":
-        case "base":
-          document.head.appendChild(node);
-          break;
-        default:
-          contentDiv.appendChild(node);
-          break;
-      }
-    }
+    appendElementWithStringAsset(contentDiv, filename, response);
     contentDiv.appendChild(returnButton.cloneNode(true));
   }
 

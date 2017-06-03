@@ -13,6 +13,28 @@ function processRepoMeta(repoMeta) {
     copyrightYear.innerHTML = new Date(meta.pushed_at).getFullYear();
 }
 
+function appendElementWithStringAsset(element, assetName, assetString) {
+  let renderText = assetName.split(".").pop() === "md" ? md.render(assetString) : assetString;
+  let template = document.createElement("template");
+  template.innerHTML = renderText;
+  for (let i = 0; i < template.content.childNodes.length; i++) {
+    let node = template.content.childNodes[i];
+    switch (node.nodeName.toLowerCase()) {
+      case "title":
+      case "style":
+      case "meta":
+      case "link":
+      case "script":
+      case "base":
+        document.head.appendChild(node);
+        break;
+      default:
+        element.appendChild(node);
+        break;
+    }
+  }
+}
+
 function onWindowResize() {
   let wrapperDiv = document.getElementById("wrapper");
 
@@ -44,28 +66,10 @@ function onWindowLoad(page) {
   }
 
   Promise.all(promises).then(function(response) {
-    let element = document.getElementById("wrapper");
+    let wrapperDiv = document.getElementById("wrapper");
     for (let i = 0; i < response.length; i++) {
       sessionStorage[filenames[i]] = sessionStorage[filenames[i]] || response[i];
-      let renderText = filenames[i].split(".").pop() === "md" ? md.render(response[i]) : response[i];
-      let template = document.createElement("template");
-      template.innerHTML = renderText;
-      for (let i = 0; i < template.content.childNodes.length; i++) {
-        let node = template.content.childNodes[i];
-        switch (node.nodeName.toLowerCase()) {
-          case "title":
-          case "style":
-          case "meta":
-          case "link":
-          case "script":
-          case "base":
-            document.head.appendChild(node);
-            break;
-          default:
-            element.appendChild(node);
-            break;
-        }
-      }
+      appendElementWithStringAsset(wrapperDiv, filenames[i], response[i]);
     }
 
     // Request repository metadata from Github API if not cached for the session
