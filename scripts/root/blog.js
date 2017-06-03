@@ -51,7 +51,6 @@ function renderBlogList() {
       for (let i = 0; i < response.length; i++) {
         sessionStorage[commitsPrefix + meta[i].path] = sessionStorage[commitsPrefix + meta[i].path] || response[i];
         let commitMeta = JSON.parse(response[i]);
-        console.log(commitMeta);
         blogEntries.push(commitMeta.pop().commit.committer.date + " " + meta[i].name);
       }
       contentDiv.appendChild(createBlogList(blogEntries));
