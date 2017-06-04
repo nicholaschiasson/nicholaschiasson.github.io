@@ -1,5 +1,6 @@
 // jshint esversion: 6
 
+commonCache = sessionStorage;
 var eventInitialized = new Event("initialized");
 var md = window.markdownit("commonmark");
 var owner = "nicholaschiasson";
@@ -58,8 +59,8 @@ function onWindowLoad(page) {
 
   let promises = [];
   for (let i = 0; i < filenames.length; i++) {
-    if (sessionStorage[filenames[i]]) {
-      promises.push(guarantee(sessionStorage[filenames[i]]));
+    if (commonCache[filenames[i]]) {
+      promises.push(guarantee(commonCache[filenames[i]]));
     } else {
       promises.push(get(filenames[i]));
     }
@@ -68,18 +69,18 @@ function onWindowLoad(page) {
   Promise.all(promises).then(function(response) {
     let wrapperDiv = document.getElementById("wrapper");
     for (let i = 0; i < response.length; i++) {
-      sessionStorage[filenames[i]] = sessionStorage[filenames[i]] || response[i];
+      commonCache[filenames[i]] = commonCache[filenames[i]] || response[i];
       appendElementWithStringAsset(wrapperDiv, filenames[i], response[i]);
     }
 
     // Request repository metadata from Github API if not cached for the session
     // Use metadata to applying last push date as copyright year for all pages
-    if (sessionStorage.RepoMeta) {
-      processRepoMeta(sessionStorage.RepoMeta);
+    if (commonCache.RepoMeta) {
+      processRepoMeta(commonCache.RepoMeta);
     } else {
       get(encodeURIWithQuery(api + repo, encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
-        sessionStorage.RepoMeta = response;
-        processRepoMeta(sessionStorage.RepoMeta);
+        commonCache.RepoMeta = response;
+        processRepoMeta(commonCache.RepoMeta);
       });
     }
 
@@ -105,12 +106,14 @@ function guarantee(value) {
 }
 
 // Taken from https://developers.google.com/web/fundamentals/getting-started/primers/promises
-function get(url) {
+function get(url, mimeType) {
   // Return a new promise.
   return new Promise(function(resolve, reject) {
     // Do the usual XHR stuff
     let req = new XMLHttpRequest();
-    req.open('GET', url);
+    req.open("GET", url);
+
+    req.overrideMimeType(mimeType || "text/plain");
 
     req.onload = function() {
       // This is called even on 404 etc
@@ -152,6 +155,13 @@ function encodeQueryData(data) {
    for (let d in data)
      ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
    return ret.join('&');
+}
+
+function clearCache() {
+  let k = Object.keys(commonCache);
+  for (let i = 0; i < k.length; i++) {
+    if (commonCache[k[i]]) delete commonCache[k[i]];
+  }
 }
 
 function initialize(pageContent) {

@@ -46,25 +46,25 @@ function renderBlogList() {
 
     if (window.location.pathname.split("/").pop() === "experimental.html" && project) {
       let filename = experimentalProjectsPath + "/" + project;
-      if (sessionStorage[filename]) {
-        renderExperimentalProject(filename, sessionStorage[filename]);
+      if (commonCache[filename]) {
+        renderExperimentalProject(filename, commonCache[filename]);
       } else {
         get(filename).then(function(response) {
-          sessionStorage[filename] = response;
-          renderExperimentalProject(filename, sessionStorage[filename]);
+          commonCache[filename] = response;
+          renderExperimentalProject(filename, commonCache[filename]);
         }, function(error) {
           window.location.href = "404.html";
         });
       }
     } else {
-      if (sessionStorage.ExperimentalProjectsMeta) {
-        processExperimentalProjectsMeta(sessionStorage.ExperimentalProjectsMeta);
+      if (commonCache.ExperimentalProjectsMeta) {
+        processExperimentalProjectsMeta(commonCache.ExperimentalProjectsMeta);
       }
       else {
         get(encodeURIWithQuery(api + repo + "/contents/" + experimentalProjectsPath,
           encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
-          sessionStorage.ExperimentalProjectsMeta = response;
-          processExperimentalProjectsMeta(sessionStorage.ExperimentalProjectsMeta);
+          commonCache.ExperimentalProjectsMeta = response;
+          processExperimentalProjectsMeta(commonCache.ExperimentalProjectsMeta);
         });
       }
     }

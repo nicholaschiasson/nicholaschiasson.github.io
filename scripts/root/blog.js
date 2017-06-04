@@ -39,8 +39,8 @@ function renderBlogList() {
     let commitsPrefix = "commits_";
     let CommitsMeta = [];
     for (let i = 0; i < meta.length; i++) {
-      if (sessionStorage[commitsPrefix + meta[i].path]) {
-        CommitsMeta.push(sessionStorage[commitsPrefix + meta[i].path]);
+      if (commonCache[commitsPrefix + meta[i].path]) {
+        CommitsMeta.push(commonCache[commitsPrefix + meta[i].path]);
       } else {
         CommitsMeta.push(get(encodeURIWithQuery(api + repo + "/commits",
           encodeQueryData({access_token: AccessToken.access_token, path: meta[i].path}))));
@@ -49,7 +49,7 @@ function renderBlogList() {
     Promise.all(CommitsMeta).then(function(response) {
       let blogEntries = [];
       for (let i = 0; i < response.length; i++) {
-        sessionStorage[commitsPrefix + meta[i].path] = sessionStorage[commitsPrefix + meta[i].path] || response[i];
+        commonCache[commitsPrefix + meta[i].path] = commonCache[commitsPrefix + meta[i].path] || response[i];
         let commitMeta = JSON.parse(response[i]);
         blogEntries.push(commitMeta.pop().commit.committer.date + " " + meta[i].name);
       }
@@ -75,12 +75,12 @@ function renderBlogList() {
 
     if (window.location.pathname.split("/").pop() === "blog.html" && blog) {
       let filename = blogsPath + "/" + blog;
-      if (sessionStorage[filename]) {
-        renderBlogEntry(filename, sessionStorage[filename]);
+      if (commonCache[filename]) {
+        renderBlogEntry(filename, commonCache[filename]);
       } else {
         get(filename).then(function(response) {
-          sessionStorage[filename] = response;
-          renderBlogEntry(filename, sessionStorage[filename]);
+          commonCache[filename] = response;
+          renderBlogEntry(filename, commonCache[filename]);
         }, function(error) {
           window.location.href = "404.html";
         });
@@ -89,13 +89,13 @@ function renderBlogList() {
       let entriesHeading = document.createElement("h4");
       entriesHeading.innerHTML = "Entries";
       contentDiv.appendChild(entriesHeading);
-      if (sessionStorage.BlogMeta) {
-        processBlogMeta(sessionStorage.BlogMeta);
+      if (commonCache.BlogMeta) {
+        processBlogMeta(commonCache.BlogMeta);
       } else {
         get(encodeURIWithQuery(api + repo + "/contents/" + blogsPath,
           encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
-          sessionStorage.BlogMeta = response;
-          processBlogMeta(sessionStorage.BlogMeta);
+          commonCache.BlogMeta = response;
+          processBlogMeta(commonCache.BlogMeta);
         });
       }
     }

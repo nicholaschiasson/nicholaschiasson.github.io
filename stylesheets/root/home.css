@@ -3,6 +3,6 @@
   text-align: center;
 }
 
-.sign img {
-  max-width: 100%;
+.sign .svg-img {
+  fill: white;
 }
