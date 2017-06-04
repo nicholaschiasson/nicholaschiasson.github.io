@@ -8,6 +8,10 @@ body {
   background-color: #151515;
 }
 
+a {
+  outline: none;
+}
+
 div#wrapper {
   background-color: #222222;
   padding: 1%;
