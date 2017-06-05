@@ -80,7 +80,6 @@ div#content .svg-img:hover {
 
 #cursor {
   animation: blinker 1s linear infinite;
-  font-size: 2vw;
 }
 
 @keyframes blinker {
