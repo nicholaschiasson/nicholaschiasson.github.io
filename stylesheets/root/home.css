@@ -2,8 +2,23 @@ div#content {
   text-align: center;
 }
 
-div#content h2 {
+div#content div#left-header, div#content div#right-header {
+  display: inline-block;
   font-family: "Courier New";
+  font-size: 2.5em;
+  line-height: 1em;
+  padding-bottom: 0.5em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  width: 45%;
+}
+
+div#content div#left-header {
+  text-align: right;
+}
+
+div#content div#right-header {
+  text-align: left;
 }
 
 div#content .svg-img {
@@ -21,8 +36,45 @@ div#content .svg-img:hover {
   fill: white;
 }
 
-#tagline {
+#tagline-main, #tagline-temp {
   color: #0ce3ac;
+  padding: 0;
+}
+
+#tagline-main {
+  opacity: 0;
+}
+
+#tagline-temp {
+  opacity: 1;
+}
+
+.tagline-main-animation {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-name: fade-in-down;
+  animation-timing-function: linear;
+}
+
+.tagline-temp-animation {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-name: fade-out-down;
+  animation-timing-function: linear;
+}
+
+@keyframes fade-in-down {
+  100% {
+    opacity: 1;
+    transform: translateY(1em);
+  }
+}
+
+@keyframes fade-out-down {
+  100% {
+    opacity: 0;
+    transform: translateY(1em);
+  }
 }
 
 #cursor {

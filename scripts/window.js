@@ -86,7 +86,7 @@ function onWindowLoad(page) {
 
     // Setting active page to determine which tab to highlight on page
     let pageName = window.location.pathname.split("/").pop().split(".")[0] || "index";
-    let activeNavigationButton = document.getElementById("nav-button-" + window.location.pathname.split("/").pop().split(".")[0]);
+    let activeNavigationButton = document.getElementById("nav-button-" + pageName);
     if (activeNavigationButton) {
       activeNavigationButton.setAttribute("class", "active");
     }
