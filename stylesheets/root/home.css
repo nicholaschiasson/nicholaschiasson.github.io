@@ -5,8 +5,9 @@ div#content {
 div#content div#left-header, div#content div#right-header {
   display: inline-block;
   font-family: "Courier New";
-  font-size: 2.5em;
+  font-size: calc(100% + 2.5vw);
   line-height: 1em;
+  overflow: hidden;
   padding-bottom: 0.5em;
   padding-left: 0.25em;
   padding-right: 0.25em;
@@ -79,7 +80,7 @@ div#content .svg-img:hover {
 
 #cursor {
   animation: blinker 1s linear infinite;
-  font-size: 0.75em;
+  font-size: 2vw;
 }
 
 @keyframes blinker {
