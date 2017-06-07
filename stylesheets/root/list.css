@@ -29,9 +29,9 @@ div#content .entry-title {
 
 div#content .creation-date {
   color: gray;
-  font-size: 0.9em;
 }
 
-div#content .creation-date:hover {
+div#content .date-time:hover {
   font-style: italic;
+  font-weight: bold;
 }

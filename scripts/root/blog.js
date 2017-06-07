@@ -1,63 +1,47 @@
 // jshint esversion: 6
 
-var blogsPath = "views/root/blogs";
-
 function renderBlogList() {
   let contentDiv = document.getElementById("content");
 
-  function createBlogEntryListItem(title, creationDate) {
+  function createBlogEntryListItem(entry) {
     let item = document.createElement("li");
     let link = document.createElement("a");
     link.setAttribute("class", "entry-title");
-    link.setAttribute("href", window.location + "?entry=" + encodeURI(title));
-    link.innerHTML = title.replace(/\.(?=[^.]*$).*/, "");
+    link.setAttribute("href", window.location + "?id=" + entry.number);
+    link.innerHTML = entry.title;
     item.appendChild(link);
     item.appendChild(document.createElement("br"));
-    let span = document.createElement("span");
-    span.setAttribute("class", "creation-date");
-    span.setAttribute("data-toggle", "tooltip");
-    span.setAttribute("title", creationDate.toTimeString());
-    span.innerHTML = creationDate.toDateString();
-    item.appendChild(span);
+    let date_p = document.createElement("p");
+    date_p.setAttribute("class", "creation-date");
+    let created_span = document.createElement("span");
+    created_span.setAttribute("class", "date-time");
+    created_span.setAttribute("data-toggle", "tooltip");
+    created_span.setAttribute("title", new Date(entry.created_at).toTimeString());
+    created_span.innerHTML = new Date(entry.created_at).toDateString();
+    date_p.appendChild(created_span);
+    if (entry.created_at !== entry.updated_at) {
+      let updated_span = document.createElement("span");
+      updated_span.setAttribute("class", "date-time");
+      updated_span.setAttribute("data-toggle", "tooltip");
+      updated_span.setAttribute("title", new Date(entry.updated_at).toTimeString());
+      updated_span.innerHTML = new Date(entry.updated_at).toDateString();
+      date_p.innerHTML += " (Updated: ";
+      date_p.appendChild(updated_span);
+      date_p.innerHTML += ")";
+    }
+    item.appendChild(date_p);
     return item;
   }
 
   function createBlogList(entries) {
     let list = document.createElement("ul");
-    entries.sort();
-    entries.reverse();
     for (let i = 0; i < entries.length; i++) {
-      let date = new Date(entries[i].split(" ")[0]);
-      let title = entries[i].replace(/^[^ ]+ /, "");
-      list.appendChild(createBlogEntryListItem(title, date));
+      list.appendChild(createBlogEntryListItem(entries[i]));
     }
     return list;
   }
 
-  function processBlogMeta(blogMeta) {
-    let meta = JSON.parse(blogMeta);
-    let commitsPrefix = "commits_";
-    let CommitsMeta = [];
-    for (let i = 0; i < meta.length; i++) {
-      if (commonCache[commitsPrefix + meta[i].path]) {
-        CommitsMeta.push(commonCache[commitsPrefix + meta[i].path]);
-      } else {
-        CommitsMeta.push(get(encodeURIWithQuery(api + repo + "/commits",
-          encodeQueryData({access_token: AccessToken.access_token, path: meta[i].path}))));
-      }
-    }
-    Promise.all(CommitsMeta).then(function(response) {
-      let blogEntries = [];
-      for (let i = 0; i < response.length; i++) {
-        commonCache[commitsPrefix + meta[i].path] = commonCache[commitsPrefix + meta[i].path] || response[i];
-        let commitMeta = JSON.parse(response[i]);
-        blogEntries.push(commitMeta.pop().commit.committer.date + " " + meta[i].name);
-      }
-      contentDiv.appendChild(createBlogList(blogEntries));
-    });
-  }
-
-  function renderBlogEntry(filename, response) {
+  function renderBlogEntry(entryMeta) {
     contentDiv.innerHTML = "";
     let returnButton = document.createElement("a");
     returnButton.setAttribute("class", "back-button");
@@ -66,21 +50,34 @@ function renderBlogList() {
     returnButtonInner.innerHTML = "back to list";
     returnButton.appendChild(returnButtonInner);
     contentDiv.appendChild(returnButton);
-    appendElementWithStringAsset(contentDiv, filename, response);
+    appendElementWithStringAsset(contentDiv, ".md", entryMeta.body);
     contentDiv.appendChild(returnButton.cloneNode(true));
   }
 
   if (contentDiv) {
-    let blog = getURLParameter("entry");
+    let blog = getURLParameter("id");
 
     if (window.location.pathname.split("/").pop() === "blog.html" && blog) {
-      let filename = blogsPath + "/" + blog;
-      if (commonCache[filename]) {
-        renderBlogEntry(filename, commonCache[filename]);
+      let entryMeta;
+      if (commonCache.BlogMeta) {
+        entryMeta = JSON.parse(commonCache.BlogMeta).find(function(element) {
+          return element.number.toString() === blog;
+        });
+      }
+      if (entryMeta) {
+        renderBlogEntry(entryMeta);
       } else {
-        get(filename).then(function(response) {
-          commonCache[filename] = response;
-          renderBlogEntry(filename, commonCache[filename]);
+        get(encodeURIWithQuery(api + repo + "/issues",
+          encodeQueryData({access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc"}))).then(function(response) {
+          commonCache.BlogMeta = response;
+          entryMeta = JSON.parse(commonCache.BlogMeta).find(function(element) {
+            return element.number.toString() === blog;
+          });
+          if (entryMeta) {
+            renderBlogEntry(entryMeta);
+          } else {
+            window.location.href = "404.html";
+          }
         }, function(error) {
           window.location.href = "404.html";
         });
@@ -90,12 +87,12 @@ function renderBlogList() {
       entriesHeading.innerHTML = "Entries";
       contentDiv.appendChild(entriesHeading);
       if (commonCache.BlogMeta) {
-        processBlogMeta(commonCache.BlogMeta);
+        contentDiv.appendChild(createBlogList(JSON.parse(commonCache.BlogMeta)));
       } else {
-        get(encodeURIWithQuery(api + repo + "/contents/" + blogsPath,
-          encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
+        get(encodeURIWithQuery(api + repo + "/issues",
+          encodeQueryData({access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc"}))).then(function(response) {
           commonCache.BlogMeta = response;
-          processBlogMeta(commonCache.BlogMeta);
+          contentDiv.appendChild(createBlogList(JSON.parse(commonCache.BlogMeta)));
         });
       }
     }
