@@ -1,11 +1,13 @@
 // jshint esversion: 6
 
-commonCache = sessionStorage;
+const owner = "nicholaschiasson";
+const api = "https://api.github.com/repos/";
+const repo = owner + "/nicholaschiasson.github.io";
+const serverAddr = "https://speedy-code-170312.appspot.com";
+
+var commonCache = sessionStorage;
 var eventInitialized = new Event("initialized");
 var md = window.markdownit("commonmark");
-var owner = "nicholaschiasson";
-var api = "https://api.github.com/repos/";
-var repo = owner + "/nicholaschiasson.github.io";
 
 function processRepoMeta(repoMeta) {
   let meta = JSON.parse(repoMeta);
@@ -162,6 +164,19 @@ function clearCache() {
   for (let i = 0; i < k.length; i++) {
     if (commonCache[k[i]]) delete commonCache[k[i]];
   }
+  k = Object.keys(localStorage);
+  for (let i = 0; i < k.length; i++) {
+    if (localStorage[k[i]]) delete localStorage[k[i]];
+  }
+}
+
+function githubAuthenticate() {
+  get(encodeURI(serverAddr + "/client_id")).then(function(res) {
+    window.location = encodeURIWithQuery("https://github.com/login/oauth/authorize",
+      encodeQueryData({client_id: res, scope: ""}));
+  }, function(err) {
+    alert(err + ": Failed to initiate authentication.");
+  });
 }
 
 function initialize(pageContent) {

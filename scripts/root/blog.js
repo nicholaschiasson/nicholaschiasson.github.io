@@ -51,7 +51,29 @@ function renderBlogList() {
     returnButton.appendChild(returnButtonInner);
     contentDiv.appendChild(returnButton);
     appendElementWithStringAsset(contentDiv, ".md", entryMeta.body);
-    contentDiv.appendChild(returnButton.cloneNode(true));
+    contentDiv.appendChild(document.createElement("hr"));
+    let commentsTitle = document.createElement("h5");
+    commentsTitle.innerHTML = "Comments • " + entryMeta.comments;
+    contentDiv.appendChild(commentsTitle);
+    if (!localStorage.profile_token) {
+      let notSignedInDiv = document.createElement("div");
+      notSignedInDiv.setAttribute("id", "not-signed-in");
+      let notSignedInP = document.createElement("p");
+      let signInButton = document.createElement("a");
+      signInButton.setAttribute("id", "sign-in-button");
+      signInButton.setAttribute("onclick", "githubAuthenticate();"); // for some reason, a regular .addEventListener() does not work here!!
+      signInButton.innerHTML = "Sign in";
+      notSignedInP.appendChild(signInButton);
+      notSignedInP.innerHTML += " using Github to post comments.";
+      notSignedInDiv.appendChild(notSignedInP);
+      contentDiv.appendChild(notSignedInDiv);
+    } else {
+      let commentBox = document.createElement("textarea");
+      commentBox.setAttribute("class", "comment-area");
+      commentBox.setAttribute("placeholder", "Leave a comment");
+      commentBox.setAttribute("rows", "4");
+      contentDiv.appendChild(commentBox);
+    }
   }
 
   if (contentDiv) {
