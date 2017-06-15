@@ -143,6 +143,10 @@ div#not-signed-in {
   padding-bottom: 0.5em;
 }
 
+.blog-title {
+  font-size: 4em;
+}
+
 a.github-button {
   background: linear-gradient(#33CC54, #26A041);
   border-color: #2EAA4B;
@@ -200,6 +204,17 @@ div.comment-outer {
   border-radius: 0.25em;
   height: 4em;
   width: 4em;
+}
+
+.original-post-avatar {
+  border-radius: 0.25em;
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.original-post-info {
+  padding-left: 0.5em;
+  padding-top: 0.5em;
 }
 
 div.comment-inner {
