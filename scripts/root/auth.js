@@ -16,7 +16,7 @@ function checkAuthentication() {
     if (header) {
       header.innerHTML = "🤔 Authenticating...";
     }
-    get(encodeURIWithQuery(encodeURI(serverAddr + "/access_token"), encodeQueryData({code: authCode}))).then(function(res) {
+    get(encodeURI(serverAddr + "/access_token"), {code: authCode}).then(function(res) {
       try {
         let accessToken = JSON.parse(res).access_token;
         if (!accessToken) throw new Error("Error: Failed to receive access token.");

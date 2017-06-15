@@ -6,7 +6,6 @@ const api = "https://api.github.com/repos/";
 const repo = owner + "/nicholaschiasson.github.io";
 const serverAddr = "https://speedy-code-170312.appspot.com";
 
-var commonCache = sessionStorage;
 var eventInitialized = new Event("initialized");
 var md = window.markdownit("commonmark");
 
@@ -62,30 +61,20 @@ function onWindowLoad(page) {
 
   let promises = [];
   for (let i = 0; i < filenames.length; i++) {
-    if (commonCache[filenames[i]]) {
-      promises.push(guarantee(commonCache[filenames[i]]));
-    } else {
-      promises.push(get(filenames[i]));
-    }
+    promises.push(get(filenames[i]));
   }
 
   Promise.all(promises).then(function(response) {
     let wrapperDiv = document.getElementById("wrapper");
     for (let i = 0; i < response.length; i++) {
-      commonCache[filenames[i]] = commonCache[filenames[i]] || response[i];
       appendElementWithStringAsset(wrapperDiv, filenames[i], response[i]);
     }
 
     // Request repository metadata from Github API if not cached for the session
     // Use metadata to applying last push date as copyright year for all pages
-    if (commonCache.RepoMeta) {
-      processRepoMeta(commonCache.RepoMeta);
-    } else {
-      get(encodeURIWithQuery(api + repo, encodeQueryData({access_token: AccessToken.access_token}))).then(function(response) {
-        commonCache.RepoMeta = response;
-        processRepoMeta(commonCache.RepoMeta);
-      });
-    }
+    get(api + repo, {access_token: AccessToken.access_token}).then(function(response) {
+      processRepoMeta(response);
+    });
 
     // Setting active page to determine which tab to highlight on page
     let pageName = window.location.pathname.split("/").pop().split(".")[0] || "index";
@@ -109,12 +98,17 @@ function guarantee(value) {
 }
 
 // Taken from https://developers.google.com/web/fundamentals/getting-started/primers/promises
-function get(url, mimeType) {
+function get(url, params, mimeType, noCache) {
+  if (noCache) {
+    if (!params) params = {};
+    params._ = new Date().getTime();
+  }
+  let uriLocation = encodeURIWithQuery(url, encodeQueryData(params));
   // Return a new promise.
   return new Promise(function(resolve, reject) {
     // Do the usual XHR stuff
     let req = new XMLHttpRequest();
-    req.open("GET", url);
+    req.open("GET", uriLocation);
 
     req.overrideMimeType(mimeType || "text/plain");
 
@@ -158,17 +152,6 @@ function encodeQueryData(data) {
    for (let d in data)
      ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
    return ret.join('&');
-}
-
-function clearCache() {
-  let k = Object.keys(commonCache);
-  for (let i = 0; i < k.length; i++) {
-    if (commonCache[k[i]]) delete commonCache[k[i]];
-  }
-  k = Object.keys(localStorage);
-  for (let i = 0; i < k.length; i++) {
-    if (localStorage[k[i]]) delete localStorage[k[i]];
-  }
 }
 
 function githubAuthenticate() {

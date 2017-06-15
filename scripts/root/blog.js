@@ -119,7 +119,7 @@ function renderBlogList() {
     } else {
       let commentForm = document.createElement("div");
       commentForm.setAttribute("class", "comment-form");
-      get(encodeURIWithQuery(authenticatedUserUrl, encodeQueryData({access_token: JSON.parse(localStorage.profile_token).access_token, _: new Date().getTime()}))).then(function(res) {
+      get(authenticatedUserUrl, {access_token: JSON.parse(localStorage.profile_token).access_token}, undefined, true).then(function(res) {
         let userMeta = JSON.parse(res);
         renderCommentForm(commentForm, entryMeta, userMeta);
         contentDiv.appendChild(commentForm);
@@ -160,7 +160,7 @@ function renderBlogList() {
     commentButtons.appendChild(signoutButton);
     let commentSubmit = document.createElement("a");
     commentSubmit.setAttribute("class", "github-button comment-button");
-    commentSubmit.setAttribute("onclick", `postComment('${JSON.stringify(entryMeta)}');`);
+    commentSubmit.setAttribute("onclick", `postComment(${JSON.stringify(entryMeta)});`);
     commentSubmit.innerHTML = "Comment";
     commentButtons.appendChild(commentSubmit);
     innerCommentForm.appendChild(commentButtons);
@@ -168,7 +168,7 @@ function renderBlogList() {
   }
 
   function renderCommentSection(entryMeta, userMeta) {
-    get(encodeURIWithQuery(entryMeta.comments_url, encodeQueryData({access_token: AccessToken.access_token, _: new Date().getTime()}))).then(function(res) {
+    get(entryMeta.comments_url, {access_token: AccessToken.access_token}, undefined, true).then(function(res) {
       let commentsMeta = JSON.parse(res);
       let commentSection = document.getElementById("comment-section") || document.createElement("div");
       commentSection.setAttribute("id", "comment-section");
@@ -240,8 +240,7 @@ function renderBlogList() {
     });
   }
 
-  postComment = function(entryJSON) {
-    let entryMeta = JSON.parse(entryJSON);
+  postComment = function(entryMeta) {
     let commentArea = document.getElementById("comment-area");
     if (commentArea && commentArea.value) {
       if (commentArea.value) {
@@ -251,7 +250,6 @@ function renderBlogList() {
 
         req.onload = function() {
           if (req.status < 400) {
-            delete commonCache.BlogMeta;
             window.location.reload(true);
           }
           else {
@@ -275,7 +273,6 @@ function renderBlogList() {
 
       req.onload = function() {
         if (req.status < 400) {
-          delete commonCache.BlogMeta;
           window.location.reload(true);
         } else {
           console.error(Error(req.statusText));
@@ -294,43 +291,25 @@ function renderBlogList() {
     let blog = getURLParameter("id");
 
     if (window.location.pathname.split("/").pop() === "blog.html" && blog) {
-      let entryMeta;
-      if (commonCache.BlogMeta) {
-        entryMeta = JSON.parse(commonCache.BlogMeta).find(function(element) {
+      get(api + repo + "/issues", {access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc"}, undefined, true).then(function(response) {
+        let entryMeta = JSON.parse(response).find(function(element) {
           return element.number.toString() === blog;
         });
-      }
-      if (entryMeta) {
-        renderBlogEntry(entryMeta);
-      } else {
-        get(encodeURIWithQuery(api + repo + "/issues",
-          encodeQueryData({access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc", _: new Date().getTime()}))).then(function(response) {
-          commonCache.BlogMeta = response;
-          entryMeta = JSON.parse(commonCache.BlogMeta).find(function(element) {
-            return element.number.toString() === blog;
-          });
-          if (entryMeta) {
-            renderBlogEntry(entryMeta);
-          } else {
-            window.location.href = "404.html";
-          }
-        }, function(error) {
+        if (entryMeta) {
+          renderBlogEntry(entryMeta);
+        } else {
           window.location.href = "404.html";
-        });
-      }
+        }
+      }, function(error) {
+        window.location.href = "404.html";
+      });
     } else {
       let entriesHeading = document.createElement("h4");
       entriesHeading.innerHTML = "Entries";
       contentDiv.appendChild(entriesHeading);
-      if (commonCache.BlogMeta) {
-        contentDiv.appendChild(createBlogList(JSON.parse(commonCache.BlogMeta)));
-      } else {
-        get(encodeURIWithQuery(api + repo + "/issues",
-          encodeQueryData({access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc"}))).then(function(response) {
-          commonCache.BlogMeta = response;
-          contentDiv.appendChild(createBlogList(JSON.parse(commonCache.BlogMeta)));
-        });
-      }
+      get(api + repo + "/issues", {access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc"}).then(function(response) {
+        contentDiv.appendChild(createBlogList(JSON.parse(response)));
+      });
     }
   }
 }
