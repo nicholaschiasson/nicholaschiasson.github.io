@@ -148,8 +148,8 @@ div#not-signed-in {
 }
 
 a.github-button {
-  background: linear-gradient(#33CC54, #26A041);
-  border-color: #2EAA4B;
+  background: linear-gradient(#33CE57, #28A745);
+  border-color: #2FAC4D;
   border-radius: 0.25em;
   border-style: solid;
   border-width: 0.1em;
@@ -164,22 +164,39 @@ a.github-button {
 }
 
 a.github-button:hover {
-  background: linear-gradient(#26993F, #1C7730);
-  border-color: #227F38;
-  color: #BFBFBF;
+  background: linear-gradient(#2DC14F, #269F42);
+  border-color: #247039;
 }
 
 a.github-button:active {
-  background: #1C7730;
+  background: linear-gradient(#258E3E, #279E43);
+  border-color: #215F33;
 }
 
-div.comment-form {
-  text-align: right;
+.comment-button {
+  float: right;
+}
+
+a.signout-button {
+  background: linear-gradient(#F9FAFB, #EFF3F6);
+  border-color: #EFF3F6;
+  color: #CB2431;
+  display: inline-block;
+}
+
+a.signout-button:hover {
+  background: linear-gradient(#D93C48, #CB2431);
+  border-color: #75252D;
+  color: white;
+}
+
+a.signout-button:active {
+  background: linear-gradient(#A0202B, #B4202C);
+  border-color: #682028;
 }
 
 div.comment-form-inner {
   padding: 0.5em;
-  padding-bottom: 1em;
 }
 
 textarea#comment-area {

@@ -121,18 +121,18 @@ function renderBlogList() {
       commentForm.setAttribute("class", "comment-form");
       get(encodeURIWithQuery(authenticatedUserUrl, encodeQueryData({access_token: JSON.parse(localStorage.profile_token).access_token, _: new Date().getTime()}))).then(function(res) {
         let userMeta = JSON.parse(res);
-        renderCommentFormAndSection(commentForm, entryMeta, userMeta);
+        renderCommentForm(commentForm, entryMeta, userMeta);
         contentDiv.appendChild(commentForm);
         renderCommentSection(entryMeta, userMeta);
       }, function(err) {
-        renderCommentFormAndSection(commentForm, entryMeta);
+        renderCommentForm(commentForm, entryMeta);
         contentDiv.appendChild(commentForm);
         renderCommentSection(entryMeta);
       });
     }
   }
 
-  function renderCommentFormAndSection(commentForm, entryMeta, userMeta) {
+  function renderCommentForm(commentForm, entryMeta, userMeta) {
     if (userMeta) {
       let userAvatarAnchor = document.createElement("a");
       userAvatarAnchor.setAttribute("class", "user-avatar-anchor");
@@ -152,11 +152,18 @@ function renderBlogList() {
     commentArea.setAttribute("placeholder", "Leave a comment");
     commentArea.setAttribute("rows", "4");
     innerCommentForm.appendChild(commentArea);
+    let commentButtons = document.createElement("div");
+    let signoutButton = document.createElement("a");
+    signoutButton.setAttribute("class", "github-button signout-button");
+    signoutButton.setAttribute("onclick", `if (confirm("Are you sure you want to sign out?")) {delete localStorage.profile_token; window.location.reload(true);}`);
+    signoutButton.innerHTML = "Sign out";
+    commentButtons.appendChild(signoutButton);
     let commentSubmit = document.createElement("a");
     commentSubmit.setAttribute("class", "github-button comment-button");
     commentSubmit.setAttribute("onclick", `postComment('${JSON.stringify(entryMeta)}');`);
     commentSubmit.innerHTML = "Comment";
-    innerCommentForm.appendChild(commentSubmit);
+    commentButtons.appendChild(commentSubmit);
+    innerCommentForm.appendChild(commentButtons);
     commentForm.appendChild(innerCommentForm);
   }
 
