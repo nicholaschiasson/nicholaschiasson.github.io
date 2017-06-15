@@ -1,6 +1,7 @@
 // jshint esversion: 6
 
 const owner = "nicholaschiasson";
+const authenticatedUserUrl = "https://api.github.com/user";
 const api = "https://api.github.com/repos/";
 const repo = owner + "/nicholaschiasson.github.io";
 const serverAddr = "https://speedy-code-170312.appspot.com";
@@ -173,7 +174,7 @@ function clearCache() {
 function githubAuthenticate() {
   get(encodeURI(serverAddr + "/client_id")).then(function(res) {
     window.location = encodeURIWithQuery("https://github.com/login/oauth/authorize",
-      encodeQueryData({client_id: res, scope: ""}));
+      encodeQueryData({client_id: res, scope: "public_repo"}));
   }, function(err) {
     alert(err + ": Failed to initiate authentication.");
   });

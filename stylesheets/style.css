@@ -127,26 +127,31 @@ div#footer .legal {
   float: left;
 }
 
+div#comment-section {
+  width: 100%;
+}
+
 div#not-signed-in {
-  background: #7F7C6E;
-  border-color: #6D6C60;
+  background: #FFF8DD;
+  border-color: #D8D6C0;
   border-radius: 0.25em;
   border-style: solid;
-  border-width: 1px;
-  color: #BFBFBF;
+  border-width: 0.1em;
+  color: #735C0F;
+  font-weight: bold;
   padding: 1em;
   padding-bottom: 0.5em;
 }
 
-a#sign-in-button {
-  background: linear-gradient(#19662A, #135121);
-  border-color: #175626;
+a.github-button {
+  background: linear-gradient(#33CC54, #26A041);
+  border-color: #2EAA4B;
   border-radius: 0.25em;
   border-style: solid;
-  border-width: 1px;
-  color: #7F7F7F;
+  border-width: 0.1em;
+  color: white;
   cursor: pointer;
-  margin-right: 0.25em;
+  font-weight: bold;
   padding-bottom: 0.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -154,18 +159,92 @@ a#sign-in-button {
   text-decoration: none;
 }
 
-a#sign-in-button:hover {
+a.github-button:hover {
   background: linear-gradient(#26993F, #1C7730);
   border-color: #227F38;
   color: #BFBFBF;
 }
 
-a#sign-in-button:active {
+a.github-button:active {
   background: #1C7730;
 }
 
-textarea.comment-area {
+div.comment-form {
+  text-align: right;
+}
+
+div.comment-form-inner {
+  padding: 0.5em;
+  padding-bottom: 1em;
+}
+
+textarea#comment-area {
   border-radius: 0.25em;
+  margin-bottom: 0.5em;
   resize: none;
   width: 100%;
+}
+
+div.comment-outer {
+  display: block;
+  min-height: 5em;
+  padding-top: 1em;
+  width: 100%;
+}
+
+.user-avatar-anchor {
+  float: left;
+}
+
+.user-avatar {
+  border-radius: 0.25em;
+  height: 4em;
+  width: 4em;
+}
+
+div.comment-inner {
+  border-color: #444444;
+  border-radius: 0.25em;
+  border-style: solid;
+  border-width: 0.1em;
+  margin-left: 4.5em;
+}
+
+div.comment-header {
+  background: #333333;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 0.5em;
+}
+
+div.comment-header a.commenter-anchor {
+  font-weight: bold;
+}
+
+div.comment-header .comment-options {
+  display: inline-block;
+  float: right;
+}
+
+div.comment-header .comment-options {
+  cursor: pointer;
+  display: inline-block;
+}
+
+div.comment-header .svg-img {
+  fill: white;
+  width: 1.5em;
+  height: 1.5em;
+  transition: fill 0.5s;
+}
+
+div.comment-header .svg-img:hover {
+  fill: #0ce3ac;
+}
+
+div.comment-body {
+  border-top: 0.1em solid #444444;
+  padding: 1em;
+  padding-bottom: 0.5em;
 }

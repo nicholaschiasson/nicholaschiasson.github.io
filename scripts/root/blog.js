@@ -1,5 +1,8 @@
 // jshint esversion: 6
 
+var postComment;
+var deleteComment;
+
 function renderBlogList() {
   let contentDiv = document.getElementById("content");
 
@@ -60,21 +63,180 @@ function renderBlogList() {
       notSignedInDiv.setAttribute("id", "not-signed-in");
       let notSignedInP = document.createElement("p");
       let signInButton = document.createElement("a");
-      signInButton.setAttribute("id", "sign-in-button");
+      signInButton.setAttribute("class", "github-button");
       signInButton.setAttribute("onclick", "githubAuthenticate();"); // for some reason, a regular .addEventListener() does not work here!!
       signInButton.innerHTML = "Sign in";
       notSignedInP.appendChild(signInButton);
       notSignedInP.innerHTML += " using Github to post comments.";
       notSignedInDiv.appendChild(notSignedInP);
       contentDiv.appendChild(notSignedInDiv);
+      renderCommentSection(entryMeta);
     } else {
-      let commentBox = document.createElement("textarea");
-      commentBox.setAttribute("class", "comment-area");
-      commentBox.setAttribute("placeholder", "Leave a comment");
-      commentBox.setAttribute("rows", "4");
-      contentDiv.appendChild(commentBox);
+      let commentForm = document.createElement("div");
+      commentForm.setAttribute("class", "comment-form");
+      get(encodeURIWithQuery(authenticatedUserUrl, encodeQueryData({access_token: JSON.parse(localStorage.profile_token).access_token, _: new Date().getTime()}))).then(function(res) {
+        let userMeta = JSON.parse(res);
+        renderCommentFormAndSection(commentForm, entryMeta, userMeta);
+        contentDiv.appendChild(commentForm);
+        renderCommentSection(entryMeta, userMeta);
+      }, function(err) {
+        renderCommentFormAndSection(commentForm, entryMeta);
+        contentDiv.appendChild(commentForm);
+        renderCommentSection(entryMeta);
+      });
     }
   }
+
+  function renderCommentFormAndSection(commentForm, entryMeta, userMeta) {
+    if (userMeta) {
+      let userAvatarAnchor = document.createElement("a");
+      userAvatarAnchor.setAttribute("class", "user-avatar-anchor");
+      userAvatarAnchor.setAttribute("href", userMeta.html_url);
+      userAvatarAnchor.setAttribute("target", "_blank");
+      let userAvatar = document.createElement("img");
+      userAvatar.setAttribute("class", "user-avatar");
+      userAvatar.setAttribute("src", userMeta.avatar_url);
+      userAvatarAnchor.appendChild(userAvatar);
+      commentForm.appendChild(userAvatarAnchor);
+    }
+    let innerCommentForm = document.createElement("div");
+    innerCommentForm.setAttribute("class", "comment-inner comment-form-inner");
+    let commentArea = document.createElement("textarea");
+    commentArea.setAttribute("name", "body");
+    commentArea.setAttribute("id", "comment-area");
+    commentArea.setAttribute("placeholder", "Leave a comment");
+    commentArea.setAttribute("rows", "4");
+    innerCommentForm.appendChild(commentArea);
+    let commentSubmit = document.createElement("a");
+    commentSubmit.setAttribute("class", "github-button comment-button");
+    commentSubmit.setAttribute("onclick", `postComment('${JSON.stringify(entryMeta)}');`);
+    commentSubmit.innerHTML = "Comment";
+    innerCommentForm.appendChild(commentSubmit);
+    commentForm.appendChild(innerCommentForm);
+  }
+
+  function renderCommentSection(entryMeta, userMeta) {
+    get(encodeURIWithQuery(entryMeta.comments_url, encodeQueryData({access_token: AccessToken.access_token, _: new Date().getTime()}))).then(function(res) {
+      let commentsMeta = JSON.parse(res);
+      let commentSection = document.getElementById("comment-section") || document.createElement("div");
+      commentSection.setAttribute("id", "comment-section");
+      for (let i = commentsMeta.length - 1; i >= 0; i--) {
+        let commentDiv = document.createElement("div");
+        commentDiv.setAttribute("class", "comment-outer");
+        let userAvatarAnchor = document.createElement("a");
+        userAvatarAnchor.setAttribute("class", "user-avatar-anchor");
+        userAvatarAnchor.setAttribute("href", commentsMeta[i].user.html_url);
+        userAvatarAnchor.setAttribute("target", "_blank");
+        let userAvatar = document.createElement("img");
+        userAvatar.setAttribute("class", "user-avatar");
+        userAvatar.setAttribute("src", commentsMeta[i].user.avatar_url);
+        userAvatarAnchor.appendChild(userAvatar);
+        commentDiv.appendChild(userAvatarAnchor);
+        let commentInner = document.createElement("div");
+        commentInner.setAttribute("class", "comment-inner");
+        let commentHeader = document.createElement("div");
+        commentHeader.setAttribute("class", "comment-header");
+        let commenter = document.createElement("a");
+        commenter.setAttribute("class", "commenter-anchor");
+        commenter.setAttribute("href", commentsMeta[i].user.html_url);
+        commenter.setAttribute("target", "_blank");
+        commenter.innerHTML = commentsMeta[i].user.login;
+        commentHeader.appendChild(commenter);
+        let commentDate = document.createElement("span");
+        commentDate.setAttribute("class", "creation-date");
+        commentDate.innerHTML = " on ";
+        let commentCreationDate = document.createElement("span");
+        commentCreationDate.setAttribute("class", "date-time");
+        commentCreationDate.setAttribute("data-toggle", "tooltip");
+        commentCreationDate.setAttribute("title", new Date(commentsMeta[i].created_at).toTimeString());
+        commentCreationDate.innerHTML = new Date(commentsMeta[i].created_at).toDateString();
+        commentDate.appendChild(commentCreationDate);
+        if (commentsMeta[i].created_at !== commentsMeta[i].updated_at) {
+          commentDate.innerHTML += " (Edited: ";
+          let commentUpdateDate = document.createElement("span");
+          commentUpdateDate.setAttribute("class", "date-time");
+          commentUpdateDate.setAttribute("data-toggle", "tooltip");
+          commentUpdateDate.setAttribute("title", new Date(commentsMeta[i].updated_at).toTimeString());
+          commentUpdateDate.innerHTML = new Date(commentsMeta[i].updated_at).toDateString();
+          commentDate.appendChild(commentUpdateDate);
+          commentDate.innerHTML += ")";
+        }
+        commentHeader.appendChild(commentDate);
+        let commentOptions = document.createElement("div");
+        commentOptions.setAttribute("class", "comment-options");
+        if (userMeta && userMeta.login === commentsMeta[i].user.login) {
+          let deleteCommentButton = document.createElement("a");
+          deleteCommentButton.setAttribute("class", "comment-option");
+          deleteCommentButton.setAttribute("data-toggle", "tooltip");
+          deleteCommentButton.setAttribute("title", "delete comment");
+          deleteCommentButton.setAttribute("onclick", `deleteComment("${commentsMeta[i].url}")`);
+          deleteCommentButton.innerHTML = svg_x;
+          commentOptions.appendChild(deleteCommentButton);
+        }
+        commentHeader.appendChild(commentOptions);
+        commentInner.appendChild(commentHeader);
+        let commentBody = document.createElement("div");
+        commentBody.setAttribute("class", "comment-body");
+        commentBody.innerHTML = md.render(commentsMeta[i].body);
+        commentInner.appendChild(commentBody);
+        commentDiv.appendChild(commentInner);
+        commentSection.appendChild(commentDiv);
+      }
+      contentDiv.appendChild(commentSection);
+    }, function(err) {
+      alert(err + ": Failed to refresh comments section.");
+    });
+  }
+
+  postComment = function(entryJSON) {
+    let entryMeta = JSON.parse(entryJSON);
+    let commentArea = document.getElementById("comment-area");
+    if (commentArea && commentArea.value) {
+      if (commentArea.value) {
+        let postBody = JSON.stringify({body: commentArea.value});
+        let req = new XMLHttpRequest();
+        req.open("POST", encodeURIWithQuery(entryMeta.comments_url, encodeQueryData({access_token: JSON.parse(localStorage.profile_token).access_token})));
+
+        req.onload = function() {
+          if (req.status < 400) {
+            delete commonCache.BlogMeta;
+            window.location.reload(true);
+          }
+          else {
+            console.error(Error(req.statusText));
+          }
+        };
+
+        req.onerror = function() {
+          console.error(Error("Network Error"));
+        };
+
+        req.send(postBody);
+      }
+    }
+  };
+
+  deleteComment = function(commentUrl) {
+    if (confirm("Are you sure you want to delete this comment?")) {
+      let req = new XMLHttpRequest();
+      req.open("DELETE", encodeURIWithQuery(commentUrl, encodeQueryData({access_token: JSON.parse(localStorage.profile_token).access_token})));
+
+      req.onload = function() {
+        if (req.status < 400) {
+          delete commonCache.BlogMeta;
+          window.location.reload(true);
+        } else {
+          console.error(Error(req.statusText));
+        }
+      };
+
+      req.onerror = function() {
+        console.error(Error("Network Error"));
+      };
+
+      req.send();
+    }
+  };
 
   if (contentDiv) {
     let blog = getURLParameter("id");
@@ -90,7 +252,7 @@ function renderBlogList() {
         renderBlogEntry(entryMeta);
       } else {
         get(encodeURIWithQuery(api + repo + "/issues",
-          encodeQueryData({access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc"}))).then(function(response) {
+          encodeQueryData({access_token: AccessToken.access_token, labels: "blog", state: "open", sort: "created", direction: "desc", _: new Date().getTime()}))).then(function(response) {
           commonCache.BlogMeta = response;
           entryMeta = JSON.parse(commonCache.BlogMeta).find(function(element) {
             return element.number.toString() === blog;
