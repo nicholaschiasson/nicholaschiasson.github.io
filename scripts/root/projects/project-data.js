@@ -75,7 +75,7 @@ ProjectData = {
     {
       "title": "minesweeper",
       "description": "Web implementation of basic minesweeper done in HTML, CSS, and Javascript for an interview developer challenge.",
-      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Minesweeper_flag.svg/2000px-Minesweeper_flag.svg.png",
+      "thumbnail_url": "https://images-na.ssl-images-amazon.com/images/I/61M9vdL-xjL.png",
       "home_url": "https://nicholaschiasson.github.io/minesweeper/",
       "download_url": "",
       "repo_url": "https://github.com/nicholaschiasson/minesweeper",
