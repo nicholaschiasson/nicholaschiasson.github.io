@@ -73,6 +73,16 @@ ProjectData = {
   ],
   "personal": [
     {
+      "title": "minesweeper",
+      "description": "Web implementation of basic minesweeper done in HTML, CSS, and Javascript for an interview developer challenge.",
+      "thumbnail_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Minesweeper_flag.svg/2000px-Minesweeper_flag.svg.png",
+      "home_url": "https://nicholaschiasson.github.io/minesweeper/",
+      "download_url": "",
+      "repo_url": "https://github.com/nicholaschiasson/minesweeper",
+      "doc_url": "",
+      "license_badge": "https://img.shields.io/badge/license-The%20Unlicense-blue.svg"
+    },
+    {
       "title": "car",
       "description": "Compile and run! A command-line utility for quickly executing files containing code in a compiled language such as C, C++, Java, etc. Seamlessly executes files as if they were scripts, leaving no trace of binaries behind.",
       "thumbnail_url": "https://www.misskatecuttables.com/uploads/shopping_cart/7778/large_car.png",
