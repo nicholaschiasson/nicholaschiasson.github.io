@@ -33,7 +33,7 @@ ProjectData = {
     {
       "title": "N3DIL",
       "description": "COMP3009 Final Project - Nick's 3D & Image Library. An OpenGL program rendering animated running manikins.",
-      "thumbnail_url": "https://www.google.ca/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwi-jo7CoPHWAhVLwWMKHdIVDdIQjBwIBA&url=https%3A%2F%2Fwww.shareicon.net%2Fdownload%2F2016%2F09%2F02%2F824564_needle_512x512.png&psig=AOvVaw08_WKc6H8Ne4Feqs4nZ77P&ust=1508109602031567",
+      "thumbnail_url": "",
       "home_url": "https://nicholaschiasson.github.io/N3DIL",
       "download_url": "https://github.com/nicholaschiasson/N3DIL/releases/latest",
       "repo_url": "https://github.com/nicholaschiasson/N3DIL",
