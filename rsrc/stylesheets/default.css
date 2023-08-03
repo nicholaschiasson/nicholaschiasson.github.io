@@ -25,7 +25,6 @@
 
   details p {
     @apply pl-2;
-    @apply py-1;
   }
 }
 
@@ -51,7 +50,8 @@
 
   .blurb-section h2,
   .blurb-section p {
-    @apply m-2;
+    @apply mx-2;
+    @apply my-4;
   }
 
   .nav-link {
