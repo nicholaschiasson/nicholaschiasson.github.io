@@ -3,204 +3,212 @@
 @tailwind utilities;
 
 @layer base {
-	a {
-		@apply text-gray-400;
-	}
+  a {
+    @apply text-gray-400;
+  }
 
-	a,
-	summary {
-		@apply transition-all;
-	}
+  a,
+  summary {
+    @apply transition-all;
+  }
 
-	a:hover,
-	summary:hover {
-		@apply text-orange-300;
-	}
+  a:hover,
+  summary:hover {
+    @apply text-orange-300;
+  }
 
-	summary span {
-		@apply not-italic;
-		@apply text-gray-400;
-		@apply text-xs;
-	}
+  summary span {
+    @apply not-italic;
+    @apply text-gray-400;
+    @apply text-xs;
+  }
 
-	details p {
-		@apply pl-2;
-		@apply py-1;
-	}
+  details p {
+    @apply pl-2;
+    @apply py-1;
+  }
 }
 
 @layer components {
-	.centered-section {
-		@apply max-md:grid;
-		@apply md:flex;
-		@apply justify-center;
-		@apply place-items-center;
-	}
+  .centered-section {
+    @apply max-md:grid;
+    @apply md:flex;
+    @apply justify-center;
+    @apply place-items-center;
+  }
 
-	.blurb-section {
-		@apply bg-white;
-		@apply border;
-		@apply border-gray-300;
-		/* @apply md:w-3/4; */
-		@apply md:max-w-[70%];
-		@apply p-8;
-		@apply rounded-3xl;
-		@apply shadow-black;
-		@apply shadow-sm;
-	}
+  .blurb-section {
+    @apply bg-white;
+    @apply border;
+    @apply border-gray-300;
+    /* @apply md:w-3/4; */
+    @apply md:max-w-[70%];
+    @apply p-8;
+    @apply rounded-3xl;
+    @apply shadow-black;
+    @apply shadow-sm;
+  }
 
-	.blurb-section h2,
-	.blurb-section p {
-		@apply m-2;
-	}
+  .blurb-section h2,
+  .blurb-section p {
+    @apply m-2;
+  }
 
-	.nav-link {
-		@apply m-2;
-		@apply text-lg;
-	}
+  .nav-link {
+    @apply m-2;
+    @apply text-lg;
+  }
 
-	.nav-link[active] {
-		@apply underline;
-	}
+  .nav-link[active] {
+    @apply underline;
+  }
 
-	.external-link::after {
-		content: url(/rsrc/images/icons/arrow-up-right-from-square-solid.svg);
-		@apply inline-block;
-		@apply ml-1;
-		@apply h-4;
-		@apply w-4;
-		@apply translate-y-[0.125em];
-		@apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
-		@apply invert-[46%];
-		@apply sepia-[7%];
-		@apply saturate-[834%];
-		@apply hue-rotate-[182deg];
-		@apply brightness-[94%];
-		@apply contrast-[85%];
-	}
+  .external-link::after {
+    content: url(/rsrc/images/icons/arrow-up-right-from-square-solid.svg);
+    @apply inline-block;
+    @apply ml-1;
+    @apply h-4;
+    @apply w-4;
+    @apply translate-y-[0.125em];
+    @apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
+    @apply invert-[46%];
+    @apply sepia-[7%];
+    @apply saturate-[834%];
+    @apply hue-rotate-[182deg];
+    @apply brightness-[94%];
+    @apply contrast-[85%];
+  }
 
-	.main-section {
-		@apply centered-section;
-		@apply min-h-screen;
-		@apply p-4;
-	}
+  .main-section {
+    @apply centered-section;
+    @apply min-h-screen;
+    @apply p-4;
+  }
 
-	.bio-line {
-		@apply text-gray-500;
-	}
+  .bio-line {
+    @apply text-gray-500;
+  }
 
-	.bio-line::before {
-		@apply inline-block;
-		@apply mr-1;
-		@apply h-5;
-		@apply w-5;
-		@apply translate-y-1;
-		@apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
-		@apply invert-[46%];
-		@apply sepia-[7%];
-		@apply saturate-[834%];
-		@apply hue-rotate-[182deg];
-		@apply brightness-[94%];
-		@apply contrast-[85%];
-	}
+  .bio-line::before {
+    @apply inline-block;
+    @apply mr-1;
+    @apply h-5;
+    @apply w-5;
+    @apply translate-y-1;
+    @apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
+    @apply invert-[46%];
+    @apply sepia-[7%];
+    @apply saturate-[834%];
+    @apply hue-rotate-[182deg];
+    @apply brightness-[94%];
+    @apply contrast-[85%];
+  }
 
-	#bio-location::before {
-		content: url(/rsrc/images/icons/location-dot-solid.svg);
-	}
+  #bio-location::before {
+    content: url(/rsrc/images/icons/location-dot-solid.svg);
+  }
 
-	#bio-email::before {
-		content: url(/rsrc/images/icons/envelope-regular.svg);
-	}
+  #bio-email::before {
+    content: url(/rsrc/images/icons/envelope-regular.svg);
+  }
 
-	#bio-github::before {
-		content: url(/rsrc/images/icons/github.svg);
-	}
+  #bio-github::before {
+    content: url(/rsrc/images/icons/github.svg);
+  }
 
-	#bio-linkedin::before {
-		content: url(/rsrc/images/icons/linkedin.svg);
-	}
+  #bio-linkedin::before {
+    content: url(/rsrc/images/icons/linkedin.svg);
+  }
 
-	.before-canada::before {
-		content: "🇨🇦 ";
-	}
+  .before-canada::before {
+    content: "🇨🇦 ";
+  }
 
-	.before-joystick::before {
-		content: "🕹️ ";
-	}
+  .before-joystick::before {
+    content: "🕹️ ";
+  }
 
-	.before-crab::before {
-		content: "🦀 ";
-	}
+  .before-crab::before {
+    content: "🦀 ";
+  }
 
-	.before-train::before {
-		content: "🚆 ";
-	}
+  .before-train::before {
+    content: "🚆 ";
+  }
 
-	.before-file::before {
-		content: "📁 ";
-	}
+  .before-file::before {
+    content: "📁 ";
+  }
 
-	.before-hundred::before {
-		content: "💯 ";
-	}
+  .before-hundred::before {
+    content: "💯 ";
+  }
 
-	.before-lifter::before {
-		content: "🏋️ ";
-	}
+  .before-lifter::before {
+    content: "🏋️ ";
+  }
 
-	.before-gymnast::before {
-		content: "🤸 ";
-	}
+  .before-gymnast::before {
+    content: "🤸 ";
+  }
 
-	.before-wrestler::before {
-		content: "🤼 ";
-	}
+  .before-wrestler::before {
+    content: "🤼 ";
+  }
 
-	.before-runner::before {
-		content: "🏃 ";
-	}
+  .before-runner::before {
+    content: "🏃 ";
+  }
 
-	.before-climber::before {
-		content: "🧗 ";
-	}
+  .before-climber::before {
+    content: "🧗 ";
+  }
 
-	.before-music::before {
-		content: "🎵 ";
-	}
+  .before-music::before {
+    content: "🎵 ";
+  }
 
-	.before-piano::before {
-		content: "🎹 ";
-	}
+  .before-piano::before {
+    content: "🎹 ";
+  }
 
-	.before-drums::before {
-		content: "🥁 ";
-	}
+  .before-drums::before {
+    content: "🥁 ";
+  }
 
-	.before-guitar::before {
-		content: "🎸 ";
-	}
+  .before-guitar::before {
+    content: "🎸 ";
+  }
 
-	.before-shrug::before {
-		content: "🤷 ";
-	}
+  .before-shrug::before {
+    content: "🤷 ";
+  }
 
-	.before-videogame::before {
-		content: "🎮 ";
-	}
+  .before-videogame::before {
+    content: "🎮 ";
+  }
 
-	.before-japan::before {
-		content: "🇯🇵 ";
-	}
+  .before-japan::before {
+    content: "🇯🇵 ";
+  }
 
-	.before-book::before {
-		content: "📚 ";
-	}
+  .before-book::before {
+    content: "📚 ";
+  }
 
-	.before-speaking::before {
-		content: "🗣️ ";
-	}
+  .before-speaking::before {
+    content: "🗣️ ";
+  }
 
-	.before-pizza::before {
-		content: "🍕 ";
-	}
+  .before-pizza::before {
+    content: "🍕 ";
+  }
+
+  .before-english::before {
+    content: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 ";
+  }
+
+  .before-globe::before {
+    content: "🌐 ";
+  }
 }
