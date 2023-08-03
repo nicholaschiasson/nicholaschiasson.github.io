@@ -1,6 +1,6 @@
-function aboutDetailsOnClick(e) {
+function aboutSummaryOnClick(e) {
     activeAboutDetails.removeAttribute("open");
-    activeAboutDetails = e;
+    activeAboutDetails = e.parentElement;
 }
 
 function onPopState(e) {

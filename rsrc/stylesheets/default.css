@@ -25,6 +25,7 @@
 
 	details p {
 		@apply pl-2;
+		@apply py-1;
 	}
 }
 
