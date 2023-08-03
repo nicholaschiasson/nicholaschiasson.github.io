@@ -1,0 +1,16 @@
+function aboutDetailsOnClick(e) {
+    activeAboutDetails.removeAttribute("open");
+    activeAboutDetails = e;
+}
+
+function onPopState(e) {
+    updateActiveNav();
+}
+
+function updateActiveNav() {
+    if (activeNav) {
+        activeNav.removeAttribute("active");
+    }
+    activeNav = document.getElementById(`nav-${location.hash.replace(/^#/, "") || "home"}`) || activeNav || document.getElementById("nav-home");
+    activeNav.setAttribute("active", true);
+}

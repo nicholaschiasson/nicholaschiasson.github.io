@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-fixed bg-gradient-to-b from-orange-100 to-orange-50 scroll-smooth">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nicholas Omer Chiasson's personal website and blog.">
+    <meta name="keywords" content="nicholas,omer,chiasson,personal,about,me,blog,contact">
+    <meta name="author" content="Nicholas Omer Chiasson &lt;nicholasomerchiasson@gmail.com&gt; (https://nicholaschiasson.github.io)">
+    <title>Home - Nicholas Omer Chiasson</title>
+    <base target="_blank">
+    <link href="rsrc/images/graphics/hyaku/hyaku_tsukushi.svg" rel="icon">
+    <link href="rsrc/stylesheets/default.css" rel="stylesheet">
+    <script src="rsrc/scripts/lib.js"></script>
+    <script defer src="rsrc/scripts/main.js"></script>
+  </head>
+  <body>
+    <header class="centered-section fixed w-full">
+      <nav class="bg-orange-100 p-2 rounded-2xl">
+        <a id="nav-home" class="nav-link" target="_self" href="#home">home</a>
+        <a id="nav-about" class="nav-link" target="_self" href="#about">about</a>
+        <a id="nav-projects" class="nav-link" target="_self" href="#projects">projects</a>
+        <a id="nav-now" class="nav-link" target="_self" href="#now">now</a>
+        <a id="nav-blog" class="nav-link" target="_self" href="blog">blog</a>
+        <a id="nav-resume" class="nav-link external-link" href="resume">resume</a>
+      </nav>
+    </header>
+    <main>
+      <section id="home" class="main-section">
+        <section id="bio" class="centered-section blurb-section">
+          <img class="max-md:h-32 md:h-64 rounded-full max-md:mb-4 md:mr-8 border-white border-8 shadow-md shadow-black" src="rsrc/images/photos/headshot.jpg" />
+          <section id="bio" class="block">
+            <h1 class="max-md:text-2xl md:text-7xl">
+              nicholas chiasson
+            </h1>
+            <p id="bio-location" class="bio-line">
+              <a href="https://goo.gl/maps/F1kWmP2tmiQA3jfW8">Montreal, Canada</a>
+            </p>
+            <p id="bio-email" class="bio-line">
+              <a href="mailto:nicholasomerchiasson@gmail.com?subject=Hello!">nicholasomerchiasson@gmail.com</a>
+            </p>
+            <p id="bio-github" class="bio-line">
+              <a href="https://github.com/nicholaschiasson">nicholaschiasson</a>
+            </p>
+            <p id="bio-linkedin" class="bio-line">
+              <a href="https://linkedin.com/in/nicholaschiasson">nicholaschiasson</a>
+            </p>
+          </section>
+        </section>
+      </section>
+      <section id="about" class="main-section">
+        <section class="blurb-section">
+          <h2 class="text-4xl text-right">
+            bit about me:
+          </h2>
+          <details id="about-developer" onclick="aboutDetailsOnClick(this);" open>
+            <summary class="italic hover:cursor-pointer">
+              as a developer
+              <span class="before-canada">A software engineer originally from <a href="https://goo.gl/maps/KJ1CLRWwqygSUrbE9">Ottawa, Canada</a>.</span>
+            </summary>
+            <p class="before-joystick">
+              While my educational focus was on game development, I've since worked professionally on embedded systems and cloud applications.
+            </p>
+            <p class="before-crab">
+              I enjoy building hobby projects with <a href="https://www.rust-lang.org/">rust</a>, <a href="https://www.python.org/">python</a>, and web technologies. I have yet to spark any brilliant ideas but I'm always learning.
+            </p>
+            <p class="before-train">
+              Looking forward, I have a passion to use my skills to make a positive impact in the environment and trasportation industries, so if you have an opportunity up that alley, don't hesitate to reach out!
+            </p>
+            <p class="before-file">
+              If you want to see some of my work, check out my <a target="_self" href="#projects">projects</a>.
+            </p>
+            <p class="before-hundred">
+              And if you are curious, you can also check out what I'm up to <a target="_self" href="#now">now</a>.
+            </p>
+          </details>
+          <details id="about-athlete" onclick="aboutDetailsOnClick(this);">
+            <summary class="italic hover:cursor-pointer">
+              as an athlete
+              <span class="before-lifter">
+                On a never ending fitness journey. Sometimes life gets in the way but sport and exercise will always be there for me.
+              </span>
+            </summary>
+            <p class="before-gymnast">
+              Perhaps my greatest character defining trait as a child was that I was a gymnast. I started training at a very young age and continued into high school. My dream had been to go to the olympics at the age of 22. Life of course had other plans and instead I left the sport at the age of 15. Even with over a decade between that era and now (2023 time of writing), I still thank my gymnastics training for shaping my life, and I truly love the sport even in spite of its negatives. I have gymnastics to thank for my ability to maintain a relatively high degree of fitness in adulthood without needing to put much effort into training for somewhat long periods of time. I believe the hard work I put into gymnastics as a child has set me up with many advantages in life, not just in sport.
+            </p>
+            <p class="before-wrestler">
+              Right after leaving gymnastics, I took up free style wrestling. As you might imagine given my training, I had a big strength advantage over many wrestlers, but it would be wrong to say I joined the sport and dominated. My cardio needed a lot of work, and anybody who has trained in combat sports knows how important technique is. Wrestling became my high school life. It's taught me many lessons and granted me an incredible appreciation for the broader world of athletics, challenging and outright tearing down the elitist mindset of my younger gymnast self.
+            </p>
+            <p class="before-runner">
+              In my university days I had very casually taken up long distance running. My enthusiasm about it waxed and waned over time. Eventually, in the year before <a href="https://en.wikipedia.org/wiki/COVID-19_pandemic">the pandemic</a>, I had challenged myself to run every day. For a good chunk of the year I stuck to it, and it certainly had a profound impact on me. Since then, while I'm not always consistently training, I can confidently and proudly say that I am a runner.
+            </p>
+            <p class="before-climber">
+              I got into climbing on a whim and fell in love with it pretty quick. I like challenging my strength with it, landing a good dyno, and of course, I dread slabs!
+            </p>
+          </details>
+          <details id="about-musician" onclick="aboutDetailsOnClick(this);">
+            <summary class="italic hover:cursor-pointer">
+              as a musician
+              <span class="before-music">
+                Both a performer and enjoyer of music, although increasingly much more the latter.
+              </span>
+            </summary>
+            <p class="before-piano">
+              From a young age I was trained in classical piano studies. While a lot of that skill has been lost to childhood now, I might still primarily call myself a pianist.
+            </p>
+            <p class="before-drums">
+              In middle school I picked up percussion to be the drummer in a band that ultimately only played one show. While rhythm comes naturally to me and playing drums is incredibly fun, I would hardly consider myself a drummer anymore.
+            </p>
+            <p class="before-guitar">
+              In high school I jumped on the guitar band wagon as well. I was quite serious for a time about developing my skill, however I'd never taken any lessons and slowly stopped caring about being one of the best. Nowadays the guitar is the easiest to reach for and it's a joy to sing along to a four chord song.
+            </p>
+          </details>
+          <details id="about-interests" onclick="aboutDetailsOnClick(this);">
+            <summary class="italic hover:cursor-pointer">
+              as a person with general interests and stuff
+              <span class="before-shrug">
+                We all need those right? Feel free to ask me about any in more detail.
+              </span>
+            </summary>
+            <p class="before-videogame">I like video games! It kind of inspired my entire career path in fact.</p>
+            <p class="before-japan">I like anime! I have less time for it these days, but certainly some of my favourite TV shows and movies are anime.</p>
+            <p class="before-book">I am always trying to read more! I am an incredibly slow reader, but you can't ask for a healthier or more fulfilling leasure activity.</p>
+            <p class="before-speaking">I am fascinated by language! I'm always on a quest to learn another language. Maybe one day I will be fluent in one!</p>
+            <p class="before-pizza">I love food! It is actually a bit of a problem. If there's one thing that may threaten my good health down the line...</p>
+          </details>
+        </section>
+      </section>
+      <section id="projects" class="main-section">
+        <section class="blurb-section">
+          <h2 class="text-4xl text-right">
+            what i've done:
+          </h2>
+        </section>
+      </section>
+      <section id="now" class="main-section">
+        <section class="blurb-section">
+          <h2 class="text-4xl text-left">
+            what i'm up to:
+          </h2>
+        </section>
+      </section>
+    </main>
+    <footer class="centered-section bg-gradient-to-b from-gray-800 to-gray-900 py-8 text-gray-100">
+      © ${YEAR} Nicholas Omer Chiasson
+    </footer>
+  </body>
+</html>
