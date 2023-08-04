@@ -15,6 +15,9 @@
           pkgs.miniserve
           pkgs.nerdfonts
           pkgs.nodejs_18
+          pkgs.nodePackages.eslint
+          pkgs.nodePackages.prettier
+          pkgs.nodePackages.tailwindcss
           pkgs.nodePackages.typescript-language-server
           pkgs.nodePackages.vscode-langservers-extracted
           pkgs.starship

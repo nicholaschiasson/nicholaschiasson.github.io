@@ -1,8 +1,17 @@
 build:
     mkdir -p dist
     cp -rf src/* rsrc dist/
-    npx tailwindcss -i rsrc/stylesheets/default.css -o dist/rsrc/stylesheets/default.css
+    tailwindcss -i rsrc/stylesheets/default.css -o dist/rsrc/stylesheets/default.css
     find dist -name *.html | while read f; do YEAR=$(date +%Y) envsubst -i "${f}" -o "${f}"; done
+
+check:
+    prettier **/*.{html,css,js} -c
+
+format:
+    prettier **/*.{html,css,js} -w
+
+lint:
+    eslint .
 
 clean:
     rm -rf dist
