@@ -3,6 +3,23 @@
 @tailwind utilities;
 
 @layer base {
+  html:before {
+    content: "";
+    @apply block;
+    @apply fixed;
+    @apply left-0;
+    @apply top-0;
+    @apply h-full;
+    @apply w-full;
+    @apply -z-50;
+    @apply bg-center;
+    @apply bg-cover;
+    @apply bg-gradient-to-b;
+    @apply from-orange-100;
+    @apply to-orange-50;
+    @apply bg-no-repeat;
+  }
+
   a {
     @apply text-gray-400;
   }
@@ -26,6 +43,24 @@
   details p {
     @apply pl-2;
   }
+
+  h1 {
+    @apply max-md:text-2xl;
+    @apply md:text-7xl;
+  }
+
+  h2 {
+    @apply text-4xl;
+    @apply text-right;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  p {
+    @apply max-md:text-sm;
+  }
 }
 
 @layer components {
@@ -40,8 +75,7 @@
     @apply bg-white;
     @apply border;
     @apply border-gray-300;
-    /* @apply md:w-3/4; */
-    @apply md:max-w-[70%];
+    @apply md:max-w-[80%];
     @apply p-8;
     @apply rounded-3xl;
     @apply shadow-black;
@@ -56,7 +90,8 @@
 
   .nav-link {
     @apply m-2;
-    @apply text-lg;
+    @apply max-md:text-sm;
+    @apply md:text-2xl;
   }
 
   .nav-link[active] {
@@ -67,9 +102,11 @@
     content: url(/rsrc/images/icons/arrow-up-right-from-square-solid.svg);
     @apply inline-block;
     @apply ml-1;
-    @apply h-4;
-    @apply w-4;
-    @apply translate-y-[0.125em];
+    @apply max-md:h-3;
+    @apply max-md:w-3;
+    @apply md:h-4;
+    @apply md:w-4;
+    @apply max-md:translate-y-[0.125em];
     @apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
     @apply invert-[46%];
     @apply sepia-[7%];
@@ -92,8 +129,10 @@
   .bio-line::before {
     @apply inline-block;
     @apply mr-1;
-    @apply h-5;
-    @apply w-5;
+    @apply max-md:h-4;
+    @apply max-md:w-4;
+    @apply md:h-5;
+    @apply md:w-5;
     @apply translate-y-1;
     @apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
     @apply invert-[46%];
