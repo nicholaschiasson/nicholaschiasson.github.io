@@ -50,7 +50,24 @@
         >
           <img
             class="max-md:h-32 md:h-64 rounded-full max-md:mb-4 md:mr-8 border-white border-8 shadow-md shadow-black"
-            src="rsrc/images/photos/headshot.jpg"
+            srcset="
+              rsrc/images/photos/headshot-88w.webp    88w,
+              rsrc/images/photos/headshot-116w.webp  116w,
+              rsrc/images/photos/headshot-232w.webp  232w,
+              rsrc/images/photos/headshot-319w.webp  319w,
+              rsrc/images/photos/headshot-638w.webp  638w,
+              rsrc/images/photos/headshot-957w.webp  957w,
+              rsrc/images/photos/headshot.webp      2552w
+            "
+            sizes="
+              (max-width: 640px) 98px,
+              (max-width: 768px) 118px,
+              (max-width: 1024px) 156px,
+              (max-width: 1280px) 195px,
+              (max-width: 1536px) 234px,
+              256px,
+            "
+            src="rsrc/images/photos/headshot.webp"
           />
           <section id="bio" class="block">
             <h1>nicholas chiasson</h1>
