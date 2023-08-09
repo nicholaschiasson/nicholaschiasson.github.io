@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: Font Awesome;
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Brands-Regular-400.otf)
+      format(opentype);
+  }
+
+  @font-face {
+    font-family: Font Awesome;
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Solid-900.otf)
+      format(opentype);
+  }
+
+  @font-face {
+    font-family: Font Awesome;
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Regular-400.otf)
+      format(opentype);
+  }
+
   html:before {
     content: "";
     @apply block;
@@ -32,6 +50,14 @@
   a:hover,
   summary:hover {
     @apply text-orange-300;
+  }
+
+  a:not([target="_parent"]):not([target="_self"]):not([target="_top"])::after {
+    content: "\00f08e";
+    @apply inline-block;
+    @apply align-super;
+    @apply ml-[0.25em];
+    @apply text-[0.5em];
   }
 
   summary span {
@@ -98,24 +124,6 @@
     @apply underline;
   }
 
-  .external-link::after {
-    content: url(/rsrc/images/icons/arrow-up-right-from-square-solid.svg);
-    @apply inline-block;
-    @apply ml-1;
-    @apply max-md:h-3;
-    @apply max-md:w-3;
-    @apply md:h-4;
-    @apply md:w-4;
-    @apply max-md:translate-y-[0.125em];
-    @apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
-    @apply invert-[46%];
-    @apply sepia-[7%];
-    @apply saturate-[834%];
-    @apply hue-rotate-[182deg];
-    @apply brightness-[94%];
-    @apply contrast-[85%];
-  }
-
   .main-section {
     @apply centered-section;
     @apply min-h-screen;
@@ -128,35 +136,25 @@
 
   .bio-line::before {
     @apply inline-block;
-    @apply mr-1;
-    @apply max-md:h-4;
-    @apply max-md:w-4;
-    @apply md:h-5;
-    @apply md:w-5;
-    @apply translate-y-1;
-    @apply filter; /* https://codepen.io/sosuke/pen/Pjoqqp */
-    @apply invert-[46%];
-    @apply sepia-[7%];
-    @apply saturate-[834%];
-    @apply hue-rotate-[182deg];
-    @apply brightness-[94%];
-    @apply contrast-[85%];
+    @apply text-[1.25em];
+    @apply text-center;
+    @apply w-6;
   }
 
   #bio-location::before {
-    content: url(/rsrc/images/icons/location-dot-solid.svg);
+    content: "\00f3c5";
   }
 
   #bio-email::before {
-    content: url(/rsrc/images/icons/envelope-regular.svg);
+    content: "\00f0e0";
   }
 
   #bio-github::before {
-    content: url(/rsrc/images/icons/github.svg);
+    content: "\00f09b";
   }
 
   #bio-linkedin::before {
-    content: url(/rsrc/images/icons/linkedin.svg);
+    content: "\00f08c";
   }
 
   .before-canada::before {
