@@ -5,20 +5,17 @@
 @layer base {
   @font-face {
     font-family: Font Awesome;
-    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Brands-Regular-400.otf)
-      format(opentype);
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Brands-Regular-400.otf) format(opentype);
   }
 
   @font-face {
     font-family: Font Awesome;
-    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Solid-900.otf)
-      format(opentype);
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Solid-900.otf) format(opentype);
   }
 
   @font-face {
     font-family: Font Awesome;
-    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Regular-400.otf)
-      format(opentype);
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Regular-400.otf) format(opentype);
   }
 
   html:before {
@@ -247,5 +244,31 @@
 
   .before-globe::before {
     content: "🌐 ";
+  }
+
+  .project {
+    @apply md:flex;
+    @apply mt-8;
+    @apply md:space-x-16;
+  }
+
+  .project:has(+ .project) {
+    @apply border-b;
+    @apply border-gray-300;
+    @apply pb-8;
+  }
+
+  .project img {
+    @apply rounded-xl;
+    @apply shadow-black;
+    @apply shadow-md;
+  }
+
+  .project-technologies {
+    @apply block;
+  }
+
+  .project-technologies ul {
+    @apply inline-block;
   }
 }

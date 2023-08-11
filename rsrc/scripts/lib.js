@@ -12,9 +12,7 @@ function updateActiveNav() {
     activeNav.removeAttribute("active");
   }
   activeNav =
-    document.getElementById(
-      `nav-${location.hash.replace(/^#/, "") || "home"}`,
-    ) ||
+    document.getElementById(`nav-${location.hash.replace(/^#/, "") || "home"}`) ||
     activeNav ||
     document.getElementById("nav-home");
   activeNav.setAttribute("active", true);
