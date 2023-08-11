@@ -194,8 +194,12 @@
                 set operations over CIDRs.
               </p>
               <li class="project-technologies">
-                <ul>&#x{{ (ds "fa").rust }};</ul>
-                <ul>&#x{{ (ds "fa").github }};</ul>
+                <ul>
+                  {{ .fa.rust.html }}
+                </ul>
+                <ul>
+                  {{ .fa.github.html }}
+                </ul>
               </li>
             </div>
             <img src="rsrc/images/gifs/fcidr.gif" />
@@ -209,8 +213,12 @@
                 myself through the day to raise and lower my new standing desk.
               </p>
               <li class="project-technologies">
-                <ul>&#x{{ (ds "fa").rust }};</ul>
-                <ul>&#x{{ (ds "fa").github }};</ul>
+                <ul>
+                  {{ .fa.rust.html }}
+                </ul>
+                <ul>
+                  {{ .fa.github.html }}
+                </ul>
               </li>
             </div>
             <img src="rsrc/images/gifs/oytr.gif" />
@@ -224,10 +232,18 @@
                 development skills.
               </p>
               <li class="project-technologies">
-                <ul>&#x{{ (ds "fa").js }};</ul>
-                <ul>&#x{{ (ds "fa").html5 }};</ul>
-                <ul>&#x{{ (ds "fa").css3_alt }};</ul>
-                <ul>&#x{{ (ds "fa").github }};</ul>
+                <ul>
+                  {{ .fa.js.html }}
+                </ul>
+                <ul>
+                  {{ .fa.html5.html }}
+                </ul>
+                <ul>
+                  {{ .fa.css3_alt.html }}
+                </ul>
+                <ul>
+                  {{ .fa.github.html }}
+                </ul>
               </li>
             </div>
             <img src="rsrc/images/gifs/mariversaire.com.gif" />
@@ -241,10 +257,18 @@
                 served statically from GitHub Pages.
               </p>
               <li class="project-technologies">
-                <ul>&#x{{ (ds "fa").rust }};</ul>
-                <ul>&#x{{ (ds "fa").html5 }};</ul>
-                <ul>&#x{{ (ds "fa").css3_alt }};</ul>
-                <ul>&#x{{ (ds "fa").github }};</ul>
+                <ul>
+                  {{ .fa.rust.html }}
+                </ul>
+                <ul>
+                  {{ .fa.html5.html }}
+                </ul>
+                <ul>
+                  {{ .fa.css3_alt.html }}
+                </ul>
+                <ul>
+                  {{ .fa.github.html }}
+                </ul>
               </li>
             </div>
             <img src="rsrc/images/gifs/omnivyou.com.gif" />
@@ -257,8 +281,12 @@
                 to respect DNS record TTLs.
               </p>
               <li class="project-technologies">
-                <ul>&#x{{ (ds "fa").c }};</ul>
-                <ul>&#x{{ (ds "fa").github }};</ul>
+                <ul>
+                  {{ .fa.c.html }}
+                </ul>
+                <ul>
+                  {{ .fa.github.html }}
+                </ul>
               </li>
             </div>
           </section>
@@ -271,47 +299,18 @@
                 environment for new coworkers or those receiving new workstations.
               </p>
               <li class="project-technologies">
-                <ul>&#x{{ (ds "fa").rust }};</ul>
-                <ul>&#x{{ (ds "fa").gitlab }};</ul>
+                <ul>
+                  {{ .fa.rust.html }}
+                </ul>
+                <ul>
+                  {{ .fa.gitlab.html }}
+                </ul>
               </li>
             </div>
           </section>
         </section>
       </section>
-      <section id="now" class="main-section">
-        <section class="blurb-section">
-          <h2>what i'm up to:</h2>
-          <p class="italic text-xs text-right">as of Thu, 03 Aug 2023</p>
-          <h3>life and career</h3>
-          <p>
-            <span class="font-bold">Working</span>: as an Online Programmer at Ubisoft Montreal, building infrastructure for a
-            large online services platform.
-          </p>
-          <p><span class="font-bold">Living</span>: in Montreal, Canada.</p>
-          <h3>personal projects</h3>
-          <p class="before-english">
-            Building an online dictionary site for a redesigned English spelling specification I came up with called
-            <a href="https://github.com/nicholaschiasson/inglix">inglix</a>.
-          </p>
-          <p class="before-globe">
-            Working on a clever blogging system for this very site leveraging GitHub technologies entirely for the back end.
-          </p>
-          <p class="before-runner">
-            Training for the next
-            <a href="https://www.runottawa.ca/races-and-events/ottawa-marathon">Ottawa marathon</a>.
-          </p>
-          <h3>miscellaneous</h3>
-          <p><span class="font-bold">Playing</span>: Skyrim (again 😅)</p>
-          <p>
-            <span class="font-bold">Reading</span>: <a href="https://www.goodreads.com/en/book/show/59357120">Yellowface</a>,
-            <a href="https://www.goodreads.com/book/show/11275.The_Wind_Up_Bird_Chronicle">The Wind-Up Bird Chronicle</a>.
-          </p>
-          <p>
-            <span class="font-bold">Watching</span>:
-            <span class="italic">nothing right now... recommend me something?</span>
-          </p>
-        </section>
-      </section>
+      <section id="now" class="main-section">{{ tpl (include "nowpage") }}</section>
     </main>
     <footer class="centered-section bg-gradient-to-b from-gray-800 to-gray-900 py-8 text-gray-100">
       © {{ time.Now.Year }} Nicholas Omer Chiasson

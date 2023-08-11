@@ -1,12 +1,11 @@
 build:
     mkdir -p dist
     cp -rf src/* rsrc dist/
-    tailwindcss -i rsrc/stylesheets/default.css -o dist/rsrc/stylesheets/default.css
-    # find dist -name *.html | while read f; do YEAR=$(date +%Y) envsubst -i "${f}" -o "${f}"; done
-    gomplate --input-dir=dist --output-dir=dist --include=**/*.html --include=**/*.css
+    gomplate --input-dir=dist --output-dir=dist --include=**/*.{html,css}
+    tailwindcss -i dist/rsrc/stylesheets/default.css -o dist/rsrc/stylesheets/default.css
 
 check:
-    prettier **/*.{html,css,js} -c
+    prettier **/*.{html,css,js,json,yaml,yml} -c
 
 format:
     prettier **/*.{html,css,js} -w

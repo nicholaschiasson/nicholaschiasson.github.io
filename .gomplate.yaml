@@ -1,3 +1,7 @@
-datasources:
+context:
   fa:
-    url: ./templates/fontawesome.yaml
+    url: templates/fontawesome.yaml
+
+datasources:
+  nowpage:
+    url: templates/now.html?type=text/plain
