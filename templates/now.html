@@ -1,6 +1,8 @@
 <section class="blurb-section">
   <h2>what i'm up to:</h2>
-  <p class="italic text-xs text-right">as of {{ (file.Stat "templates/now.html").ModTime.Format time.RFC1123 }}</p>
+  <p class="italic text-xs text-right">
+    as of {{ (git "log" "-1" "--format=%ct" "templates/now.html" | strings.TrimSpace | time.Unix).Format time.RFC1123 }}
+  </p>
   <h3>life and career</h3>
   <p>
     <span class="font-bold">Working</span>: as an Online Programmer at Ubisoft Montreal, building infrastructure for a large
