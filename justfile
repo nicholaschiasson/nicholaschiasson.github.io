@@ -4,11 +4,13 @@ build:
     gomplate --input-dir=dist --output-dir=dist --include=**/*.{html,css}
     tailwindcss -i dist/rsrc/stylesheets/default.css -o dist/rsrc/stylesheets/default.css
 
-check:
-    prettier **/*.{html,css,js,json,yaml,yml} -c
+[private]
+prettier *ARGS:
+    prettier **/*.{html,css,js,json,md,yaml,yml} --no-error-on-unmatched-pattern {{ARGS}}
 
-format:
-    prettier **/*.{html,css,js} -w
+check: (prettier "-c")
+
+format: (prettier "-w")
 
 lint:
     eslint .
