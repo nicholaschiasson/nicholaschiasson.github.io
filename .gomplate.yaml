@@ -1,0 +1,3 @@
+datasources:
+  fa:
+    url: ./templates/fontawesome.yaml

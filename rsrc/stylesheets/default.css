@@ -50,7 +50,8 @@
   }
 
   a:not([target="_parent"]):not([target="_self"]):not([target="_top"])::after {
-    content: "\00f08e";
+    /* content: "\00f08e"; */
+    content: "\00{{ (ds "fa").external_link }}";
     @apply inline-block;
     @apply align-super;
     @apply ml-[0.25em];
@@ -139,19 +140,23 @@
   }
 
   #bio-location::before {
-    content: "\00f3c5";
+    /* content: "\00f3c5"; */
+    content: "\00{{ (ds "fa").location_dot }}";
   }
 
   #bio-email::before {
-    content: "\00f0e0";
+    /* content: "\00f0e0"; */
+    content: "\00{{ (ds "fa").envelope }}";
   }
 
   #bio-github::before {
-    content: "\00f09b";
+    /* content: "\00f09b"; */
+    content: "\00{{ (ds "fa").github }}";
   }
 
   #bio-linkedin::before {
-    content: "\00f08c";
+    /* content: "\00f08c"; */
+    content: "\00{{ (ds "fa").linkedin }}";
   }
 
   .before-canada::before {

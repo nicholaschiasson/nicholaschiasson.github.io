@@ -10,7 +10,7 @@
       devShell = pkgs.mkShell {
         buildInputs = [
           pkgs.coreutils
-          pkgs.envsubst
+          pkgs.gomplate
           pkgs.just
           pkgs.miniserve
           pkgs.nerdfonts
