@@ -12,10 +12,10 @@
     />
     <title>Home - Nicholas Omer Chiasson</title>
     <base target="_blank" />
-    <link href="rsrc/images/graphics/hyaku/hyaku_tsukushi.svg" rel="icon" />
-    <link href="rsrc/stylesheets/default.css" rel="stylesheet" />
-    <script src="rsrc/scripts/lib.js"></script>
-    <script defer src="rsrc/scripts/main.js"></script>
+    <link href="/rsrc/images/graphics/hyaku/hyaku_tsukushi.svg" rel="icon" />
+    <link href="/rsrc/stylesheets/default.css" rel="stylesheet" />
+    <script src="/rsrc/scripts/lib.js"></script>
+    <script defer src="/rsrc/scripts/main.js"></script>
   </head>
   <body>
     <header class="centered-section fixed w-full">
@@ -25,7 +25,7 @@
         <a id="nav-projects" class="nav-link" target="_self" href="/#projects">projects</a>
         <a id="nav-now" class="nav-link" target="_self" href="/#now">now</a>
         <a id="nav-blog" class="nav-link" target="_self" href="/blog.html">blog</a>
-        <a id="nav-resume" class="nav-link" href="resume">resume</a>
+        <a id="nav-resume" class="nav-link" href="/resume">resume</a>
       </nav>
     </header>
     <main>
@@ -34,13 +34,13 @@
           <img
             class="max-md:h-32 md:h-64 rounded-full max-md:mb-4 md:mr-8 border-white border-8 shadow-md shadow-black"
             srcset="
-              rsrc/images/photos/headshot-88w.webp    88w,
-              rsrc/images/photos/headshot-116w.webp  116w,
-              rsrc/images/photos/headshot-232w.webp  232w,
-              rsrc/images/photos/headshot-319w.webp  319w,
-              rsrc/images/photos/headshot-638w.webp  638w,
-              rsrc/images/photos/headshot-957w.webp  957w,
-              rsrc/images/photos/headshot.webp      2552w
+              /rsrc/images/photos/headshot-88w.webp    88w,
+              /rsrc/images/photos/headshot-116w.webp  116w,
+              /rsrc/images/photos/headshot-232w.webp  232w,
+              /rsrc/images/photos/headshot-319w.webp  319w,
+              /rsrc/images/photos/headshot-638w.webp  638w,
+              /rsrc/images/photos/headshot-957w.webp  957w,
+              /rsrc/images/photos/headshot.webp      2552w
             "
             sizes="
               (max-width: 640px) 98px,
@@ -50,7 +50,7 @@
               (max-width: 1536px) 234px,
               256px,
             "
-            src="rsrc/images/photos/headshot.webp"
+            src="/rsrc/images/photos/headshot.webp"
           />
           <section id="bio" class="block">
             <h1>nicholas chiasson</h1>
@@ -92,11 +92,11 @@
             </p>
             <p class="before-file">
               If you want to see some of my work, check out my
-              <a target="_self" href="#projects">projects</a>.
+              <a target="_self" href="/#projects">projects</a>.
             </p>
             <p class="before-hundred">
               And if you're curious, you can also check out what I'm up to
-              <a target="_self" href="#now">now</a>.
+              <a target="_self" href="/#now">now</a>.
             </p>
           </details>
           <details id="about-athlete">
@@ -188,11 +188,7 @@
           <h2>what i've done:</h2>
           <section class="project">
             <div>
-              <h3>fcidr</h3>
-              <p>
-                A rust library exposing a data structure to represent a set of CIDR ranges as well as an interface to compute
-                set operations over CIDRs.
-              </p>
+              <h3><a href="https://github.com/nicholaschiasson/fcidr" class="project-title">fcidr</a></h3>
               <li class="project-technologies">
                 <ul>
                   {{ .fa.rust.html }}
@@ -201,36 +197,38 @@
                   {{ .fa.github.html }}
                 </ul>
               </li>
+              <p>
+                A rust library exposing a data structure to represent a set of CIDR ranges as well as an interface to compute
+                set operations over CIDRs.
+              </p>
             </div>
-            <img src="rsrc/images/gifs/fcidr.gif" />
+            <img src="/rsrc/images/gifs/fcidr.gif" />
           </section>
           <section class="project">
             <div>
-              <h3>oytr</h3>
+              <h3><a href="https://github.com/nicholaschiasson/oytr" class="project-title">oytr</a></h3>
+              <li class="project-technologies">
+                <ul>
+                  {{ .fa.rust.html }}
+                </ul>
+                <ul>
+                  {{ .fa.github.html }}
+                </ul>
+              </li>
               <p>
                 A commandline utility to configure simple scheduled reminders using cron expressions and push desktop
                 notifications when they are triggered. A DIY answer to my version of the simplest possible way I could remind
                 myself through the day to raise and lower my new standing desk.
               </p>
-              <li class="project-technologies">
-                <ul>
-                  {{ .fa.rust.html }}
-                </ul>
-                <ul>
-                  {{ .fa.github.html }}
-                </ul>
-              </li>
             </div>
-            <img src="rsrc/images/gifs/oytr.gif" />
+            <img src="/rsrc/images/gifs/oytr.gif" />
           </section>
           <section class="project">
             <div>
-              <h3>mariversaire.com</h3>
-              <p>
-                A website updated each year with a new game used as the means of delivering or presenting my partner with her
-                birthday gift for that year. Doubles as the primary outlet for me to challenge my creativity and frontend
-                development skills.
-              </p>
+              <h3>
+                <a href="https://github.com/nicholaschiasson/mariversaire" class="project-title">mariversaire.com</a>
+                <span class="project-homepage"><a href="https://mariversaire.com">See it in action!</a></span>
+              </h3>
               <li class="project-technologies">
                 <ul>
                   {{ .fa.js.html }}
@@ -245,17 +243,20 @@
                   {{ .fa.github.html }}
                 </ul>
               </li>
+              <p>
+                A website updated each year with a new game used as the means of delivering or presenting my partner with her
+                birthday gift for that year. Doubles as the primary outlet for me to challenge my creativity and frontend
+                development skills.
+              </p>
             </div>
-            <img src="rsrc/images/gifs/mariversaire.com.gif" />
+            <img src="/rsrc/images/gifs/mariversaire.com.gif" />
           </section>
           <section class="project">
             <div>
-              <h3>omnivyou.com</h3>
-              <p>
-                A simple media viewer runnable in a web browser for viewing local video, audio, and image files. Built as a
-                responsive, single page application leveraging Rust code compiled to WebAssembly running on the front end,
-                served statically from GitHub Pages.
-              </p>
+              <h3>
+                <a href="https://github.com/nicholaschiasson/omnivyou" class="project-title">omnivyou.com</a>
+                <span class="project-homepage"><a href="https://omnivyou.com">See it in action!</a></span>
+              </h3>
               <li class="project-technologies">
                 <ul>
                   {{ .fa.rust.html }}
@@ -270,16 +271,21 @@
                   {{ .fa.github.html }}
                 </ul>
               </li>
+              <p>
+                A simple media viewer runnable in a web browser for viewing local video, audio, and image files. Built as a
+                responsive, single page application leveraging Rust code compiled to WebAssembly running on the front end,
+                served statically from GitHub Pages.
+              </p>
             </div>
-            <img src="rsrc/images/gifs/omnivyou.com.gif" />
+            <img src="/rsrc/images/gifs/omnivyou.com.gif" />
           </section>
           <section class="project">
             <div>
-              <h3>ngx_upstream_jdomain</h3>
-              <p>
-                An Nginx module enabling upstreams to be configured to perform asynchronous DNS lookups on an interval in order
-                to respect DNS record TTLs.
-              </p>
+              <h3>
+                <a href="https://github.com/nicholaschiasson/ngx_upstream_jdomain" class="project-title"
+                  >ngx_upstream_jdomain</a
+                >
+              </h3>
               <li class="project-technologies">
                 <ul>
                   {{ .fa.c.html }}
@@ -288,16 +294,15 @@
                   {{ .fa.github.html }}
                 </ul>
               </li>
+              <p>
+                An Nginx module enabling upstreams to be configured to perform asynchronous DNS lookups on an interval in order
+                to respect DNS record TTLs.
+              </p>
             </div>
           </section>
           <section class="project">
             <div>
-              <h3>mir</h3>
-              <p>
-                A commandline utility to mirror a user's entire accessible GitLab group hierarchy as directories on the local
-                file system and optionally clone all repositories. Proven useful helping to bootstrap the development
-                environment for new coworkers or those receiving new workstations.
-              </p>
+              <h3><a href="https://github.com/nicholaschiasson/mir" class="project-title">mir</a></h3>
               <li class="project-technologies">
                 <ul>
                   {{ .fa.rust.html }}
@@ -306,6 +311,11 @@
                   {{ .fa.gitlab.html }}
                 </ul>
               </li>
+              <p>
+                A commandline utility to mirror a user's entire accessible GitLab group hierarchy as directories on the local
+                file system and optionally clone all repositories. Proven useful helping to bootstrap the development
+                environment for new coworkers or those receiving new workstations.
+              </p>
             </div>
           </section>
         </section>

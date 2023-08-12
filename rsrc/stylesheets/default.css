@@ -264,11 +264,38 @@
     @apply shadow-md;
   }
 
+  .project-title:hover {
+    @apply underline;
+  }
+
+  .project-homepage {
+    @apply italic;
+    @apply ml-2;
+    @apply text-xs;
+  }
+
   .project-technologies {
-    @apply block;
+    @apply inline-block;
+    @apply max-md:text-xs;
+    @apply mt-4;
+    @apply select-none;
+  }
+
+  .project-technologies::before {
+    content: "Made with ";
+    @apply italic;
+    @apply md:text-sm;
   }
 
   .project-technologies ul {
+    @apply bg-gray-50;
+    @apply border;
+    @apply border-gray-300;
     @apply inline-block;
+    @apply max-md:w-6;
+    @apply md:w-8;
+    @apply rounded-full;
+    @apply text-center;
+    @apply text-gray-500;
   }
 }

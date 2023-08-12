@@ -10,6 +10,7 @@
       devShell = pkgs.mkShell {
         buildInputs = [
           pkgs.coreutils
+          pkgs.gitMinimal
           pkgs.gomplate
           pkgs.just
           pkgs.miniserve
