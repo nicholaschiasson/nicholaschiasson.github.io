@@ -264,6 +264,10 @@
     @apply bg-gray-50;
   }
 
+  .project div {
+    @apply flex-grow;
+  }
+
   .project img {
     @apply rounded-xl;
     @apply shadow-black;
