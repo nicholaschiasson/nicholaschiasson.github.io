@@ -29,6 +29,8 @@ jobs:
         run: nix develop -c just check
       # - name: Lint
       #   run: nix develop -c just lint
+      - name: debugging...
+        run: nix develop -c git log "-1" "--format=%ct" "templates/now.html"
       - name: Build
         run: nix develop -c just build
       - name: Upload Build Artifact
