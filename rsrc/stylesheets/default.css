@@ -293,7 +293,7 @@
     @apply md:text-sm;
   }
 
-  .project-technologies ul {
+  .project-technologies li {
     @apply bg-gray-50;
     @apply border;
     @apply border-gray-300;
