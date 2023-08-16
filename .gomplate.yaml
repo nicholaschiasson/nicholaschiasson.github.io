@@ -1,0 +1,10 @@
+context:
+  fa:
+    url: templates/fontawesome.yaml
+
+datasources:
+  nowpage:
+    url: templates/now.html?type=text/plain
+
+plugins:
+  git: git

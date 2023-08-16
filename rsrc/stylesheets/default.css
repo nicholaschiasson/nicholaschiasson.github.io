@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: Font Awesome;
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Brands-Regular-400.otf) format(opentype);
+  }
+
+  @font-face {
+    font-family: Font Awesome;
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Solid-900.otf) format(opentype);
+  }
+
+  @font-face {
+    font-family: Font Awesome;
+    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Regular-400.otf) format(opentype);
+  }
+
+  html:before {
+    content: "";
+    @apply block;
+    @apply fixed;
+    @apply left-0;
+    @apply top-0;
+    @apply h-full;
+    @apply w-full;
+    @apply -z-50;
+    @apply bg-center;
+    @apply bg-cover;
+    @apply bg-gradient-to-b;
+    @apply from-orange-100;
+    @apply to-orange-50;
+    @apply bg-no-repeat;
+  }
+
+  a {
+    @apply text-gray-400;
+  }
+
+  a,
+  summary {
+    @apply transition-all;
+  }
+
+  a:hover,
+  summary:hover {
+    @apply text-orange-300;
+  }
+
+  a:not([target="_parent"]):not([target="_self"]):not([target="_top"])::after {
+    content: "{{ .fa.external_link.css }}";
+    @apply inline-block;
+    @apply align-super;
+    @apply ml-[0.25em];
+    @apply text-[0.5em];
+  }
+
+  summary span {
+    @apply not-italic;
+    @apply text-gray-400;
+    @apply text-xs;
+  }
+
+  details p {
+    @apply pl-2;
+  }
+
+  h1 {
+    @apply max-md:text-2xl;
+    @apply md:text-7xl;
+  }
+
+  h2 {
+    @apply text-4xl;
+    @apply text-right;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  p {
+    @apply max-md:text-sm;
+    @apply text-justify;
+  }
+}
+
+@layer components {
+  .centered-section {
+    @apply max-md:grid;
+    @apply md:flex;
+    @apply justify-center;
+    @apply place-items-center;
+  }
+
+  .blurb-section {
+    @apply bg-white;
+    @apply border;
+    @apply border-gray-300;
+    @apply md:max-w-[80%];
+    @apply max-md:p-3;
+    @apply md:p-8;
+    @apply rounded-3xl;
+    @apply shadow-black;
+    @apply shadow-sm;
+  }
+
+  .blurb-section h2,
+  .blurb-section p {
+    @apply mx-2;
+    @apply my-4;
+  }
+
+  .nav-link {
+    @apply m-2;
+    @apply max-md:text-sm;
+    @apply md:text-2xl;
+  }
+
+  .nav-link[active] {
+    @apply underline;
+  }
+
+  .main-section {
+    @apply centered-section;
+    @apply min-h-screen;
+    @apply p-4;
+  }
+
+  .bio-line {
+    @apply text-gray-500;
+  }
+
+  .bio-line::before {
+    @apply inline-block;
+    @apply text-[1.25em];
+    @apply text-center;
+    @apply w-6;
+  }
+
+  #bio-location::before {
+    content: "{{ .fa.location_dot.css }}";
+  }
+
+  #bio-email::before {
+    content: "{{ .fa.envelope.css }}";
+  }
+
+  #bio-github::before {
+    content: "{{ .fa.github.css }}";
+  }
+
+  #bio-linkedin::before {
+    content: "{{ .fa.linkedin.css }}";
+  }
+
+  .before-canada::before {
+    content: "🇨🇦 ";
+  }
+
+  .before-joystick::before {
+    content: "🕹️ ";
+  }
+
+  .before-crab::before {
+    content: "🦀 ";
+  }
+
+  .before-train::before {
+    content: "🚆 ";
+  }
+
+  .before-file::before {
+    content: "📁 ";
+  }
+
+  .before-hundred::before {
+    content: "💯 ";
+  }
+
+  .before-lifter::before {
+    content: "🏋️ ";
+  }
+
+  .before-gymnast::before {
+    content: "🤸 ";
+  }
+
+  .before-wrestler::before {
+    content: "🤼 ";
+  }
+
+  .before-runner::before {
+    content: "🏃 ";
+  }
+
+  .before-climber::before {
+    content: "🧗 ";
+  }
+
+  .before-music::before {
+    content: "🎵 ";
+  }
+
+  .before-piano::before {
+    content: "🎹 ";
+  }
+
+  .before-drums::before {
+    content: "🥁 ";
+  }
+
+  .before-guitar::before {
+    content: "🎸 ";
+  }
+
+  .before-shrug::before {
+    content: "🤷 ";
+  }
+
+  .before-videogame::before {
+    content: "🎮 ";
+  }
+
+  .before-japan::before {
+    content: "🇯🇵 ";
+  }
+
+  .before-book::before {
+    content: "📚 ";
+  }
+
+  .before-speaking::before {
+    content: "🗣️ ";
+  }
+
+  .before-pizza::before {
+    content: "🍕 ";
+  }
+
+  .before-english::before {
+    content: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 ";
+  }
+
+  .before-globe::before {
+    content: "🌐 ";
+  }
+
+  .project {
+    @apply md:flex;
+    @apply px-2;
+    @apply py-8;
+    @apply md:space-x-16;
+  }
+
+  .project:has(+ .project) {
+    @apply border-b;
+    @apply border-gray-300;
+  }
+
+  .project:hover {
+    @apply bg-gray-50;
+  }
+
+  .project img {
+    @apply rounded-xl;
+    @apply shadow-black;
+    @apply shadow-md;
+  }
+
+  .project-title {
+    @apply group-hover/project:underline;
+  }
+
+  .project-homepage {
+    @apply italic;
+    @apply ml-2;
+    @apply text-xs;
+  }
+
+  .project-technologies {
+    @apply inline-block;
+    @apply max-md:text-xs;
+    @apply mt-4;
+    @apply select-none;
+  }
+
+  .project-technologies::before {
+    content: "Made with ";
+    @apply italic;
+    @apply md:text-sm;
+  }
+
+  .project-technologies ul {
+    @apply bg-gray-50;
+    @apply border;
+    @apply border-gray-300;
+    @apply inline-block;
+    @apply max-md:w-6;
+    @apply md:w-8;
+    @apply rounded-full;
+    @apply text-center;
+    @apply text-gray-500;
+  }
+}
