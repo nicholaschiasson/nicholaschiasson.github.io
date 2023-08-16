@@ -22,9 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.5.2
       - name: debugging...
-        run: git log -1 templates/now.html
+        run: git log -1 HEAD templates/now.html
       - name: debugging...
-        run: git log -1 --format=%ct templates/now.html
+        run: git log -1 --format=%ct HEAD templates/now.html
       - name: Install Nix
         uses: cachix/install-nix-action@v22
         with:
