@@ -21,6 +21,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.5.2
+      - name: debugging...
+        run: nix develop -c git log "-1" "templates/now.html"
+      - name: debugging...
+        run: nix develop -c git log "-1" "--format=%ct" "templates/now.html"
       - name: Install Nix
         uses: cachix/install-nix-action@v22
         with:
@@ -29,8 +33,6 @@ jobs:
         run: nix develop -c just check
       # - name: Lint
       #   run: nix develop -c just lint
-      - name: debugging...
-        run: nix develop -c git log "-1" "--format=%ct" "templates/now.html"
       - name: Build
         run: nix develop -c just build
       - name: Upload Build Artifact
