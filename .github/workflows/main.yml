@@ -121,14 +121,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Download Build Artifacts
         uses: actions/download-artifact@v3.0.2
-      - name: Move static files
-        run: mv artifact/dist pages/
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "pages"
+          path: "artifact"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
