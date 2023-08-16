@@ -63,8 +63,3 @@ The `lint` task invokes `eslint`.
 
 > [!NOTE]
 > Currently, the `lint` task is not entirely useful due to default rules and how the javascript is written. For this reason, it is not run by CI. This should be fixed in the future.
-
-# TO DO
-
-- [ ] Parallaxing backgrounds
-- [ ] Donation

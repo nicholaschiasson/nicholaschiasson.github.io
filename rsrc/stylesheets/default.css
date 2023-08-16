@@ -83,6 +83,7 @@
 
   p {
     @apply max-md:text-sm;
+    @apply text-justify;
   }
 }
 
@@ -99,7 +100,8 @@
     @apply border;
     @apply border-gray-300;
     @apply md:max-w-[80%];
-    @apply p-8;
+    @apply max-md:p-3;
+    @apply md:p-8;
     @apply rounded-3xl;
     @apply shadow-black;
     @apply shadow-sm;
@@ -248,14 +250,18 @@
 
   .project {
     @apply md:flex;
-    @apply mt-8;
+    @apply px-2;
+    @apply py-8;
     @apply md:space-x-16;
   }
 
   .project:has(+ .project) {
     @apply border-b;
     @apply border-gray-300;
-    @apply pb-8;
+  }
+
+  .project:hover {
+    @apply bg-gray-50;
   }
 
   .project img {
@@ -264,8 +270,8 @@
     @apply shadow-md;
   }
 
-  .project-title:hover {
-    @apply underline;
+  .project-title {
+    @apply group-hover/project:underline;
   }
 
   .project-homepage {
