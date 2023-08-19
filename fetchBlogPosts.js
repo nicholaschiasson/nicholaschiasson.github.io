@@ -6,7 +6,7 @@ const REPOSITORY_NAME = "nicholaschiasson.github.io";
 const DISCUSSION_CATEGORY_SLUG = "blog-posts";
 
 async function query(query) {
-  return await (
+  const res = await (
     await fetch("https://api.github.com/graphql", {
       method: "POST",
       headers: {
@@ -17,6 +17,8 @@ async function query(query) {
       body: JSON.stringify({ query }),
     })
   ).json();
+  console.error(res);
+  return res;
 }
 
 async function queryList(buildQuery, accessData) {
