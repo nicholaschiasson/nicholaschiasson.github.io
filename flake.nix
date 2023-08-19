@@ -13,6 +13,7 @@
           pkgs.ffmpeg-full
           pkgs.gitMinimal
           pkgs.gomplate
+          pkgs.jaq
           pkgs.just
           pkgs.miniserve
           pkgs.nerdfonts
@@ -26,6 +27,7 @@
           pkgs.watchexec
         ];
         shellHook = ''
+          source .env
           eval "$(starship init bash)"
         '';
       };

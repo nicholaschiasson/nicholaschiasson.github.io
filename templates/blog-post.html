@@ -29,9 +29,25 @@
     <main>
       <section class="main-section">
         <section class="centered-section blurb-section grid">
+          <h1>{{.post.title}}</h1>
+          <p>
+            <a href="{{.post.author.url}}"
+              ><img class="inline-block" src="{{.post.author.avatarUrl}}" />{{.post.author.login}}</a
+            >
+          </p>
+          <hr />
+          {{.post.bodyHTML}}
+          <hr />
           <ul>
-            {{range (ds "blogPosts")}}
-            <li><a target="_self" href="/posts/{{.slug}}.html">{{.title}}</a></li>
+            {{range .post.comments}}
+            <li>
+              {{.bodyText}}
+              <ul>
+                {{range .replies}}
+                <li>{{.bodyText}}</li>
+                {{end}}
+              </ul>
+            </li>
             {{end}}
           </ul>
         </section>
