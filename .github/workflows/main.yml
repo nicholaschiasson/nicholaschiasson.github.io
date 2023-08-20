@@ -14,7 +14,7 @@ on:
 permissions:
   contents: write
   id-token: write
-  discussions: read
+  discussions: write
   pages: write
 
 jobs:
