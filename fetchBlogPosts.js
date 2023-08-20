@@ -1,4 +1,4 @@
-#!/usr/bin/env deno run --allow-env=GITHUB_TOKEN --allow-net=api.github.com
+#!/usr/bin/env node
 
 const BATCH_SIZE = 100;
 const REPOSITORY_OWNER = "nicholaschiasson";
@@ -11,7 +11,7 @@ async function query(query) {
       method: "POST",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ query }),
