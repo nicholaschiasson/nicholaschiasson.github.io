@@ -11,10 +11,19 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
+  actions: read
+  checks: read
   contents: write
-  discussions: read
-  pages: write
+  deployments: read
   id-token: write
+  issues: read
+  discussions: read
+  packages: read
+  pages: write
+  pull-requests: read
+  repository-projects: read
+  security-events: read
+  statuses: read
 
 jobs:
   build:
