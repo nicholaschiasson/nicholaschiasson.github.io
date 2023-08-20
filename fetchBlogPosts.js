@@ -17,7 +17,12 @@ async function query(query) {
       body: JSON.stringify({ query }),
     })
   ).json();
-  console.error(JSON.stringify(res, null, 2));
+
+  if (res.errors) {
+    console.error(JSON.stringify(res.data, null, 2));
+    throw res.errors.map(e => new Error(e.message));
+  }
+
   return res;
 }
 
@@ -27,21 +32,16 @@ async function queryList(buildQuery, accessData) {
   const list = [];
 
   while (hasNextPage) {
-    try {
-      const response = accessData(await query(buildQuery(cursor)));
+    const response = accessData(await query(buildQuery(cursor)));
 
-      for (let { node } of response.edges) {
-        list.push(node);
-      }
+    for (let { node } of response.edges) {
+      list.push(node);
+    }
 
-      hasNextPage = response.pageInfo.hasNextPage;
+    hasNextPage = response.pageInfo.hasNextPage;
 
-      if (hasNextPage) {
-        cursor = `"${response.edges.at(-1).cursor}"`;
-      }
-    } catch (e) {
-      console.error(e);
-      throw e;
+    if (hasNextPage) {
+      cursor = `"${response.edges.at(-1).cursor}"`;
     }
   }
 
@@ -57,158 +57,170 @@ function slug(s) {
 }
 
 (async function main() {
-  const { discussionCategory } = (
-    await query(`query GetRepositoryDiscussionCategory {
-      repository(
-        owner: "${REPOSITORY_OWNER}",
-        name: "${REPOSITORY_NAME}"
-      ) {
-        discussionCategory(
-          slug: "${DISCUSSION_CATEGORY_SLUG}"
+  try {
+    const { discussionCategory } = (
+      await query(`query GetRepositoryDiscussionCategory {
+        repository(
+          owner: "${REPOSITORY_OWNER}",
+          name: "${REPOSITORY_NAME}"
         ) {
           id
+          discussionCategories(
+            first: 100
+          ) {
+            nodes {
+              id
+              name
+            }
+          }
+          discussionCategory(
+            slug: "${DISCUSSION_CATEGORY_SLUG}"
+          ) {
+            id
+          }
         }
-      }
-    }`)
-  ).data.repository;
+      }`)
+    ).data.repository;
 
-  const discussions = await queryList(
-    (cursor) => `query GetRepositoryDiscussions {
-        repository(
-            owner: "${REPOSITORY_OWNER}",
-            name: "${REPOSITORY_NAME}"
-        ) {
-            discussions(
-                after: ${cursor},
-                categoryId: "${discussionCategory.id}",
-                first: ${BATCH_SIZE},
-                orderBy: { field: CREATED_AT, direction: DESC }
-            ) {
-                totalCount
-                pageInfo {
-                    hasNextPage
-                }
-                edges {
-                    cursor
-                    node {
-                        id
-                        author {
-                          avatarUrl(
-                            size: 64
-                          )
-                          login
+    const discussions = await queryList(
+      (cursor) => `query GetRepositoryDiscussions {
+          repository(
+              owner: "${REPOSITORY_OWNER}",
+              name: "${REPOSITORY_NAME}"
+          ) {
+              discussions(
+                  after: ${cursor},
+                  categoryId: "${discussionCategory.id}",
+                  first: ${BATCH_SIZE},
+                  orderBy: { field: CREATED_AT, direction: DESC }
+              ) {
+                  totalCount
+                  pageInfo {
+                      hasNextPage
+                  }
+                  edges {
+                      cursor
+                      node {
+                          id
+                          author {
+                            avatarUrl(
+                              size: 64
+                            )
+                            login
+                            url
+                          }
+                          authorAssociation
+                          bodyHTML
+                          createdAt
+                          lastEditedAt
+                          number
+                          publishedAt
+                          title
+                          updatedAt
+                          upvoteCount
                           url
-                        }
-                        authorAssociation
-                        bodyHTML
-                        createdAt
-                        lastEditedAt
-                        number
-                        publishedAt
-                        title
-                        updatedAt
-                        upvoteCount
-                        url
-                    }
-                }
-            }
-        }
-    }`,
-    (res) => res.data.repository.discussions,
-  );
+                      }
+                  }
+              }
+          }
+      }`,
+      (res) => res.data.repository.discussions,
+    );
 
-  for (let discussion of discussions) {
-    discussion.slug = slug(discussion.title);
-    discussion.comments = (
-      await queryList(
-        (cursor) => `query GetRepositoryDiscussionComments {
-            node(
-                id: "${discussion.id}",
-            ) {
-                ... on Discussion {
-                    comments(
-                        after: ${cursor},
-                        first: ${BATCH_SIZE}
-                    ) {
-                        totalCount
-                        pageInfo {
-                            hasNextPage
-                        }
-                        edges {
-                            cursor
-                            node {
-                                id
-                                author {
-                                    avatarUrl(
-                                      size: 64
-                                    )
-                                    login
-                                    url
-                                }
-                                authorAssociation
-                                bodyText
-                                createdAt
-                                lastEditedAt
-                                publishedAt
-                                updatedAt
-                                upvoteCount
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-        }`,
-        (res) => res.data.node.comments,
-      )
-    ).reverse();
-
-    for (let comment of discussion.comments) {
-      comment.replies = (
+    for (let discussion of discussions) {
+      discussion.slug = slug(discussion.title);
+      discussion.comments = (
         await queryList(
           (cursor) => `query GetRepositoryDiscussionComments {
-                node(
-                    id: "${comment.id}"
-                ) {
-                    ... on DiscussionComment {
-                        replies(
-                            after: ${cursor},
-                            first: ${BATCH_SIZE}
-                        ) {
-                            totalCount
-                            pageInfo {
-                                hasNextPage
-                            }
-                            edges {
-                                cursor
-                                node {
-                                    id
-                                    author {
-                                        avatarUrl(
-                                          size: 64
-                                        )
-                                        login
-                                        url
-                                    }
-                                    authorAssociation
-                                    bodyText
-                                    createdAt
-                                    lastEditedAt
-                                    publishedAt
-                                    updatedAt
-                                    upvoteCount
-                                    url
-                                }
-                            }
-                        }
-                    }
-                }
-            }`,
-          (res) => res.data.node.replies,
+              node(
+                  id: "${discussion.id}",
+              ) {
+                  ... on Discussion {
+                      comments(
+                          after: ${cursor},
+                          first: ${BATCH_SIZE}
+                      ) {
+                          totalCount
+                          pageInfo {
+                              hasNextPage
+                          }
+                          edges {
+                              cursor
+                              node {
+                                  id
+                                  author {
+                                      avatarUrl(
+                                        size: 64
+                                      )
+                                      login
+                                      url
+                                  }
+                                  authorAssociation
+                                  bodyText
+                                  createdAt
+                                  lastEditedAt
+                                  publishedAt
+                                  updatedAt
+                                  upvoteCount
+                                  url
+                              }
+                          }
+                      }
+                  }
+              }
+          }`,
+          (res) => res.data.node.comments,
         )
       ).reverse();
-    }
-  }
 
-  console.info(JSON.stringify(discussions, null, 2));
+      for (let comment of discussion.comments) {
+        comment.replies = (
+          await queryList(
+            (cursor) => `query GetRepositoryDiscussionComments {
+                  node(
+                      id: "${comment.id}"
+                  ) {
+                      ... on DiscussionComment {
+                          replies(
+                              after: ${cursor},
+                              first: ${BATCH_SIZE}
+                          ) {
+                              totalCount
+                              pageInfo {
+                                  hasNextPage
+                              }
+                              edges {
+                                  cursor
+                                  node {
+                                      id
+                                      author {
+                                          avatarUrl(
+                                            size: 64
+                                          )
+                                          login
+                                          url
+                                      }
+                                      authorAssociation
+                                      bodyText
+                                      createdAt
+                                      lastEditedAt
+                                      publishedAt
+                                      updatedAt
+                                      upvoteCount
+                                      url
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }`,
+            (res) => res.data.node.replies,
+          )
+        ).reverse();
+      }
+    }
+    console.info(JSON.stringify(discussions, null, 2));
+  } catch (e) {
+    console.error(e);
+  }
 })();
