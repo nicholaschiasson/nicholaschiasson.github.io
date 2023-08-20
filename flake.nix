@@ -10,6 +10,7 @@
       devShell = pkgs.mkShell {
         buildInputs = [
           pkgs.coreutils
+          pkgs.deno
           pkgs.ffmpeg-full
           pkgs.gitMinimal
           pkgs.gomplate
@@ -17,7 +18,6 @@
           pkgs.just
           pkgs.miniserve
           pkgs.nerdfonts
-          pkgs.nodejs_18
           pkgs.nodePackages.eslint
           pkgs.nodePackages.prettier
           pkgs.nodePackages.tailwindcss

@@ -25,7 +25,7 @@ build_posts: build_dist build_templates
     done
 
 build_templates: build_cache
-    node fetchBlogPosts.js > .cache/blogPosts.json
+    ./fetchBlogPosts.js > .cache/blogPosts.json
 
 [private]
 prettier *ARGS:

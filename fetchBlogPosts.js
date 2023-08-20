@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env deno run --allow-env=GITHUB_TOKEN --allow-net=api.github.com
 
 const BATCH_SIZE = 100;
 const REPOSITORY_OWNER = "nicholaschiasson";
@@ -6,17 +6,19 @@ const REPOSITORY_NAME = "nicholaschiasson.github.io";
 const DISCUSSION_CATEGORY_SLUG = "blog-posts";
 
 async function query(query) {
-  return await (
+  const res = await (
     await fetch("https://api.github.com/graphql", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Authorization: `Bearer ${Deno.env.get("GITHUB_TOKEN")}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ query }),
     })
   ).json();
+  console.error(JSON.stringify(res, null, 2));
+  return res;
 }
 
 async function queryList(buildQuery, accessData) {
