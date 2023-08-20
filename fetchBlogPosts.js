@@ -20,7 +20,7 @@ async function query(query) {
 
   if (res.errors) {
     console.error(JSON.stringify(res.data, null, 2));
-    throw res.errors.map(e => new Error(e.message));
+    throw res.errors.map((e) => new Error(e.message));
   }
 
   return res;
