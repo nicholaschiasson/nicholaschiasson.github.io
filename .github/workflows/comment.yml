@@ -41,17 +41,17 @@ jobs:
         id: fetch-discussion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "DISCUSSION_LIST=\'$(nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion.node_id }}")\'" >> "$GITHUB_OUTPUT"
+        run: echo "DISCUSSION_LIST=\"$(nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion.node_id }}")\"" >> "$GITHUB_OUTPUT"
       - name: Isolate Discussion
         id: isolate-discussion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "DISCUSSION=$(echo ${{ steps.fetch-discussion.outputs.DISCUSSION_LIST }} | nix develop .#ciBlog -c jaq '.[]')" >> "$GITHUB_OUTPUT"
+        run: echo "DISCUSSION=$(echo \'${{ steps.fetch-discussion.outputs.DISCUSSION_LIST }}\' | nix develop .#ciBlog -c jaq '.[]')" >> "$GITHUB_OUTPUT"
       - name: Render Blog Post
         id: render-blog-post
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo ${{ steps.isolate-discussion.outputs.DISCUSSION }}nix develop .#ciBlog -c gomplate -c 'post=stdin:///in.json' -f templates/blog-post.html -o dist/posts/${{ steps.slug-discussion-title.outputs.DISCUSSION_TITLE_SLUG }}.html
+        run: echo ${{ steps.isolate-discussion.outputs.DISCUSSION }} nix develop .#ciBlog -c gomplate -c 'post=stdin:///in.json' -f templates/blog-post.html -o dist/posts/${{ steps.slug-discussion-title.outputs.DISCUSSION_TITLE_SLUG }}.html
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
