@@ -204,7 +204,7 @@ const DISCUSSION_ID = Deno.args[0];
         ).reverse();
       }
     }
-    console.info(JSON.stringify(discussions, null, 2));
+    console.info(JSON.stringify(discussions));
   } catch (e) {
     console.error(e);
     process.exit(1);
