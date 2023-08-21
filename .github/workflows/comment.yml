@@ -32,13 +32,26 @@ jobs:
         with:
           name: nicholaschiasson-github-io
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - name: Build
+      - name: Slug Discussion Title
+        id: slug-discussion-title
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          nix develop .#ciBlog -c "deno run \"--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN\" \"--allow-net=api.github.com\" bin/fetchBlogPosts.js \"${{ github.event.discussion_comment.discussion.id }}\"" \
-          | nix develop .#ciBlog -c "jaq '.[]'" \
-          | nix develop .#ciBlog -c "gomplate -c 'post=stdin:///in.json' -f templates/blog-post.html -o dist/posts/$(./bin/slug.js \"${{ github.event.discussion_comment.discussion.id }}\").html"
+        run: DISCUSSION_TITLE_SLUG=$(nix develop .#ciBlog -c ./bin/slug "${{ github.event.discussion_comment.discussion.title }}") >> "$GITHUB_OUTPUT"
+      - name: Fetch Discussion
+        id: fetch-discussion
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: DISCUSSION_LIST=$(nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion_comment.discussion.id }}") >> "$GITHUB_OUTPUT"
+      - name: Isolate Discussion
+        id: isolate-discussion
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: DISCUSSION=$(echo ${{ steps.fetch-discussion.outputs.DISCUSSION_LIST }} | nix develop .#ciBlog -c jaq '.[]') >> "$GITHUB_OUTPUT"
+      - name: Render Blog Post
+        id: render-blog-post
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ steps.isolate-discussion.outputs.DISCUSSION }}nix develop .#ciBlog -c gomplate -c 'post=stdin:///in.json' -f templates/blog-post.html -o dist/posts/$(./bin/slug.js "${{ steps.slug-discussion-title.outputs.DISCUSSION_TITLE_SLUG }}").html
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
