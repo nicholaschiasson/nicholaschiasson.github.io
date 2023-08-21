@@ -35,6 +35,8 @@ jobs:
         run: |
           ls -la
           echo "<html><body><h1>hello world</h1></body></html>" > index.html
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
           git commit -m "Updating pages"
           git push
