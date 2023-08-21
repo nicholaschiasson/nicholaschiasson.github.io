@@ -47,7 +47,6 @@
         buildInputs = [
           pkgs.deno
           pkgs.gomplate
-          pkgs.jaq
           pkgs.nodePackages.tailwindcss
         ];
       };
