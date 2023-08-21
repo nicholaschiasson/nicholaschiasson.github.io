@@ -28,13 +28,11 @@
     </header>
     <main>
       <section class="main-section">
-        <section class="centered-section blurb-section grid">
-          <ul>
-            {{range (ds "blogPosts")}}
-            <li><a target="_self" href="/posts/{{.slug}}.html">{{.title}}</a></li>
-            {{end}}
-          </ul>
-        </section>
+        <ul>
+          {{range (ds "blogPosts")}}
+          <li><a target="_self" href="/posts/{{.slug}}.html">{{.title}}</a></li>
+          {{end}}
+        </ul>
       </section>
     </main>
     <footer class="centered-section bg-gradient-to-b from-gray-800 to-gray-900 py-8 text-gray-100">
