@@ -87,9 +87,9 @@ jobs:
     concurrency:
       group: "pages"
       cancel-in-progress: false
-    # environment:
-    #   name: github-pages
-    #   url: https://nicholaschiasson.github.io/
+    environment:
+      name: github-pages
+      url: https://nicholaschiasson.github.io/
     runs-on: ubuntu-latest
     needs: [build]
     steps:
@@ -102,7 +102,6 @@ jobs:
         uses: actions/download-artifact@v3.0.2
       - name: Prepare Pages
         run: |
-          rm -rf pages/*
           mv artifact/* pages/
       - name: Deploy to GitHub Pages
         working-directory: pages
