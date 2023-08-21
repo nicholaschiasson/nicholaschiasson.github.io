@@ -1,4 +1,4 @@
-#!/usr/bin/env deno run --allow-env
+#!/usr/bin/env deno run "--allow-env"
 
 import { slug } from "../lib/lib.js";
 
