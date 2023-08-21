@@ -33,13 +33,11 @@ jobs:
           name: nicholaschiasson-github-io
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: testing the thingyyyyy
-        run: echo ${{ github.event.discussion_comment.discussion.category.slug }}
-      - name: testing the thingyyyyy 2
-        run: echo ${{ github.event }}
+        run: echo ${{ github.event.discussion.category.slug }}
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: nix develop .#ciBlog -c just build
+        run: nix develop .#ci -c just build
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
