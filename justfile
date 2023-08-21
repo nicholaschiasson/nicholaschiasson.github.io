@@ -40,7 +40,7 @@ check: (prettier "-c")
 format: (prettier "-w")
 
 lint:
-    eslint .
+    deno lint .
 
 clean:
     rm -rf .cache dist

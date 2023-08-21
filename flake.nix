@@ -18,7 +18,6 @@
           pkgs.just
           pkgs.miniserve
           pkgs.nerdfonts
-          pkgs.nodePackages.eslint
           pkgs.nodePackages.prettier
           pkgs.nodePackages.tailwindcss
           pkgs.nodePackages.typescript-language-server
