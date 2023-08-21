@@ -154,7 +154,7 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v3.0.2
         with:
-          name: pages
+          path: pages
       - name: Debugging
         run: ls -R
       - name: Deploy to GitHub Pages
