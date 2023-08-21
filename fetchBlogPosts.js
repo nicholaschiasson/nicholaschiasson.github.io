@@ -1,6 +1,6 @@
-#!/usr/bin/env node
-
-const { GITHUB_GRAPHQL_URL, GITHUB_REPOSITORY_OWNER, GITHUB_TOKEN } = process.env;
+const GITHUB_GRAPHQL_URL = Deno.env.get("GITHUB_GRAPHQL_URL");
+const GITHUB_REPOSITORY_OWNER = Deno.env.get("GITHUB_REPOSITORY_OWNER");
+const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN");
 
 const BATCH_SIZE = 100;
 const REPOSITORY_NAME = "nicholaschiasson.github.io";

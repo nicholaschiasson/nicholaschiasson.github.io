@@ -25,7 +25,11 @@ build_posts: build_dist build_templates
     done
 
 build_templates: build_cache
-    ./fetchBlogPosts.js > .cache/blogPosts.json
+    deno run \
+        --allow-env="GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" \
+        --allow-net="api.github.com" \
+        fetchBlogPosts.js \
+        > .cache/blogPosts.json
 
 [private]
 prettier *ARGS:
