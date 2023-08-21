@@ -36,17 +36,17 @@ jobs:
         id: slug-discussion-title
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: DISCUSSION_TITLE_SLUG=$(nix develop .#ciBlog -c deno run "--allow-env" bin/slug.js "${{ github.event.discussion_comment.discussion.title }}") >> "$GITHUB_OUTPUT"
+        run: echo "DISCUSSION_TITLE_SLUG=$(nix develop .#ciBlog -c deno run "--allow-env" bin/slug.js "${{ github.event.discussion_comment.discussion.title }}")" >> "$GITHUB_OUTPUT"
       - name: Fetch Discussion
         id: fetch-discussion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: DISCUSSION_LIST=$(nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion_comment.discussion.id }}") >> "$GITHUB_OUTPUT"
+        run: echo "DISCUSSION_LIST=$(nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion_comment.discussion.id }}")" >> "$GITHUB_OUTPUT"
       - name: Isolate Discussion
         id: isolate-discussion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: DISCUSSION=$(echo ${{ steps.fetch-discussion.outputs.DISCUSSION_LIST }} | nix develop .#ciBlog -c jaq '.[]') >> "$GITHUB_OUTPUT"
+        run: echo "DISCUSSION=$(echo ${{ steps.fetch-discussion.outputs.DISCUSSION_LIST }} | nix develop .#ciBlog -c jaq '.[]')" >> "$GITHUB_OUTPUT"
       - name: Render Blog Post
         id: render-blog-post
         env:
