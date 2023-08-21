@@ -1,4 +1,4 @@
-name: Build and Publish
+name: Comment on discussion \"${{ github.event.discussion.title }}\"
 
 on:
   discussion_comment:
