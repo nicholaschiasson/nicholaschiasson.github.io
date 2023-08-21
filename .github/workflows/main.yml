@@ -172,7 +172,7 @@ jobs:
   #     - name: Prepare Pages
   #       run: |
   #         rm -rf pages/*
-  #         mv artifact/* pages
+  #         mv artifact/* pages/
   #     - name: Deploy to GitHub Pages
   #       working-directory: pages
   #       run: |

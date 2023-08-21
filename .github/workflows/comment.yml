@@ -53,38 +53,8 @@ jobs:
         with:
           path: "dist"
 
-  deploy:
-    if: github.event.discussion_comment.discussion.category.slug == 'blog-posts'
-    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3.5.2
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v3.0.2
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: "artifact"
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-
-  ##
-  ## May use the 'pages' branch to deploy if I figure I can get extra fast builds and deployments on single pages for example when blog comments are added
-  ##
   # deploy:
-  #   if: github.event.discussion_comment.discussion.category.slug == 'blog-posts'
+  #   if: github.event.discussion.category.slug == 'blog-posts'
   #   # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
   #   # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
   #   concurrency:
@@ -92,26 +62,53 @@ jobs:
   #     cancel-in-progress: false
   #   environment:
   #     name: github-pages
-  #     url: https://nicholaschiasson.github.io/
+  #     url: ${{ steps.deployment.outputs.page_url }}
   #   runs-on: ubuntu-latest
   #   needs: [build]
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v3.5.2
-  #       with:
-  #         path: pages
-  #         ref: pages
   #     - name: Download Build Artifacts
   #       uses: actions/download-artifact@v3.0.2
-  #     - name: Prepare Pages
-  #       run: |
-  #         rm -rf pages/*
-  #         mv artifact/* pages
+  #     - name: Setup Pages
+  #       uses: actions/configure-pages@v3
+  #     - name: Upload artifact
+  #       uses: actions/upload-pages-artifact@v2
+  #       with:
+  #         path: "artifact"
   #     - name: Deploy to GitHub Pages
-  #       working-directory: pages
-  #       run: |
-  #         git config user.name github-actions
-  #         git config user.email github-actions@github.com
-  #         git add .
-  #         git commit -m "Deploying to GitHub Pages"
-  #         git push
+  #       id: deployment
+  #       uses: actions/deploy-pages@v2
+
+  deploy:
+    if: github.event.discussion.category.slug == 'blog-posts'
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: https://nicholaschiasson.github.io/
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.5.2
+        with:
+          path: pages
+          ref: pages
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v3.0.2
+      - name: Prepare Pages
+        run: |
+          rm -rf pages/*
+          mv artifact/* pages/
+      - name: Deploy to GitHub Pages
+        working-directory: pages
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Deploying to GitHub Pages"
+          git push
