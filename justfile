@@ -28,7 +28,7 @@ build_templates: build_cache
     deno run \
         --allow-env="GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" \
         --allow-net="api.github.com" \
-        fetchBlogPosts.js \
+        bin/fetchBlogPosts.js \
         > .cache/blogPosts.json
 
 [private]

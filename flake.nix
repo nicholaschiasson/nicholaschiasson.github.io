@@ -33,13 +33,21 @@
 
       devShells.ci = pkgs.mkShell {
         buildInputs = [
-          pkgs.coreutils
           pkgs.deno
           pkgs.ffmpeg-full
           pkgs.gomplate
           pkgs.jaq
           pkgs.just
           pkgs.nodePackages.prettier
+          pkgs.nodePackages.tailwindcss
+        ];
+      };
+
+      devShells.ciBlog = pkgs.mkShell {
+        buildInputs = [
+          pkgs.deno
+          pkgs.gomplate
+          pkgs.jaq
           pkgs.nodePackages.tailwindcss
         ];
       };

@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   build:
+    if: github.event.discussion_comment.discussion.category.slug == 'blog-posts'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,14 +35,17 @@ jobs:
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: nix develop .#ci -c just build
+        run: |
+          nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion_comment.discussion.id }}" \
+          | nix develop .#ciBlog -c jaq '.[]' \
+          | nix develop .#ciBlog -c gomplate -c 'post=stdin:///in.json' -f templates/blog-post.html -o dist/posts/$(./bin/slug.js "${{ github.event.discussion_comment.discussion.id }}").html
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
           path: "dist"
 
   deploy:
-    if: github.event_name == 'discussion' || github.event_name == 'push' || (github.base_ref == 'main' && github.event.pull_request.merged == true)
+    if: github.event.discussion_comment.discussion.category.slug == 'blog-posts'
     # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
     # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
     concurrency:
@@ -71,7 +75,7 @@ jobs:
   ## May use the 'pages' branch to deploy if I figure I can get extra fast builds and deployments on single pages for example when blog comments are added
   ##
   # deploy:
-  #   if: github.event_name == 'discussion' || github.event_name == 'push' || (github.base_ref == 'main' && github.event.pull_request.merged == true)
+  #   if: github.event.discussion_comment.discussion.category.slug == 'blog-posts'
   #   # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
   #   # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
   #   concurrency:
