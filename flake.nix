@@ -7,7 +7,7 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      devShell = pkgs.mkShell {
+      devShells.default = pkgs.mkShell {
         buildInputs = [
           pkgs.coreutils
           pkgs.deno
@@ -29,6 +29,19 @@
           source .env
           eval "$(starship init bash)"
         '';
+      };
+
+      devShells.ci = pkgs.mkShell {
+        buildInputs = [
+          pkgs.coreutils
+          pkgs.deno
+          pkgs.ffmpeg-full
+          pkgs.gomplate
+          pkgs.jaq
+          pkgs.just
+          pkgs.nodePackages.prettier
+          pkgs.nodePackages.tailwindcss
+        ];
       };
     });
 }

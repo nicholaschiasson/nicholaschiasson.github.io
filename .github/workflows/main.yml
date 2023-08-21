@@ -38,14 +38,14 @@ jobs:
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: Check Format
         if: github.event_name != 'discussion'
-        run: nix develop -c just check
+        run: nix develop .#ci -c just check
       # - name: Lint
       #   if: github.event_name != 'discussion'
-      #   run: nix develop -c just lint
+      #   run: nix develop .#ci -c just lint
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: nix develop -c just build
+        run: nix develop .#ci -c just build
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:

@@ -34,7 +34,7 @@ jobs:
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: nix develop -c just build
+        run: nix develop .#ci -c just build
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
