@@ -41,7 +41,7 @@ jobs:
         id: fetch-discussion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "DISCUSSION_LIST=\"$(nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion.node_id }}")\"" >> "$GITHUB_OUTPUT"
+        run: echo "DISCUSSION_LIST=\'$(nix develop .#ciBlog -c deno run "--allow-env=GITHUB_GRAPHQL_URL,GITHUB_REPOSITORY_OWNER,GITHUB_TOKEN" "--allow-net=api.github.com" bin/fetchBlogPosts.js "${{ github.event.discussion.node_id }}")\'" >> "$GITHUB_OUTPUT"
       - name: Isolate Discussion
         id: isolate-discussion
         env:
