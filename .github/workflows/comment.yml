@@ -36,7 +36,7 @@ jobs:
         id: slug-discussion-title
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: DISCUSSION_TITLE_SLUG=$(nix develop .#ciBlog -c ./bin/slug.js "${{ github.event.discussion_comment.discussion.title }}") >> "$GITHUB_OUTPUT"
+        run: DISCUSSION_TITLE_SLUG=$(nix develop .#ciBlog -c deno run "--allow-env" bin/slug.js "${{ github.event.discussion_comment.discussion.title }}") >> "$GITHUB_OUTPUT"
       - name: Fetch Discussion
         id: fetch-discussion
         env:
