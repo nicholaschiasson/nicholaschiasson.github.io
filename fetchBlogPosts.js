@@ -1,17 +1,22 @@
 #!/usr/bin/env node
 
+const {
+  GITHUB_GRAPHQL_URL,
+  GITHUB_REPOSITORY_OWNER,
+  GITHUB_TOKEN
+} = process.env;
+
 const BATCH_SIZE = 100;
-const REPOSITORY_OWNER = "nicholaschiasson";
 const REPOSITORY_NAME = "nicholaschiasson.github.io";
 const DISCUSSION_CATEGORY_SLUG = "blog-posts";
 
 async function query(query) {
   const res = await (
-    await fetch("https://api.github.com/graphql", {
+    await fetch(GITHUB_GRAPHQL_URL, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ query }),
@@ -61,7 +66,7 @@ function slug(s) {
     const { discussionCategory } = (
       await query(`query GetRepositoryDiscussionCategory {
         repository(
-          owner: "${REPOSITORY_OWNER}",
+          owner: "${GITHUB_REPOSITORY_OWNER}",
           name: "${REPOSITORY_NAME}"
         ) {
           id
@@ -85,7 +90,7 @@ function slug(s) {
     const discussions = await queryList(
       (cursor) => `query GetRepositoryDiscussions {
           repository(
-              owner: "${REPOSITORY_OWNER}",
+              owner: "${GITHUB_REPOSITORY_OWNER}",
               name: "${REPOSITORY_NAME}"
           ) {
               discussions(
