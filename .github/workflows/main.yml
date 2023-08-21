@@ -25,6 +25,18 @@ jobs:
         uses: actions/checkout@v3.5.2
         with:
           fetch-depth: 0
+      - name: Fetch Pages
+        uses: actions/checkout@v3.5.2
+        with:
+          path: testpages
+          ref: pages
+      - name: Update Pages
+        working-directory: testpages
+        run: |
+          echo "<html><body><h1>hello world</h1></body></html>" > testpages/index.html
+          git add .
+          git commit -m "Updating pages"
+          git push
       - name: Install Nix
         uses: cachix/install-nix-action@v22
         with:
