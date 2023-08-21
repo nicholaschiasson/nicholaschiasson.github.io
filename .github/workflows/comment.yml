@@ -46,7 +46,7 @@ jobs:
         id: render-blog-post
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo ${{ steps.fetch-discussion.outputs.DISCUSSION }} | nix develop .#ciBlog -c gomplate -c 'post=stdin:///in.json' -f templates/blog-post.html -o dist/posts/${{ steps.slug-discussion-title.outputs.DISCUSSION_TITLE_SLUG }}.html
+        run: echo "${{ steps.fetch-discussion.outputs.DISCUSSION }}" | nix develop .#ciBlog -c gomplate -c 'post=stdin:///in.json' -f templates/blog-post.html -o dist/posts/${{ steps.slug-discussion-title.outputs.DISCUSSION_TITLE_SLUG }}.html
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
