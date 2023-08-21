@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   build:
-    if: github.event.discussion_comment.discussion.category.slug == 'blog-posts'
+    # if: github.event.discussion_comment.discussion.category.slug == 'blog-posts'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
