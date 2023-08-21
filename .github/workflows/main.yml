@@ -153,10 +153,10 @@ jobs:
           ref: pages
       - name: Download Build Artifacts
         uses: actions/download-artifact@v3.0.2
-        with:
-          path: pages
-      - name: Debugging
-        run: ls -R
+      - name: Prepare Pages
+        run: |
+          rm -rf pages/*
+          mv artifact/* pages
       - name: Deploy to GitHub Pages
         working-directory: pages
         run: |
