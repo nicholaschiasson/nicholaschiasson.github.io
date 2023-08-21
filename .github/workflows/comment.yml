@@ -35,7 +35,7 @@ jobs:
       - name: testing the thingyyyyy
         run: echo ${{ github.event.discussion_comment.discussion.category.slug }}
       - name: testing the thingyyyyy 2
-        run: echo ${{ github.event.discussion_comment }}
+        run: echo ${{ github.event }}
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
