@@ -42,13 +42,5 @@
           pkgs.nodePackages.tailwindcss
         ];
       };
-
-      devShells.ciBlog = pkgs.mkShell {
-        buildInputs = [
-          pkgs.deno
-          pkgs.gomplate
-          pkgs.nodePackages.tailwindcss
-        ];
-      };
     });
 }
