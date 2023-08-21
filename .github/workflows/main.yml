@@ -33,7 +33,8 @@ jobs:
       - name: Update Pages
         working-directory: testpages
         run: |
-          echo "<html><body><h1>hello world</h1></body></html>" > testpages/index.html
+          ls -la
+          echo "<html><body><h1>hello world</h1></body></html>" > index.html
           git add .
           git commit -m "Updating pages"
           git push
