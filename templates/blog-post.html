@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" class="bg-fixed bg-gradient-to-b from-orange-100 to-orange-50 scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Nicholas Omer Chiasson's personal website and blog." />
+    <meta name="keywords" content="nicholas,omer,chiasson,personal,about,me,blog,contact" />
+    <meta
+      name="author"
+      content="Nicholas Omer Chiasson &lt;nicholasomerchiasson@gmail.com&gt; (https://nicholaschiasson.github.io)"
+    />
+    <title>{{.post.title}} - Blog - Nicholas Omer Chiasson</title>
+    <base target="_blank" />
+    <!-- <link href="/rsrc/images/graphics/hyaku/hyaku_tsukushi.svg" rel="icon" /> -->
+    <link href="/rsrc/stylesheets/default.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="centered-section fixed w-full">
+      <nav class="bg-opacity-75 bg-orange-100 p-2 rounded-2xl">
+        <a id="nav-home" class="nav-link" target="_self" href="/#home">home</a>
+        <a id="nav-about" class="nav-link" target="_self" href="/#about">about</a>
+        <a id="nav-projects" class="nav-link" target="_self" href="/#projects">projects</a>
+        <a id="nav-now" class="nav-link" target="_self" href="/#now">now</a>
+        <a id="nav-blog" class="nav-link underline" target="_self" href="/blog.html">blog</a>
+        <a id="nav-resume" class="nav-link external-link" href="/resume">resume</a>
+      </nav>
+    </header>
+    <main>
+      <section class="main-section">
+        <section class="centered-section block mt-16 max-md:w-[90vw] md:w-[70%]">
+          <p>
+            <a target="_self" href="/blog.html">{{ .fa.arrow_left.html }} Back to blogs</a>
+          </p>
+          <h1>{{.post.title}}</h1>
+          <p>
+            <a href="{{.post.author.url}}"
+              ><img
+                class="border h-[1.5em] inline-block mr-2 rounded-full"
+                src="{{.post.author.avatarUrl}}"
+              />{{.post.author.login}}</a
+            >
+          </p>
+          <p class="italic text-xs">
+            Published {{(.post.publishedAt | time.Parse time.RFC3339).Format time.RFC1123}}.{{with .post.lastEditedAt}} Last
+            edited {{(. | time.Parse time.RFC3339).Format time.RFC1123}}.{{end}}
+          </p>
+          <hr />
+          <section>{{.post.bodyHTML}}</section>
+          <hr />
+          <p class="border border-l-8 bg-gray-50 mx-0 my-2 p-2 rounded">
+            {{ .fa.comment.html }} Visit the discussion on <a href="{{.post.url}}">GitHub</a> to leave a comment.
+          </p>
+          <h4>
+            <span class="font-bold">{{len .post.comments}} Comments</span>{{with .post.totalReplies}} • {{.}} Replies{{end}}
+          </h4>
+          <ul>
+            {{range .post.comments}}
+            <li id="{{.id}}" class="border border-l-8 bg-gray-50 hover:bg-orange-50 my-2 p-1 rounded">
+              <p>
+                <a class="author-{{.authorAssociation | toLower}}" href="{{.author.url}}"
+                  ><img
+                    class="border h-[1.5em] inline-block mr-2 rounded-full"
+                    src="{{.author.avatarUrl}}"
+                  />{{.author.login}}</a
+                >
+                <a class="float-right mx-2 symbol" target="_self" href="#{{.id}}" title="Permalink">{{$.fa.link.html}}</a>
+                <a class="float-right mx-2 symbol" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
+                <span class="max-md:block italic text-xs" {{with .lastEditedAt}} title="Edited {{.}}{{end}}"
+                  >{{.publishedAt}}</span
+                >
+              </p>
+              <p>{{.bodyText}}</p>
+              <ul>
+                {{range .replies}}
+                <li id="{{.id}}" class="border border-l-8 bg-gray-50 hover:bg-orange-100 mx-4 my-2 p-1 rounded-lg">
+                  <p>
+                    <a class="author-{{.authorAssociation | toLower}}" href="{{.author.url}}"
+                      ><img
+                        class="border h-[1.5em] inline-block mr-2 rounded-full"
+                        src="{{.author.avatarUrl}}"
+                      />{{.author.login}}</a
+                    >
+                    <a class="float-right mx-2 symbol" target="_self" href="#{{.id}}" title="Permalink">{{$.fa.link.html}}</a>
+                    <a class="float-right mx-2 symbol" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
+                    <span class="max-md:block italic text-xs" {{with .lastEditedAt}} title="Edited {{.}}{{end}}"
+                      >{{.publishedAt}}</span
+                    >
+                  </p>
+                  <p>{{.bodyText}}</p>
+                </li>
+                {{end}}
+              </ul>
+            </li>
+            {{else}}
+            <li>No comments yet.</li>
+            {{end}}
+          </ul>
+        </section>
+      </section>
+    </main>
+    <footer class="centered-section bg-gradient-to-b from-gray-800 to-gray-900 py-8 text-gray-100">
+      © {{ time.Now.Year }} Nicholas Omer Chiasson
+    </footer>
+  </body>
+</html>

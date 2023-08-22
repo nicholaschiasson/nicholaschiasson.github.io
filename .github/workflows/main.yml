@@ -10,10 +10,12 @@ on:
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# See: https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
 permissions:
   contents: write
-  pages: write
   id-token: write
+  discussions: write
+  pages: write
 
 jobs:
   build:
@@ -27,12 +29,19 @@ jobs:
         uses: cachix/install-nix-action@v22
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fetch Nix Derivation
+        uses: cachix/cachix-action@v12
+        with:
+          name: nicholaschiasson-github-io
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: Check Format
-        run: nix develop -c just check
+        run: nix develop .#ci -c just check
       # - name: Lint
-      #   run: nix develop -c just lint
+      #   run: nix develop .#ci -c just lint
       - name: Build
-        run: nix develop -c just build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: nix develop .#ci -c just build
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
@@ -120,7 +129,7 @@ jobs:
     needs: [build, release]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.2
       - name: Download Build Artifacts
         uses: actions/download-artifact@v3.0.2
       - name: Setup Pages

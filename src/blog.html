@@ -17,7 +17,7 @@
   </head>
   <body>
     <header class="centered-section fixed w-full">
-      <nav class="bg-orange-100 p-2 rounded-2xl">
+      <nav class="bg-opacity-75 bg-orange-100 p-2 rounded-2xl">
         <a id="nav-home" class="nav-link" target="_self" href="/#home">home</a>
         <a id="nav-about" class="nav-link" target="_self" href="/#about">about</a>
         <a id="nav-projects" class="nav-link" target="_self" href="/#projects">projects</a>
@@ -28,9 +28,35 @@
     </header>
     <main>
       <section class="main-section">
-        <section class="centered-section blurb-section grid">
-          <h1 class="max-md:text-xl md:text-7xl">🚧 still under construction 🚧</h1>
-          <p>come back later</p>
+        <section class="centered-section block mt-16 max-md:w-[90vw] md:w-[70%]">
+          <ul class="block w-full">
+            {{range (ds "blogPosts")}}
+            <li class="border-gray-300 group hover:bg-gray-50 p-4 ruled-list-item transition-all">
+              <h2>
+                <a class="group-hover:underline" target="_self" href="/posts/{{.slug}}.html">{{.title}}</a>
+              </h2>
+              <p
+                class="italic m-2 text-xs"
+                {{with
+                .lastEditedAt}}
+                title="Edited {{(. | time.Parse time.RFC3339).Format time.RFC1123}}"
+                {{end}}
+              >
+                {{(.publishedAt | time.Parse time.RFC3339).Format time.RFC1123}}
+              </p>
+              {{/* This is an insane trick to satisfy prettier. */}} {{if false}}
+              <!--
+              {{end}}
+              <p class="m-2 text-sm">
+                {{.bodyHTML | regexp.Replace "(?s)^.*?<p.*?>(.*?)</p>.*$" "$1" | strings.Abbrev 256}}
+              </p>
+              <p class="m-2 text-sm"><a target="_self" href="/posts/{{.slug}}.html">Read More</a></p>
+              {{if false}}
+              -->
+              {{end}}
+            </li>
+            {{end}}
+          </ul>
         </section>
       </section>
     </main>

@@ -1,3 +1,5 @@
+let activeNav;
+
 function aboutSummaryOnClick(e) {
   activeAboutDetails.removeAttribute("open");
   activeAboutDetails = e.parentElement;

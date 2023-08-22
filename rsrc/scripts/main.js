@@ -1,5 +1,3 @@
-let activeNav;
-
 updateActiveNav();
 
 addEventListener("popstate", onPopState);

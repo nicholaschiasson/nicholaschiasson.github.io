@@ -3,6 +3,8 @@ context:
     url: templates/fontawesome.yaml
 
 datasources:
+  blogPosts:
+    url: .cache/blogPosts.json
   nowpage:
     url: templates/now.html?type=text/plain
 
