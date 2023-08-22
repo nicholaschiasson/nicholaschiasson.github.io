@@ -1,8 +1,6 @@
 name: Build and Publish
 
 on:
-  discussion:
-    types: [category_changed, created, edited, deleted]
   push:
     branches:
       - "main"
@@ -37,10 +35,8 @@ jobs:
           name: nicholaschiasson-github-io
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - name: Check Format
-        if: github.event_name != 'discussion'
         run: nix develop .#ci -c just check
       # - name: Lint
-      #   if: github.event_name != 'discussion'
       #   run: nix develop .#ci -c just lint
       - name: Build
         env:
@@ -120,7 +116,7 @@ jobs:
           tag_name: ${{ needs.tag.outputs.version }}
 
   deploy:
-    if: github.event_name == 'discussion' || github.event_name == 'push' || (github.base_ref == 'main' && github.event.pull_request.merged == true)
+    if: github.event_name == 'push' || (github.base_ref == 'main' && github.event.pull_request.merged == true)
     # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
     # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
     concurrency:
@@ -130,7 +126,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [build, release]
     steps:
       - name: Checkout
         uses: actions/checkout@v3.5.2

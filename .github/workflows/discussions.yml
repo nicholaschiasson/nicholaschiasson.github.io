@@ -1,6 +1,7 @@
-name: Build and Publish Blog Comment
+name: Build and Publish Discussion and Comment Changes
 
 on:
+  discussion:
   discussion_comment:
 
   # Allows you to run this workflow manually from the Actions tab
