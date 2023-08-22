@@ -49,7 +49,7 @@
     @apply text-orange-300;
   }
 
-  a:not([target="_parent"]):not([target="_self"]):not([target="_top"])::after {
+  a:not([target="_parent"]):not([target="_self"]):not([target="_top"]):not(.symbol)::after {
     content: "{{ .fa.external_link.css }}";
     @apply inline-block;
     @apply align-super;
@@ -74,14 +74,22 @@
 
   h2 {
     @apply text-4xl;
-    @apply text-right;
   }
 
   h3 {
     @apply text-2xl;
   }
 
+  hr {
+    @apply bg-gray-300;
+    @apply border-none;
+    @apply h-[1.5px];
+    @apply my-4;
+    @apply text-gray-300;
+  }
+
   p {
+    @apply m-2;
     @apply max-md:text-sm;
     @apply text-justify;
   }
@@ -107,9 +115,12 @@
     @apply shadow-sm;
   }
 
-  .blurb-section h2,
-  .blurb-section p {
+  .blurb-section h2 {
     @apply mx-2;
+    @apply my-4;
+  }
+
+  .blurb-section p {
     @apply my-4;
   }
 
@@ -249,6 +260,7 @@
   }
 
   .project {
+    @apply border-gray-300;
     @apply md:flex;
     @apply px-2;
     @apply py-8;
@@ -257,7 +269,6 @@
 
   .project:has(+ .project) {
     @apply border-b;
-    @apply border-gray-300;
   }
 
   .project:hover {
@@ -307,5 +318,29 @@
     @apply rounded-full;
     @apply text-center;
     @apply text-gray-500;
+  }
+
+  .ruled-list-item:has(+ .ruled-list-item) {
+    @apply border-b;
+  }
+
+  .author-owner {
+    @apply text-red-300;
+    @apply font-bold;
+  }
+
+  .author-collaborator {
+    @apply text-green-300;
+    @apply font-bold;
+  }
+
+  .author-contributor {
+    @apply text-blue-300;
+    @apply font-bold;
+  }
+
+  .author-member {
+    @apply text-purple-300;
+    @apply font-bold;
   }
 }

@@ -1,7 +1,10 @@
 import { query, queryList, slug } from "../lib/lib.js";
 
+const GITHUB_GRAPHQL_URL = Deno.env.get("GITHUB_GRAPHQL_URL");
 const GITHUB_REPOSITORY_OWNER = Deno.env.get("GITHUB_REPOSITORY_OWNER");
+const GITHUB_TOKEN = Deno.env.get("GITHUB_TOKEN");
 
+const AUTHORIZATION = `Bearer ${GITHUB_TOKEN}`;
 const BATCH_SIZE = 100;
 const REPOSITORY_NAME = "nicholaschiasson.github.io";
 const DISCUSSION_CATEGORY_SLUG = "blog-posts";
@@ -13,7 +16,10 @@ const DISCUSSION_ID = Deno.args[0];
     const discussionCategory = DISCUSSION_ID
       ? undefined
       : (
-          await query(`query GetRepositoryDiscussionCategory {
+          await query(
+            GITHUB_GRAPHQL_URL,
+            AUTHORIZATION,
+            `query GetRepositoryDiscussionCategory {
             repository(
               owner: "${GITHUB_REPOSITORY_OWNER}",
               name: "${REPOSITORY_NAME}"
@@ -33,41 +39,48 @@ const DISCUSSION_ID = Deno.args[0];
                 id
               }
             }
-          }`)
+          }`,
+          )
         ).data.repository.discussionCategory;
+
+    const discussionNode = `{
+      id
+      author {
+        avatarUrl(
+          size: 64
+        )
+        login
+        url
+      }
+      authorAssociation
+      bodyHTML
+      lastEditedAt
+      number
+      publishedAt
+      title
+      upvoteCount
+      url
+    }`;
 
     const discussions = DISCUSSION_ID
       ? [
           (
-            await query(`query GetDiscussion {
-              node(
-                id: "${DISCUSSION_ID}"
-              ) {
-                ... on Discussion {
-                  id
-                  author {
-                    avatarUrl(
-                      size: 64
-                    )
-                    login
-                    url
-                  }
-                  authorAssociation
-                  bodyHTML
-                  createdAt
-                  lastEditedAt
-                  number
-                  publishedAt
-                  title
-                  updatedAt
-                  upvoteCount
-                  url
+            await query(
+              GITHUB_GRAPHQL_URL,
+              AUTHORIZATION,
+              `query GetDiscussion {
+                node(
+                  id: "${DISCUSSION_ID}"
+                ) {
+                  ... on Discussion ${discussionNode}
                 }
-              }
-            }`)
+              }`,
+            )
           ).data.node,
         ]
       : await queryList(
+          GITHUB_GRAPHQL_URL,
+          AUTHORIZATION,
           (cursor) => `query GetRepositoryDiscussions {
           repository(
             owner: "${GITHUB_REPOSITORY_OWNER}",
@@ -85,26 +98,7 @@ const DISCUSSION_ID = Deno.args[0];
               }
               edges {
                 cursor
-                node {
-                  id
-                  author {
-                    avatarUrl(
-                      size: 64
-                    )
-                    login
-                    url
-                  }
-                  authorAssociation
-                  bodyHTML
-                  createdAt
-                  lastEditedAt
-                  number
-                  publishedAt
-                  title
-                  updatedAt
-                  upvoteCount
-                  url
-                }
+                node ${discussionNode}
               }
             }
           }
@@ -116,6 +110,8 @@ const DISCUSSION_ID = Deno.args[0];
       discussion.slug = slug(discussion.title);
       discussion.comments = (
         await queryList(
+          GITHUB_GRAPHQL_URL,
+          AUTHORIZATION,
           (cursor) => `query GetRepositoryDiscussionComments {
             node(
               id: "${discussion.id}",
@@ -142,10 +138,8 @@ const DISCUSSION_ID = Deno.args[0];
                       }
                       authorAssociation
                       bodyText
-                      createdAt
                       lastEditedAt
                       publishedAt
-                      updatedAt
                       upvoteCount
                       url
                     }
@@ -161,6 +155,8 @@ const DISCUSSION_ID = Deno.args[0];
       for (let comment of discussion.comments) {
         comment.replies = (
           await queryList(
+            GITHUB_GRAPHQL_URL,
+            AUTHORIZATION,
             (cursor) => `query GetCommentReplies {
                 node(
                   id: "${comment.id}"
@@ -187,10 +183,8 @@ const DISCUSSION_ID = Deno.args[0];
                           }
                           authorAssociation
                           bodyText
-                          createdAt
                           lastEditedAt
                           publishedAt
-                          updatedAt
                           upvoteCount
                           url
                         }
@@ -203,8 +197,9 @@ const DISCUSSION_ID = Deno.args[0];
           )
         ).reverse();
       }
+      discussion.totalReplies = discussion.comments.reduce((sum, { replies }) => sum + replies.length, 0);
     }
-    console.info(JSON.stringify(DISCUSSION_ID ? discussions[0] : discussions));
+    console.info(JSON.stringify(DISCUSSION_ID ? discussions[0] : discussions, null, 2));
   } catch (e) {
     console.error(e);
     process.exit(1);
