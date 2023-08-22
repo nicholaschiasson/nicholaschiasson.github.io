@@ -48,7 +48,7 @@
               <!--
               {{end}}
               <p class="m-2 text-sm">
-                {{.bodyHTML | regexp.Replace "(?s)^.*?<p.*?>(.*?)</p>.*$" "$1" | strings.Abbrev 256}}
+                {{.bodyHTML | regexp.Replace "(?s)^.*?<p.*?>(.*?)</p>.*$" "$1" | strings.Abbrev 360}}
               </p>
               <p class="m-2 text-sm"><a target="_self" href="/posts/{{.slug}}.html">Read More</a></p>
               {{if false}}
