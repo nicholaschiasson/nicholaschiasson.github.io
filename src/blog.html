@@ -44,8 +44,7 @@
               >
                 {{(.publishedAt | time.Parse time.RFC3339).Format time.RFC1123}}
               </p>
-              {{/* This is an insane trick to satisfy prettier. */}}
-              {{if false}}
+              {{/* This is an insane trick to satisfy prettier. */}} {{if false}}
               <!--
               {{end}}
               <p class="m-2 text-sm">
