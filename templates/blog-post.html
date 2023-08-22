@@ -53,7 +53,8 @@
             {{ .fa.comment.html }} Visit the discussion on <a href="{{.post.url}}">GitHub</a> to leave a comment.
           </p>
           <h4>
-            <span class="font-bold">{{len .post.comments}} Comments</span>{{with .post.totalReplies}} • {{.}} Replies{{end}}
+            <span class="font-bold">{{len .post.comments}} Comment{{if (ne (len .post.comments) 1)}}s{{end}}</span>{{with
+            .post.totalReplies}} • {{.}} Repl{{if (eq . 1)}}y{{else}}ies{{end}}{{end}}
           </h4>
           <ul>
             {{range .post.comments}}
