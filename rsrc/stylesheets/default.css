@@ -360,7 +360,23 @@
   section.footnotes {
     @apply border-gray-300;
     @apply border-t-[1.5px];
+    @apply mb-2;
     @apply mt-4;
     @apply pt-2;
+    @apply text-sm;
+  }
+
+  section.footnotes li {
+    @apply list-decimal;
+    @apply ml-6;
+  }
+
+  code {
+    @apply bg-gray-50;
+    @apply border;
+    @apply border-gray-300;
+    @apply px-1;
+    @apply rounded;
+    @apply text-pink-400;
   }
 }
