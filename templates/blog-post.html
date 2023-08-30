@@ -11,7 +11,7 @@
       content="Nicholas Omer Chiasson &lt;nicholasomerchiasson@gmail.com&gt; (https://nicholaschiasson.github.io)"
     />
     <title>{{.post.title}} - Blog - Nicholas Omer Chiasson</title>
-    <base target="_blank" />
+    <base target="_self" />
     <!-- <link href="/rsrc/images/graphics/hyaku/hyaku_tsukushi.svg" rel="icon" /> -->
     <link href="/rsrc/stylesheets/default.css" rel="stylesheet" />
   </head>
@@ -24,7 +24,7 @@
         <a id="nav-projects" class="nav-link" target="_self" href="/#projects">projects</a>
         <a id="nav-now" class="nav-link" target="_self" href="/#now">now</a>
         <a id="nav-blog" class="nav-link underline" target="_self" href="/blog.html">blog</a>
-        <a id="nav-resume" class="nav-link external-link" href="/resume">resume</a>
+        <a id="nav-resume" class="nav-link" target="_blank" href="/resume">resume</a>
       </nav>
     </header>
     <main>
@@ -35,7 +35,7 @@
           </p>
           <h1>{{.post.title}}</h1>
           <p>
-            <a href="{{.post.author.url}}"
+            <a target="_blank" href="{{.post.author.url}}"
               ><img
                 class="border h-[1.5em] inline-block mr-2 rounded-full"
                 src="{{.post.author.avatarUrl}}"
@@ -48,10 +48,10 @@
             edited {{(. | time.Parse time.RFC3339).Format time.RFC1123}}.{{end}}
           </p>
           <hr />
-          <section class="md:border-l-8 md:pl-4 md:rounded-lg md:w-[50vw]">{{.post.bodyHTML}}</section>
+          <section id="blog-post-body" class="md:border-l-8 md:pl-4 md:rounded-lg md:w-[50vw]">{{.post.bodyHTML}}</section>
           <hr />
           <p class="border border-l-8 bg-gray-50 mx-0 my-2 p-2 rounded-lg">
-            {{ .fa.comment.html }} Visit the discussion on <a href="{{.post.url}}">GitHub</a> to leave a comment.
+            {{ .fa.comment.html }} Visit the discussion on <a target="_blank" href="{{.post.url}}">GitHub</a> to leave a comment.
           </p>
           <h4>
             <span class="font-bold">{{len .post.comments}} Comment{{if (ne (len .post.comments) 1)}}s{{end}}</span>{{with
@@ -61,7 +61,7 @@
             {{range .post.comments}}
             <li id="{{.id}}" class="border border-l-8 bg-gray-50 hover:bg-orange-50 my-2 p-1 rounded-lg">
               <p>
-                <a class="author-{{.authorAssociation | toLower}}" href="{{.author.url}}"
+                <a class="author-{{.authorAssociation | toLower}}" target="_blank" href="{{.author.url}}"
                   ><img
                     class="border h-[1.5em] inline-block mr-2 rounded-full"
                     src="{{.author.avatarUrl}}"
@@ -69,7 +69,7 @@
                   />{{.author.login}}</a
                 >
                 <a class="float-right mx-2 symbol" target="_self" href="#{{.id}}" title="Permalink">{{$.fa.link.html}}</a>
-                <a class="float-right mx-2 symbol" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
+                <a class="float-right mx-2 symbol" target="_blank" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
                 <span class="max-md:block italic text-xs" {{with .lastEditedAt}} title="Edited {{.}}{{end}}"
                   >{{.publishedAt}}</span
                 >
@@ -79,7 +79,7 @@
                 {{range .replies}}
                 <li id="{{.id}}" class="border border-l-8 bg-gray-50 hover:bg-orange-100 mx-4 my-2 p-1 rounded-lg">
                   <p>
-                    <a class="author-{{.authorAssociation | toLower}}" href="{{.author.url}}"
+                    <a class="author-{{.authorAssociation | toLower}}" target="_blank" href="{{.author.url}}"
                       ><img
                         class="border h-[1.5em] inline-block mr-2 rounded-full"
                         src="{{.author.avatarUrl}}"
@@ -87,7 +87,7 @@
                       />{{.author.login}}</a
                     >
                     <a class="float-right mx-2 symbol" target="_self" href="#{{.id}}" title="Permalink">{{$.fa.link.html}}</a>
-                    <a class="float-right mx-2 symbol" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
+                    <a class="float-right mx-2 symbol" target="_blank" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
                     <span class="max-md:block italic text-xs" {{with .lastEditedAt}} title="Edited {{.}}{{end}}"
                       >{{.publishedAt}}</span
                     >
