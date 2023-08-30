@@ -125,7 +125,8 @@
     @apply bg-white;
     @apply border;
     @apply border-gray-300;
-    @apply md:max-w-[80%];
+    @apply max-md:w-[90vw];
+    @apply md:w-[80vw];
     @apply max-md:p-3;
     @apply md:p-8;
     @apply rounded-3xl;
