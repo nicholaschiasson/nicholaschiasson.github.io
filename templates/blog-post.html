@@ -51,7 +51,8 @@
           <section id="blog-post-body" class="md:border-l-8 md:pl-4 md:rounded-lg md:w-[50vw]">{{.post.bodyHTML}}</section>
           <hr />
           <p class="border border-l-8 bg-gray-50 mx-0 my-2 p-2 rounded-lg">
-            {{ .fa.comment.html }} Visit the discussion on <a target="_blank" href="{{.post.url}}">GitHub</a> to leave a comment.
+            {{ .fa.comment.html }} Visit the discussion on <a target="_blank" href="{{.post.url}}">GitHub</a> to leave a
+            comment.
           </p>
           <h4>
             <span class="font-bold">{{len .post.comments}} Comment{{if (ne (len .post.comments) 1)}}s{{end}}</span>{{with
@@ -69,7 +70,9 @@
                   />{{.author.login}}</a
                 >
                 <a class="float-right mx-2 symbol" target="_self" href="#{{.id}}" title="Permalink">{{$.fa.link.html}}</a>
-                <a class="float-right mx-2 symbol" target="_blank" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
+                <a class="float-right mx-2 symbol" target="_blank" href="{{.url}}" title="Reply on GitHub"
+                  >{{$.fa.reply.html}}</a
+                >
                 <span class="max-md:block italic text-xs" {{with .lastEditedAt}} title="Edited {{.}}{{end}}"
                   >{{.publishedAt}}</span
                 >
@@ -87,7 +90,9 @@
                       />{{.author.login}}</a
                     >
                     <a class="float-right mx-2 symbol" target="_self" href="#{{.id}}" title="Permalink">{{$.fa.link.html}}</a>
-                    <a class="float-right mx-2 symbol" target="_blank" href="{{.url}}" title="Reply on GitHub">{{$.fa.reply.html}}</a>
+                    <a class="float-right mx-2 symbol" target="_blank" href="{{.url}}" title="Reply on GitHub"
+                      >{{$.fa.reply.html}}</a
+                    >
                     <span class="max-md:block italic text-xs" {{with .lastEditedAt}} title="Edited {{.}}{{end}}"
                       >{{.publishedAt}}</span
                     >

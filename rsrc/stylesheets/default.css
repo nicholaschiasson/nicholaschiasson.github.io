@@ -49,7 +49,9 @@
     @apply text-orange-300;
   }
 
-  a:not([target="_parent"]):not([target="_self"]):not([target="_top"]):not([aria-describedby="footnote-label"]):not(.symbol)::after {
+  a:not([target="_parent"]):not([target="_self"]):not([target="_top"]):not([aria-describedby="footnote-label"]):not(
+      .symbol
+    )::after {
     content: "{{ .fa.external_link.css }}";
     @apply inline-block;
     @apply align-super;
@@ -57,7 +59,10 @@
     @apply text-[0.5em];
   }
 
-  section#blog-post-body a:not([target="_parent"]):not([target="_self"]):not([target="_top"]):not([aria-describedby="footnote-label"]):not(.symbol)::after {
+  section#blog-post-body
+    a:not([target="_parent"]):not([target="_self"]):not([target="_top"]):not([aria-describedby="footnote-label"]):not(
+      .symbol
+    )::after {
     content: "";
     @apply m-0;
   }
