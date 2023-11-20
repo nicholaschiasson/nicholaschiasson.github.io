@@ -278,6 +278,10 @@
     content: "🌐 ";
   }
 
+  .before-golang::before {
+    content: "{{ .fa.golang.css }} ";
+  }
+
   .project {
     @apply border-gray-300;
     @apply md:flex;
