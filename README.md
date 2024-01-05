@@ -13,11 +13,24 @@ See it live here: https://nicholaschiasson.github.io
 
 ## How-to
 
-Create the development shell environment.
+Firstly, create a `.env` file with a few environment variable exports. These
+will be necessary for building the site, since the build process needs to reach
+GitHub's GraphQL API.
+
+```shell
+export GITHUB_GRAPHQL_URL="https://api.github.com/graphql"
+export GITHUB_REPOSITORY_OWNER="nicholaschiasson"
+export GITHUB_TOKEN="<insert auth token here>"
+```
+
+Next, create the development shell environment. The `.env` file will be sourced
+by the nix shell on initialization.
 
 ```shell
 nix develop
 ```
+
+After that, all of the following actions will become available.
 
 Build the site, compiling tailwind css and running templating engine.
 
