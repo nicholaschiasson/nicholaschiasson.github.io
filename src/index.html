@@ -12,17 +12,20 @@
     />
     <title>Home - Nicholas Omer Chiasson</title>
     <base target="_blank" />
-    <!-- <link href="/rsrc/images/graphics/hyaku/hyaku_tsukushi.svg" rel="icon" /> -->
     <link href="/rsrc/stylesheets/default.css" rel="stylesheet" />
     <script src="/rsrc/scripts/lib.js"></script>
+    <script src="/rsrc/wasm/life.js"></script>
     <script defer src="/rsrc/scripts/main.js"></script>
+    <script defer src="/rsrc/scripts/life.js"></script>
     <style>
       h2 {
         text-align: right;
       }
     </style>
   </head>
+
   <body>
+    <canvas id="game-of-life-canvas"></canvas>
     <header class="centered-section fixed w-full">
       <nav class="bg-opacity-75 bg-orange-100 p-2 rounded-2xl">
         <a id="nav-home" class="nav-link" target="_self" href="/#home">home</a>

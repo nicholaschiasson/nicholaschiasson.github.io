@@ -16,13 +16,15 @@
           pkgs.gomplate
           pkgs.jaq
           pkgs.just
+          pkgs.lldb_17
           pkgs.miniserve
-          pkgs.nerdfonts
           pkgs.nodePackages.prettier
           pkgs.nodePackages.tailwindcss
           pkgs.nodePackages.typescript-language-server
           pkgs.nodePackages.vscode-langservers-extracted
+          pkgs.rustup
           pkgs.starship
+          pkgs.wasm-pack
           pkgs.watchexec
         ];
         shellHook = ''
@@ -40,6 +42,8 @@
           pkgs.just
           pkgs.nodePackages.prettier
           pkgs.nodePackages.tailwindcss
+          pkgs.rustup
+          pkgs.wasm-pack
         ];
       };
     });

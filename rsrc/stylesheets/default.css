@@ -114,6 +114,12 @@
 }
 
 @layer components {
+  #game-of-life-canvas {
+    @apply fixed;
+    @apply opacity-5;
+    @apply z-[-1];
+  }
+
   .centered-section {
     @apply max-md:grid;
     @apply md:flex;

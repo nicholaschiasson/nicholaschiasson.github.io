@@ -1,4 +1,4 @@
-build: build_dist build_posts
+build: build_dist build_life build_posts
     cp -rf src/* rsrc dist/
     for f in $(find rsrc -name *.webp); do \
         for ar in 1920 1280 640 320 160 80; do \
@@ -18,6 +18,9 @@ build_cache:
 build_dist:
     mkdir -p dist
 
+build_life: build_dist
+    just life/build --release -t no-modules --no-pack --no-typescript -d ${PWD}/dist/rsrc/wasm
+
 build_posts: build_dist build_templates
     mkdir -p dist/posts
     jaq -c '.[]' ./.cache/blogPosts.json | while read -r post; do \
@@ -35,18 +38,30 @@ build_templates: build_cache
 prettier *ARGS:
     prettier **/*.{html,css,js,json,md,yaml,yml} --no-error-on-unmatched-pattern {{ARGS}}
 
-check: (prettier "-c")
+check: (prettier "-c") check_life
 
-format: (prettier "-w")
+check_life:
+    just life/check
 
-lint:
+format: (prettier "-w") format_life
+
+format_life:
+    just life/format
+
+lint: lint_life
     deno lint .
 
-clean:
+lint_life:
+    just life/lint
+
+clean: clean_life
     rm -rf .cache dist
 
+clean_life:
+    just life/clean
+
 watch:
-    watchexec -w src -w rsrc -w templates just build
+    watchexec -w src -w rsrc -w templates -w life just build
 
 serve: build
     miniserve dist --index=index.html &

@@ -1,0 +1,20 @@
+build *ARGS:
+  wasm-pack build {{ARGS}}
+
+check *ARGS:
+  cargo check {{ARGS}}
+
+clean *ARGS:
+  cargo clean {{ARGS}}
+
+format *ARGS:
+  cargo fmt {{ARGS}}
+
+lint *ARGS:
+  cargo clippy {{ARGS}}
+
+test *ARGS:
+  wasm-pack test {{ARGS}}
+
+watch *ARGS:
+  watchexec -w src just build {{ARGS}}
