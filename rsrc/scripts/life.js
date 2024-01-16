@@ -6,7 +6,17 @@
   const ALIVE_COLOR = "rgb(0, 0, 0)";
   const INTERVAL_MS = 100;
 
-  const universe = Universe.new(screen.width / 32,  screen.height / 32);
+  let screenWidth = screen.width;
+  let screenHeight = screen.height;
+  switch (screen.orientation.type) {
+    case "landscape-secondary":
+    case "portrait-secondary":
+      screenWidth = screen.height;
+      screenHeight = screen.width;
+      break;
+  }
+
+  const universe = Universe.new(screenWidth / 32,  screenHeight / 32);
   const width = universe.width();
   const height = universe.height();
 
