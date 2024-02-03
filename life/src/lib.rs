@@ -45,17 +45,9 @@ impl Universe {
          */
         let mut count = 0;
 
-        let north = if row == 0 {
-            self.height - 1
-        } else {
-            row - 1
-        };
+        let north = if row == 0 { self.height - 1 } else { row - 1 };
 
-        let south = if row == self.height - 1 {
-            0
-        } else {
-            row + 1
-        };
+        let south = if row == self.height - 1 { 0 } else { row + 1 };
 
         let west = if column == 0 {
             self.width - 1
