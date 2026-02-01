@@ -131,13 +131,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Download Build Artifacts
+        id: download
         uses: actions/download-artifact@v7
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: "artifact"
+          path: "${{ steps.download.outputs.download-path }}"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
