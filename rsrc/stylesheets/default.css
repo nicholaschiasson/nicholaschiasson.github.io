@@ -13,11 +13,6 @@
     src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Solid-900.otf) format(opentype);
   }
 
-  @font-face {
-    font-family: Font Awesome;
-    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Regular-400.otf) format(opentype);
-  }
-
   html:before {
     content: "";
     @apply block;
