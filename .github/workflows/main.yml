@@ -71,21 +71,21 @@ jobs:
       - name: Bump major version and push tag
         id: bump-major
         if: ${{ steps.check-semver.outputs.semver == 'major' }}
-        uses: anothrNick/github-tag-action@1.75
+        uses: anothrNick/github-tag-action@1.75.0
         env:
           DEFAULT_BUMP: major
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Bump minor version and push tag
         id: bump-minor
         if: ${{ steps.check-semver.outputs.semver == 'minor' }}
-        uses: anothrNick/github-tag-action@1.75
+        uses: anothrNick/github-tag-action@1.75.0
         env:
           DEFAULT_BUMP: minor
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Bump patch version and push tag
         id: bump-patch
         if: ${{ steps.check-semver.outputs.semver == 'patch' }}
-        uses: anothrNick/github-tag-action@1.75
+        uses: anothrNick/github-tag-action@1.75.0
         env:
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -111,7 +111,7 @@ jobs:
       - name: Download Build Artifacts
         uses: actions/download-artifact@v7
       - name: Release
-        uses: softprops/action-gh-release@v2.5
+        uses: softprops/action-gh-release@v2.5.0
         with:
           tag_name: ${{ needs.tag.outputs.version }}
 
