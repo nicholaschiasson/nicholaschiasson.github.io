@@ -1,13 +1,12 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../dist/**/*.{html,js}';
 
 @theme {
   --font-sans:
-    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji', Font Awesome;
-  --font-serif:
-    ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif, Font Awesome;
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji",
+    Font Awesome;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif, Font Awesome;
 }
 
 /*
@@ -86,145 +85,145 @@
 
 @utility before-canada {
   &::before {
-    content: '🇨🇦 ';
+    content: "🇨🇦 ";
   }
 }
 
 @utility before-joystick {
   &::before {
-    content: '🕹️ ';
+    content: "🕹️ ";
   }
 }
 
 @utility before-crab {
   &::before {
-    content: '🦀 ';
+    content: "🦀 ";
   }
 }
 
 @utility before-train {
   &::before {
-    content: '🚆 ';
+    content: "🚆 ";
   }
 }
 
 @utility before-file {
   &::before {
-    content: '📁 ';
+    content: "📁 ";
   }
 }
 
 @utility before-hundred {
   &::before {
-    content: '💯 ';
+    content: "💯 ";
   }
 }
 
 @utility before-lifter {
   &::before {
-    content: '🏋️ ';
+    content: "🏋️ ";
   }
 }
 
 @utility before-gymnast {
   &::before {
-    content: '🤸 ';
+    content: "🤸 ";
   }
 }
 
 @utility before-wrestler {
   &::before {
-    content: '🤼 ';
+    content: "🤼 ";
   }
 }
 
 @utility before-runner {
   &::before {
-    content: '🏃 ';
+    content: "🏃 ";
   }
 }
 
 @utility before-climber {
   &::before {
-    content: '🧗 ';
+    content: "🧗 ";
   }
 }
 
 @utility before-music {
   &::before {
-    content: '🎵 ';
+    content: "🎵 ";
   }
 }
 
 @utility before-piano {
   &::before {
-    content: '🎹 ';
+    content: "🎹 ";
   }
 }
 
 @utility before-drums {
   &::before {
-    content: '🥁 ';
+    content: "🥁 ";
   }
 }
 
 @utility before-guitar {
   &::before {
-    content: '🎸 ';
+    content: "🎸 ";
   }
 }
 
 @utility before-shrug {
   &::before {
-    content: '🤷 ';
+    content: "🤷 ";
   }
 }
 
 @utility before-videogame {
   &::before {
-    content: '🎮 ';
+    content: "🎮 ";
   }
 }
 
 @utility before-japan {
   &::before {
-    content: '🇯🇵 ';
+    content: "🇯🇵 ";
   }
 }
 
 @utility before-book {
   &::before {
-    content: '📚 ';
+    content: "📚 ";
   }
 }
 
 @utility before-speaking {
   &::before {
-    content: '🗣️ ';
+    content: "🗣️ ";
   }
 }
 
 @utility before-pizza {
   &::before {
-    content: '🍕 ';
+    content: "🍕 ";
   }
 }
 
 @utility before-english {
   &::before {
-    content: '🏴󠁧󠁢󠁥󠁮󠁧󠁿 ';
+    content: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 ";
   }
 }
 
 @utility before-globe {
   &::before {
-    content: '🌐 ';
+    content: "🌐 ";
   }
 }
 
 @utility before-golang {
   &::before {
-    content: '{{ .fa.golang.css }} ';
+    content: "{{ .fa.golang.css }} ";
   }
 }
 
@@ -271,7 +270,7 @@
   @apply select-none;
 
   &::before {
-    content: 'Made with ';
+    content: "Made with ";
     @apply italic;
     @apply md:text-sm;
   }

@@ -16,7 +16,7 @@
       break;
   }
 
-  const universe = Universe.new(screenWidth / 32,  screenHeight / 32);
+  const universe = Universe.new(screenWidth / 32, screenHeight / 32);
   const width = universe.width();
   const height = universe.height();
 
@@ -61,7 +61,7 @@
 
   const drawCells = () => {
     const cellsPtr = universe.cells();
-    const cells = new Uint8Array(memory.buffer, cellsPtr, width * height / 8);
+    const cells = new Uint8Array(memory.buffer, cellsPtr, (width * height) / 8);
 
     ctx.fillStyle = ALIVE_COLOR;
     for (let row = 0; row < height; row++) {
@@ -73,13 +73,7 @@
         }
 
         ctx.beginPath();
-        ctx.roundRect(
-          col * cellWidth,
-          row * cellHeight,
-          cellWidth + 1,
-          cellHeight + 1,
-          100
-        );
+        ctx.roundRect(col * cellWidth, row * cellHeight, cellWidth + 1, cellHeight + 1, 100);
         ctx.fill();
       }
     }
@@ -94,17 +88,11 @@
         }
 
         ctx.beginPath();
-        ctx.roundRect(
-          col * cellWidth,
-          row * cellHeight,
-          cellWidth + 1,
-          cellHeight + 1,
-          100
-        );
+        ctx.roundRect(col * cellWidth, row * cellHeight, cellWidth + 1, cellHeight + 1, 100);
         ctx.fill();
       }
     }
-  }
+  };
 
   const setSize = () => {
     canvas.width = visualViewport.width;
@@ -112,7 +100,7 @@
     cellWidth = canvas.width / width;
     cellHeight = canvas.height / height;
     drawCells();
-  }
+  };
 
   addEventListener("resize", setSize);
 

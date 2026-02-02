@@ -43,7 +43,7 @@ build_templates: build_cache
 
 [private]
 prettier *ARGS:
-    prettier **/*.{html,css,js,json,md,yaml,yml} --no-error-on-unmatched-pattern {{ARGS}}
+    prettier **/*.{html,css,js,json,md,yaml} --no-error-on-unmatched-pattern {{ARGS}}
 
 check: (prettier "-c") check_life
 
