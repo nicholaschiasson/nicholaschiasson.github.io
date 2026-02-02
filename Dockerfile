@@ -12,6 +12,7 @@ RUN apk update \
 		just=~1.43 \
 		miniserve=~0.32 \
 		npm=~11.6 \
+		sudo=~1.9 \
 		watchexec=~2.3 \
 	&& rm -rf /var/cache/apk/*
 
