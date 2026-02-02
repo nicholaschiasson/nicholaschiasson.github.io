@@ -1,0 +1,12 @@
+[tools]
+"cargo:just-lsp" = "0.3"
+"cargo:miniserve" = "0.32"
+"cargo:wasm-pack" = "0.13"
+deno = "2.6"
+gomplate = "5.0"
+jaq = "2.3"
+just = "1.46"
+"npm:@tailwindcss/cli" = "4.1"
+"npm:tailwindcss" = "4.1"
+prettier = "3.8"
+watchexec = "2.3"

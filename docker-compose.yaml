@@ -1,0 +1,13 @@
+---
+services:
+  app:
+    build: .
+    command: just serve
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/src
+      - ~/.gitconfig:/root/.gitconfig:ro
+    working_dir: /src

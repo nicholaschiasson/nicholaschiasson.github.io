@@ -1,14 +1,21 @@
+set dotenv-load
+
 build: build_dist build_life build_posts
+    #!/usr/bin/env bash
     cp -rf src/* rsrc dist/
-    for f in $(find rsrc -name *.webp); do \
-        for ar in 1920 1280 640 320 160 80; do \
-            if ! [ -f dist/${f%.webp}-${ar}w.webp ]; then \
-                ffmpeg -i ${f} -vf scale=${ar}:-1 dist/${f%.webp}-${ar}w.webp; \
-            fi; \
-        done; \
+    for f in $(find rsrc -name *.webp); do
+        mkdir -p $(dirname dist/${f});
+        for ar in 1920 1280 640 320 160 80; do
+            if ! [ -f dist/${f%.webp}-${ar}w.webp ]; then
+                ffmpeg -i ${f} -vf scale=${ar}:-1 dist/${f%.webp}-${ar}w.webp;
+            fi;
+        done;
     done
-    gomplate --input-dir=dist --output-dir=dist --include=**/*.{html,css}
-    tailwindcss -i dist/rsrc/stylesheets/default.css -o dist/rsrc/stylesheets/default.css
+    gomplate --input-dir=dist --output-dir=dist --include=**/*.css
+    gomplate --input-dir=dist --output-dir=dist --include=**/*.html
+    mv dist/rsrc/stylesheets/default.css dist/rsrc/stylesheets/.default.css
+    tailwindcss -i dist/rsrc/stylesheets/.default.css -o dist/rsrc/stylesheets/default.css
+    rm -f dist/rsrc/stylesheets/.default.css
 
 [private]
 build_cache:
