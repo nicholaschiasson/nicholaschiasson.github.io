@@ -129,20 +129,20 @@ jobs:
       - name: Check Format
         uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
         with:
-          entrypoint: just
-          args: check
+          entrypoint: sudo
+          args: just check
       # - name: Lint
       #   uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
       #   with:
-      #     entrypoint: just
-      #     args: lint
+      #     entrypoint: sudo
+      #     args: just lint
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
         with:
-          entrypoint: just
-          args: build
+          entrypoint: sudo
+          args: just build
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v6
         with:

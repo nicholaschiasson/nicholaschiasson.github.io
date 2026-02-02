@@ -27,8 +27,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
         with:
-          entrypoint: just
-          args: build
+          entrypoint: sudo
+          args: just build
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v6
         with:
