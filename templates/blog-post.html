@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="bg-fixed bg-gradient-to-b from-orange-100 to-orange-50 scroll-smooth">
+<html lang="en" class="bg-fixed bg-linear-to-b from-orange-100 to-orange-50 scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,6 +12,8 @@
     />
     <title>{{.post.title}} - Blog - Nicholas Omer Chiasson</title>
     <base target="_self" />
+    <link href="/rsrc/fonts/fontawesome/Font Awesome 6 Brands-Regular-400.otf" rel="preload" as="font" type="font/otf" crossorigin="anonymous" />
+    <link href="/rsrc/fonts/fontawesome/Font Awesome 6 Free-Solid-900.otf" rel="preload" as="font" type="font/otf" crossorigin="anonymous" />
     <link href="/rsrc/stylesheets/default.css" rel="stylesheet" />
   </head>
 
@@ -28,7 +30,7 @@
     </header>
     <main>
       <section class="main-section">
-        <section class="centered-section block mt-16 max-md:w-[90vw] md:w-[70%]">
+        <section class="centered-section block mt-16 max-md:w-[90vw] md:w-[70%] place-items-start">
           <p>
             <a target="_self" href="/blog.html">{{ .fa.arrow_left.html }} Back to blogs</a>
           </p>
@@ -47,8 +49,11 @@
             edited {{(. | time.Parse time.RFC3339).Format time.RFC1123}}.{{end}}
           </p>
           <hr />
-          <section id="blog-post-body" class="md:border-l-8 md:pl-4 md:rounded-lg md:w-[50vw]">{{.post.bodyHTML}}</section>
+          <section id="blog-post-body" class="md:border-l-8 md:pl-4 md:rounded-lg">{{.post.bodyHTML}}</section>
           <hr />
+          <p class="mb-8">
+            <a target="_self" href="/blog.html">{{ .fa.arrow_left.html }} Back to blogs</a>
+          </p>
           <p class="border border-l-8 bg-gray-50 mx-0 my-2 p-2 rounded-lg">
             {{ .fa.comment.html }} Visit the discussion on <a target="_blank" href="{{.post.url}}">GitHub</a> to leave a
             comment.
@@ -108,7 +113,7 @@
         </section>
       </section>
     </main>
-    <footer class="centered-section bg-gradient-to-b from-gray-800 to-gray-900 py-8 text-gray-100">
+    <footer class="centered-section bg-linear-to-b from-gray-800 to-gray-900 py-8 text-gray-100">
       © {{ time.Now.Year }} Nicholas Omer Chiasson
     </footer>
   </body>
