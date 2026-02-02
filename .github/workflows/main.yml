@@ -27,7 +27,7 @@ on:
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 # See: https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
 permissions:
-  contents: read
+  contents: write
   id-token: write
   discussions: write
   pages: write
