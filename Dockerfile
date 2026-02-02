@@ -12,13 +12,12 @@ RUN apk update \
 		just=~1.43 \
 		miniserve=~0.32 \
 		npm=~11.6 \
+		sed=~4.9 \
 		sudo=~1.9 \
 		watchexec=~2.3 \
 	&& rm -rf /var/cache/apk/*
 
 RUN npm install -g prettier@3.8 \
-	tailwindcss@4.1 \
-	@tailwindcss/cli@4.1 \
 	&& npm cache clean --force
 
 ENV CARGO_HOME=/usr/local/cargo
@@ -35,4 +34,5 @@ RUN cargo install --locked wasm-pack@^0.13 jaq@^2.3 \
 	&& wasm-pack --version \
 	&& jaq --version
 
-RUN git config --global --add safe.directory '*'
+RUN curl -fsSL https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.18/tailwindcss-linux-$(uname -m | sed 's/86_//')-musl -o /usr/local/bin/tailwindcss \
+	&& chmod +x /usr/local/bin/tailwindcss
