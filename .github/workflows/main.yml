@@ -127,19 +127,19 @@ jobs:
         with:
           fetch-depth: 0
       - name: Check Format
-        uses: docker://gcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
+        uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
         with:
           entrypoint: just
           args: check
       # - name: Lint
-        # uses: docker://gcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
+        # uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
         # with:
         #   entrypoint: just
         #   args: lint
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: docker://gcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
+        uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
         with:
           entrypoint: just
           args: build
