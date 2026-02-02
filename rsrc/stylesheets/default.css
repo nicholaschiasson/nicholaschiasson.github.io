@@ -18,6 +18,12 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+  .dark-theme,
+  .dark-theme img,
+  .dark-theme [class^="before-"]::before {
+    @apply invert;
+  }
+
   *,
   ::after,
   ::before,
@@ -333,12 +339,12 @@
 @layer base {
   @font-face {
     font-family: Font Awesome;
-    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Brands-Regular-400.otf) format(opentype);
+    src: url("/rsrc/fonts/fontawesome/Font Awesome 6 Brands-Regular-400.otf") format(opentype);
   }
 
   @font-face {
     font-family: Font Awesome;
-    src: url(/rsrc/fonts/fontawesome/Font\ Awesome\ 6\ Free-Solid-900.otf) format(opentype);
+    src: url("/rsrc/fonts/fontawesome/Font Awesome 6 Free-Solid-900.otf") format(opentype);
   }
 
   html:before {
@@ -358,17 +364,21 @@
     @apply bg-no-repeat;
   }
 
-  a {
+  a,
+  button {
     @apply text-gray-400;
   }
 
   a,
+  button,
   summary {
     @apply transition-all;
   }
 
   a:hover,
+  button:hover,
   summary:hover {
+    @apply cursor-pointer;
     @apply text-orange-300;
   }
 

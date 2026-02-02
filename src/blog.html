@@ -27,6 +27,7 @@
       crossorigin="anonymous"
     />
     <link href="/rsrc/stylesheets/default.css" rel="stylesheet" />
+    <script src="/rsrc/scripts/theme.js"></script>
     <script src="/rsrc/wasm/life.js"></script>
     <script defer src="/rsrc/scripts/life.js"></script>
   </head>
@@ -41,6 +42,9 @@
         <a id="nav-blog" class="nav-link underline" target="_self" href="/blog.html">blog</a>
         <a id="nav-resume" class="nav-link" href="/resume">resume</a>
       </nav>
+      <button id="toggle-theme" class="fixed right-6 top-4 max-md:text-sm md:text-2xl" aria-label="Toggle light/dark theme" onclick="toggleTheme()">
+        {{ .fa.moon.html }}
+      </button>
     </header>
     <main>
       <section class="main-section">
