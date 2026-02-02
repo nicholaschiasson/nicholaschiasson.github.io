@@ -22,6 +22,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Add safe directory
+        run: git config --global --add safe.directory /github/workspace
+      - name: Fix ownership
+        run: sudo chown -R "$(whoami)" "$GITHUB_WORKSPACE"
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
