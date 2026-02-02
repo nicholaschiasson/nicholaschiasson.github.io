@@ -127,7 +127,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Add safe directory
-        run: git config --global --add safe.directory /github/workspace
+        run: git config --global --add safe.directory '*'
       - name: Check Format
         uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
         with:

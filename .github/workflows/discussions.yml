@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Add safe directory
-        run: git config --global --add safe.directory /github/workspace
+        run: git config --global --add safe.directory '*'
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
