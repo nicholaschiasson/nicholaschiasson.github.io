@@ -36,3 +36,5 @@ RUN cargo install --locked wasm-pack@^0.13 jaq@^2.3 \
 
 RUN curl -fsSL https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.18/tailwindcss-linux-$(uname -m | sed 's/86_//')-musl -o /usr/local/bin/tailwindcss \
 	&& chmod +x /usr/local/bin/tailwindcss
+
+RUN git config --global --add safe.directory '*'
