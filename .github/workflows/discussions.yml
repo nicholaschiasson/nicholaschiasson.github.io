@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
   id-token: write
-  discussions: read
+  discussions: write
   pages: write
 
 concurrency:
@@ -28,7 +28,7 @@ jobs:
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:latest
+        uses: docker://ghcr.io/nicholaschiasson/nicholaschiasson.github.io:4f54016633953d324ac6de7a743e295ae919379a
         with:
           entrypoint: su
           args: -c "just build"
