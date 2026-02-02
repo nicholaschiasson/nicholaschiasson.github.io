@@ -33,3 +33,5 @@ RUN rustup target add wasm32-unknown-unknown
 RUN cargo install --locked wasm-pack@^0.13 jaq@^2.3 \
 	&& wasm-pack --version \
 	&& jaq --version
+
+RUN git config --global --add safe.directory '*'
