@@ -14,6 +14,7 @@ build: build_dist build_life build_posts
     gomplate --input-dir=dist --output-dir=dist --include=**/*.css
     gomplate --input-dir=dist --output-dir=dist --include=**/*.html
     mv dist/rsrc/stylesheets/default.css dist/rsrc/stylesheets/.default.css
+    npm i --omit=dev
     tailwindcss -m -i dist/rsrc/stylesheets/.default.css -o dist/rsrc/stylesheets/default.css
     rm -f dist/rsrc/stylesheets/.default.css
 
@@ -62,7 +63,7 @@ lint_life:
     just life/lint
 
 clean: clean_life
-    rm -rf .cache dist
+    rm -rf .cache dist node_modules
 
 clean_life:
     just life/clean
