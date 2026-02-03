@@ -18,6 +18,10 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+  * {
+    transition: filter 0.3s ease-in-out;
+  }
+
   .dark-theme,
   .dark-theme img,
   .dark-theme [class^="before-"]::before {

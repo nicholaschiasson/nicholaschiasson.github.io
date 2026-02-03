@@ -52,6 +52,7 @@ docker compose run --rm --service-ports app just serve
 ```
 
 Tips:
+
 - `--rm`: removes the container when the task completes.
 - `-it`: attaches an interactive TTY (useful for `watch`).
 - `--service-ports`: binds the service’s ports (e.g., 8080) for `serve`.
@@ -84,39 +85,49 @@ This installs the exact tool versions declared in [mise.toml](mise.toml) (e.g., 
 Common `just` tasks:
 
 - Build:
-	```shell
-	just build
-	```
-	Compiles Tailwind CSS, runs templating, processes assets, and outputs to `dist/`.
+
+  ```shell
+  just build
+  ```
+
+  Compiles Tailwind CSS, runs templating, processes assets, and outputs to `dist/`.
 
 - Check (format validation):
-	```shell
-	just check
-	```
-	Runs Prettier in check mode and project checks for `life/`.
+
+  ```shell
+  just check
+  ```
+
+  Runs Prettier in check mode and project checks for `life/`.
 
 - Format (apply fixes):
-	```shell
-	just format
-	```
-	Runs Prettier in write mode and formatting for `life/`.
+
+  ```shell
+  just format
+  ```
+
+  Runs Prettier in write mode and formatting for `life/`.
 
 - Lint:
-	```shell
-	just lint
-	```
-	Uses `deno lint` for JS/TS and linting for `life/`.
+
+  ```shell
+  just lint
+  ```
+
+  Uses `deno lint` for JS/TS and linting for `life/`.
 
 - Watch and rebuild on changes:
-	```shell
-	just watch
-	```
+
+  ```shell
+  just watch
+  ```
 
 - Serve locally (rebuilds on change):
-	```shell
-	just serve
-	```
+  ```shell
+  just serve
+  ```
 
 Notes:
+
 - `serve` invokes `watch`, and both ultimately run `build`.
 - `build` writes to `dist/` and does not clear it; use `just clean` to remove `dist/`, `.cache/`, and `node_modules/`.
