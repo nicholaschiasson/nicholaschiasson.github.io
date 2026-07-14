@@ -24,7 +24,8 @@
 
   .dark-theme,
   .dark-theme img,
-  .dark-theme [class^="before-"]::before {
+  .dark-theme [class^="before-"]::before,
+  .dark-theme .never-invert {
     @apply invert;
   }
 
